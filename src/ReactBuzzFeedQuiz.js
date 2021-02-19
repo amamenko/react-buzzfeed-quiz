@@ -5,7 +5,8 @@ import { IoIosLink } from "react-icons/io";
 import { FaUser } from "react-icons/fa";
 import { scroller } from "react-scroll";
 import PropTypes from "prop-types";
-import "./ProximaNova.css";
+import propTypesChecker from "./reactBuzzfeedPropTypesChecker";
+// import "./ProximaNova.css";
 
 const StyledOuterQuizContainer = styled.div`
   position: relative;
@@ -571,6 +572,12 @@ const ReactBuzzFeedQuiz = (props) => {
   const [resultsAvailable, changeResultsAvailable] = useState(false);
   const [finalResult, changeFinalResult] = useState([]);
 
+  useEffect(() => {
+    console.error = (error) => {
+      throw new Error(error);
+    };
+  }, []);
+
   const scrollFunction = (element, questionIndex) => {
     if (autoScroll) {
       if (questionIndex + 1 === questions.length) {
@@ -653,7 +660,7 @@ const ReactBuzzFeedQuiz = (props) => {
   };
 
   return (
-    <StyledOuterQuizContainer name="Top">
+    <StyledOuterQuizContainer name="Top" className="react_buzzfeed_quiz">
       <StyledInnerQuizContainer>
         {title ? <StyledQuizTitle>{title}</StyledQuizTitle> : null}
         {description ? (
@@ -868,7 +875,17 @@ const ReactBuzzFeedQuiz = (props) => {
   );
 };
 
-export default ReactBuzzFeedQuiz;
+export default propTypesChecker(ReactBuzzFeedQuiz);
+
+// Specifies the default values for props:
+ReactBuzzFeedQuiz.defaultProps = {
+  byline: true,
+  autoScroll: true,
+  linkShareButton: true,
+  facebookShareButton: true,
+  twitterShareButton: true,
+  linkShareButton: true,
+};
 
 ReactBuzzFeedQuiz.propTypes = {
   title: PropTypes.string.isRequired,
@@ -903,7 +920,7 @@ ReactBuzzFeedQuiz.propTypes = {
       title: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       resultImageSrc: PropTypes.string.isRequired,
-      resultID: PropTypes.number,
+      resultID: PropTypes.number.isRequired,
     })
   ),
 };

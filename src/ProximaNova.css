@@ -35,7 +35,3 @@
   src: url("./ProximaNovaFont/Proxima_Nova_Black.otf") format("opentype");
   font-display: swap;
 }
-
-body {
-  font-family: "Proxima Nova";
-}
