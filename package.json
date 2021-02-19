@@ -4,18 +4,25 @@
   "description": "React-friendly BuzzFeed Quiz Module",
   "main": "./lib/ReactBuzzFeedQuiz.js",
   "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "prop-types": "^15.7.2",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+  "peerDependencies": {
     "react-icons": "^4.2.0",
     "react-scripts": "4.0.2",
     "react-scroll": "^1.8.1",
     "styled-components": "^5.2.1",
-    "web-vitals": "^1.0.1"
+    "prop-types": "^15.7.2",
+    "react": ">=15.0.1",
+    "react-dom": ">=15.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.17",
+    "@babel/preset-env": "^7.12.17",
+    "@babel/preset-react": "7.12.13",
+    "babel-loader": "^8.2.2",
+    "prop-types": "^15.7.2",
+    "react": ">=15.0.1",
+    "react-dom": ">=15.0.1",
+    "webpack": "^5.23.0",
+    "webpack-cli": "^4.5.0"
   },
   "scripts": {
     "build": "webpack"
@@ -37,8 +44,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "webpack-cli": "^4.5.0"
   }
 }

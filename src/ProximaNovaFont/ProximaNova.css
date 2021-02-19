@@ -5,7 +5,7 @@
   font-family: "Proxima Nova";
   font-weight: 400;
   font-style: normal;
-  src: url("./ProximaNovaFont/Proxima_Nova_Regular.ttf") format("truetype");
+  src: url("./Proxima_Nova_Regular.ttf") format("truetype");
   font-display: swap;
 }
 
@@ -14,7 +14,7 @@
   font-family: "Proxima Nova";
   font-weight: 600;
   font-style: normal;
-  src: url("./ProximaNovaFont/Proxima_Nova_Semibold.ttf") format("truetype");
+  src: url("./Proxima_Nova_Semibold.ttf") format("truetype");
   font-display: swap;
 }
 
@@ -23,7 +23,7 @@
   font-family: "Proxima Nova";
   font-weight: 700;
   font-style: normal;
-  src: url("./ProximaNovaFont/Proxima_Nova_Bold.ttf") format("truetype");
+  src: url("./Proxima_Nova_Bold.ttf") format("truetype");
   font-display: swap;
 }
 
@@ -32,6 +32,6 @@
   font-family: "Proxima Nova";
   font-weight: 900;
   font-style: normal;
-  src: url("./ProximaNovaFont/Proxima_Nova_Black.otf") format("opentype");
+  src: url("./Proxima_Nova_Black.ttf") format("truetype");
   font-display: swap;
 }
