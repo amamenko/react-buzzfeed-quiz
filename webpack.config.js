@@ -2,10 +2,14 @@ const path = require("path");
 
 module.exports = {
   mode: "production",
-  entry: "./src/ReactBuzzFeedQuiz.js",
+  entry: {
+    ReactBuzzFeedQuiz: './src/ReactBuzzFeedQuiz.js',
+    reactBuzzfeedPropTypesChecker: './src/reactBuzzfeedPropTypesChecker.js',
+    ProximaNovaFont: "./src/ProximaNovaFont"
+  },
   output: {
     path: path.resolve("lib"),
-    filename: "ReactBuzzFeedQuiz.js",
+    filename: "[name].js",
     libraryTarget: "commonjs2",
   },
   module: {

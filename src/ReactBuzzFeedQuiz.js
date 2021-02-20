@@ -5,8 +5,7 @@ import { IoIosLink } from "react-icons/io";
 import { FaUser } from "react-icons/fa";
 import { scroller } from "react-scroll";
 import PropTypes from "prop-types";
-import propTypesChecker from "./reactBuzzfeedPropTypesChecker";
-// import "./ProximaNova.css";
+import propTypesChecker from "./reactBuzzFeedPropTypesChecker";
 
 const StyledOuterQuizContainer = styled.div`
   position: relative;
@@ -264,6 +263,7 @@ const StyledIndividualAnswerContainer = styled.div`
   }
 
   & > p {
+    padding: 0.25rem;
     position: absolute;
     z-index: 3;
     margin: 0 auto;
@@ -453,7 +453,6 @@ const StyledMobileRetakeQuizContainer = styled.div`
 
 const StyledShareLinksList = styled.div`
   padding-left: 0;
-  min-width: 18rem;
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
@@ -469,7 +468,6 @@ const StyledShareLinksList = styled.div`
 
 const StyledMobileShareLinksList = styled.div`
   padding-left: 0;
-  min-width: 18rem;
   margin-top: 1rem;
   display: flex;
   flex-direction: column;

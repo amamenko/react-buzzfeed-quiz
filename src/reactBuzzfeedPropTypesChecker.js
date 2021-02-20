@@ -1,7 +1,7 @@
 import React from "react";
 import SECRET from "prop-types/lib/ReactPropTypesSecret";
 
-const reactBuzzfeedPropTypesChecker = (Component) => (props) => {
+const reactBuzzFeedPropTypesChecker = (Component) => (props) => {
   const analysis = Object.keys(Component.propTypes).map((key) => {
     const validator = Component.propTypes[key];
 
@@ -30,4 +30,4 @@ const reactBuzzfeedPropTypesChecker = (Component) => (props) => {
   }
 };
 
-export default reactBuzzfeedPropTypesChecker;
+export default reactBuzzFeedPropTypesChecker;
