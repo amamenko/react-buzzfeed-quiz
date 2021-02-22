@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { GrRefresh, GrFacebook, GrTwitter } from "react-icons/gr";
-import { IoIosLink } from "react-icons/io";
+import { IoIosLink, IoIosCheckmarkCircle } from "react-icons/io";
 import { FaUser } from "react-icons/fa";
 import { scroller } from "react-scroll";
 import PropTypes from "prop-types";
-import propTypesChecker from "./reactBuzzFeedPropTypesChecker";
+import { quizValidatorFunction } from "./quizValidatorFunction";
 
 const StyledOuterQuizContainer = styled.div`
   position: relative;
@@ -25,7 +25,6 @@ const StyledInnerQuizContainer = styled.div`
 `;
 
 const StyledQuizTitle = styled.h1`
-  font-family: "Proxima Nova";
   font-size: 1.625rem;
   line-height: 1.2;
   font-weight: 700;
@@ -102,6 +101,14 @@ const StyledBylineAuthorDescriptor = styled.p`
   line-height: 1.21;
   margin: 0;
   padding: 0;
+
+  a {
+    color: #000;
+
+    &:hover {
+      color: #0f65ef;
+    }
+  }
 `;
 
 const StyledQuestionListContainer = styled.ol`
@@ -458,6 +465,10 @@ const StyledShareLinksList = styled.div`
   flex-direction: column;
   display: none;
 
+  a {
+    text-decoration: none;
+  }
+
   @media (min-width: 40rem) {
     display: flex;
     flex-direction: row;
@@ -474,6 +485,10 @@ const StyledMobileShareLinksList = styled.div`
   padding-left: 1rem;
   padding-right: 1rem;
   padding-bottom: 0.5rem;
+
+  a {
+    text-decoration: none;
+  }
 
   @media (min-width: 40rem) {
     display: none;
@@ -504,15 +519,20 @@ const StyledShareButton = styled.span`
   line-height: 1.5rem;
   font-size: 0.875rem;
   min-width: 4rem;
+  width: ${(props) => (props.shareTo === "link" ? "100%" : "auto")};
   max-height: 1.5rem;
   border-radius: 3px;
   cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   transition: background-color 0.1s ease, border 0.1s ease;
 
   @media (min-width: 40rem) {
     padding: 0.2rem 0.625rem;
     line-height: 1.25rem;
     margin-bottom: 0;
+    width: auto;
   }
 
   svg {
@@ -546,12 +566,94 @@ const StyledShareButton = styled.span`
   }
 `;
 
+const StyledShareLinkButtonOuterContainer = styled.div`
+  position: relative;
+
+  @media (max-width: 40rem) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`;
+
+const StyledTooltipContainer = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  background: #222;
+  max-width: 100%;
+  max-height: 1.5rem;
+  bottom: 0;
+  white-space: nowrap;
+  border: 1px solid #222;
+  box-shadow: 0 1px 1px rgb(173 168 168 / 10%);
+  border-radius: 3px;
+  margin-bottom: 61px;
+  padding: 0.5rem 0.8rem;
+  line-height: 1.5rem;
+  min-width: 4rem;
+  transform: translate(-2%, 0%);
+
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeout {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  animation: ${(props) =>
+    props.shareLinkAnimatingOut === true
+      ? "fadeout 0.5s ease"
+      : "fadein 0.2s ease"};
+
+  @media (min-width: 40rem) {
+    padding: 0.4rem 0.625rem;
+    margin-bottom: 45px;
+  }
+
+  svg {
+    padding-right: 0.25rem;
+  }
+
+  p {
+    font-size: 0.8rem;
+    padding-left: 0.25rem;
+  }
+
+  &::after {
+    content: "";
+    border-top-color: #222;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -0.5875rem;
+    border-width: 0.5875rem;
+    border-style: solid;
+    border-color: #222 transparent transparent transparent;
+  }
+`;
+
 const ReactBuzzFeedQuiz = (props) => {
   const {
     title,
     description,
     byline,
     bylineAuthor,
+    bylineAuthorLink,
+    bylineAuthorLinkOpenInNewTab,
     bylineAuthorTagline,
     bylineAvatarImageSrc,
     generalTheme,
@@ -561,20 +663,18 @@ const ReactBuzzFeedQuiz = (props) => {
     facebookShareLink,
     twitterShareButton,
     twitterShareLink,
-    linkShareButton,
-    linkShareLink,
+    twitterShareText,
+    twitterShareHashtags,
+    copyShareButton,
+    copyShareLink,
     results,
   } = props;
 
   const [selectedAnswers, changeSelectedAnswers] = useState([]);
   const [resultsAvailable, changeResultsAvailable] = useState(false);
   const [finalResult, changeFinalResult] = useState([]);
-
-  useEffect(() => {
-    console.error = (error) => {
-      throw new Error(error);
-    };
-  }, []);
+  const [shareLinkClicked, changeShareLinkClicked] = useState(false);
+  const [shareLinkAnimatingOut, changeShareLinkAnimatingOut] = useState(false);
 
   const scrollFunction = (element, questionIndex) => {
     if (autoScroll) {
@@ -655,34 +755,124 @@ const ReactBuzzFeedQuiz = (props) => {
     changeResultsAvailable(false);
     changeSelectedAnswers([]);
     changeFinalResult([]);
+
+    if (shareLinkClicked) {
+      changeShareLinkClicked(false);
+    }
+
+    if (shareLinkAnimatingOut) {
+      changeShareLinkAnimatingOut(false);
+    }
   };
+
+  const handleShareLinkClicked = (shareLink) => {
+    // Handle copy to clipboard
+    const el = document.createElement("textarea");
+    el.value = shareLink;
+    el.setAttribute("readonly", "");
+    el.style = { position: "absolute", left: "-9999px" };
+    document.body.appendChild(el);
+
+    if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
+      // save current contentEditable/readOnly status
+      var editable = el.contentEditable;
+      var readOnly = el.readOnly;
+
+      // convert to editable with readonly to stop iOS keyboard opening
+      el.contentEditable = true;
+      el.readOnly = true;
+
+      // create a selectable range
+      var range = document.createRange();
+      range.selectNodeContents(el);
+
+      // select the range
+      var selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      el.setSelectionRange(0, 999999);
+
+      // restore contentEditable/readOnly to original state
+      el.contentEditable = editable;
+      el.readOnly = readOnly;
+    } else {
+      el.select();
+    }
+
+    document.execCommand("copy");
+    document.body.removeChild(el);
+
+    if (!shareLinkClicked) {
+      changeShareLinkClicked(true);
+    }
+  };
+
+  useEffect(() => {
+    if (shareLinkClicked) {
+      setTimeout(() => {
+        changeShareLinkAnimatingOut(true);
+      }, 4500);
+
+      setTimeout(() => {
+        changeShareLinkClicked(false);
+        changeShareLinkAnimatingOut(false);
+      }, 4800);
+    }
+  }, [shareLinkClicked]);
+
+  if (!quizValidatorFunction(props)) {
+    return null;
+  }
 
   return (
     <StyledOuterQuizContainer name="Top" className="react_buzzfeed_quiz">
-      <StyledInnerQuizContainer>
-        {title ? <StyledQuizTitle>{title}</StyledQuizTitle> : null}
+      <StyledInnerQuizContainer className="rbq_inner_container">
+        {title ? (
+          <StyledQuizTitle className="rbq_title">{title}</StyledQuizTitle>
+        ) : null}
         {description ? (
-          <StyledQuizDescription>{description}</StyledQuizDescription>
+          <StyledQuizDescription className="rbq_description">
+            {description}
+          </StyledQuizDescription>
         ) : null}
         {byline ? (
-          <StyledBylineContainer>
+          <StyledBylineContainer className="rbq_byline_container">
             {bylineAuthor ? (
-              <StyledAvatarContainer>
+              <StyledAvatarContainer className="rbq_byline_avatar_container">
                 {bylineAvatarImageSrc ? (
-                  <StyledAvatar alt={bylineAuthor} src={bylineAvatarImageSrc} />
+                  <StyledAvatar
+                    className="rbq_byline_avatar"
+                    alt={bylineAuthor}
+                    src={bylineAvatarImageSrc}
+                  />
                 ) : (
-                  <FaUser />
+                  <FaUser className="rbq_byline_avatar_icon" />
                 )}
               </StyledAvatarContainer>
             ) : null}
-            <StyledBylineAuthorDescriptorContainer>
+            <StyledBylineAuthorDescriptorContainer className="rbq_byline_descriptor_container">
               {bylineAuthor ? (
-                <StyledBylineAuthorDescriptor>
-                  by <strong>{bylineAuthor}</strong>
+                <StyledBylineAuthorDescriptor className="rbq_byline_author">
+                  by{" "}
+                  {bylineAuthorLink ? (
+                    <a
+                      href={bylineAuthorLink}
+                      target={bylineAuthorLinkOpenInNewTab ? "_blank" : "_self"}
+                      rel={
+                        bylineAuthorLinkOpenInNewTab
+                          ? "noopener noreferrer"
+                          : null
+                      }
+                    >
+                      <strong>{bylineAuthor}</strong>
+                    </a>
+                  ) : (
+                    <strong>{bylineAuthor}</strong>
+                  )}
                 </StyledBylineAuthorDescriptor>
               ) : null}
-              {bylineAuthorTagline ? (
-                <StyledBylineAuthorDescriptor>
+              {bylineAuthor && bylineAuthorTagline ? (
+                <StyledBylineAuthorDescriptor className="rbq_byline_tagline">
                   {bylineAuthorTagline}
                 </StyledBylineAuthorDescriptor>
               ) : null}
@@ -693,15 +883,20 @@ const ReactBuzzFeedQuiz = (props) => {
         {questions ? (
           Array.isArray(questions) && questions.length > 0 ? (
             <>
-              <StyledQuestionListContainer id="main_questions_container">
+              <StyledQuestionListContainer
+                id="main_questions_container"
+                className="rbq_questions_container"
+              >
                 {questions.map((item, questionIndex) => {
                   return (
                     <StyledListItemContainer
+                      className="rbq_question"
                       key={questionIndex}
                       questionIndex={questionIndex}
                       name={`Question${questionIndex}`}
                     >
                       <StyledQuestionContainer
+                        className="rbq_question_inner_container"
                         theme={
                           item.specificTheme
                             ? item.specificTheme
@@ -711,6 +906,7 @@ const ReactBuzzFeedQuiz = (props) => {
                         }
                       >
                         <StyledQuestionText
+                          className="rbq_question_text"
                           theme={
                             item.specificTheme
                               ? item.specificTheme
@@ -726,10 +922,11 @@ const ReactBuzzFeedQuiz = (props) => {
                       {item.answers ? (
                         Array.isArray(item.answers) &&
                         item.answers.length > 0 ? (
-                          <StyledQuestionAnswersContainer>
+                          <StyledQuestionAnswersContainer className="rbq_answers_container">
                             {item.answers.map((x, answerIndex) => {
                               return (
                                 <StyledIndividualAnswerContainer
+                                  className="rbq_answer"
                                   resultsAvailable={resultsAvailable}
                                   answered={selectedAnswers.some(
                                     (el) => el.questionIndex === questionIndex
@@ -767,100 +964,208 @@ const ReactBuzzFeedQuiz = (props) => {
                 })}
               </StyledQuestionListContainer>
               {resultsAvailable && finalResult.length > 0 ? (
-                <StyledResultOuterContainer name="Result">
-                  <StyledResultHeader>
+                <StyledResultOuterContainer
+                  className="rbq_result"
+                  name="Result"
+                >
+                  <StyledResultHeader className="rbq_result_header">
                     <h2>{title}</h2>
-                    <StyledRetakeQuizContainer onClick={handleRetakeQuiz}>
-                      <GrRefresh />
+                    <StyledRetakeQuizContainer
+                      className="rbq_retake_container"
+                      onClick={handleRetakeQuiz}
+                    >
+                      <GrRefresh className="rbq_retake_icon" />
                       <p>Retake Quiz</p>
                     </StyledRetakeQuizContainer>
                   </StyledResultHeader>
-                  <StyledResultInnerContainer>
-                    <StyledResultInnerDescriptionContainer>
-                      <StyledResultInnerDescriptionHeader>
+                  <StyledResultInnerContainer className="rbq_result_inner_container">
+                    <StyledResultInnerDescriptionContainer className="rbq_result_description_container">
+                      <StyledResultInnerDescriptionHeader className="rbq_result_description_header">
                         You got: {finalResult[0].title}
                       </StyledResultInnerDescriptionHeader>
-                      <StyledResultInnerDescription>
+                      <StyledResultInnerDescription className="rbq_result_description_body">
                         {finalResult[0].description}
                       </StyledResultInnerDescription>
-                      <StyledShareLinksList>
+                      <StyledShareLinksList className="rbq_share_links_container">
                         {facebookShareButton ? (
-                          <StyledShareButton
-                            shareTo="facebook"
-                            onClick={() =>
-                              (window.location.href = facebookShareLink)
+                          <a
+                            href={
+                              facebookShareLink
+                                ? `https://www.facebook.com/sharer.php?u=${encodeURI(
+                                    facebookShareLink
+                                  )}`
+                                : ""
                             }
+                            target="_blank"
+                            rel="noopener noreferrer"
                           >
-                            <GrFacebook />
-                            <p>Share</p>
-                          </StyledShareButton>
+                            <StyledShareButton
+                              className="rbq_facebook_share_button"
+                              shareTo="facebook"
+                            >
+                              <GrFacebook className="rbq_facebook_share_button_icon" />
+                              <p>Share</p>
+                            </StyledShareButton>
+                          </a>
                         ) : null}
                         {twitterShareButton ? (
-                          <StyledShareButton
-                            shareTo="twitter"
-                            onClick={() =>
-                              (window.location.href = twitterShareLink)
+                          <a
+                            href={
+                              twitterShareLink
+                                ? `https://twitter.com/intent/tweet?url=${encodeURI(
+                                    twitterShareLink
+                                  )}${
+                                    twitterShareText
+                                      ? `&text=${encodeURIComponent(
+                                          twitterShareText
+                                        )}`
+                                      : ""
+                                  }${
+                                    twitterShareHashtags
+                                      ? twitterShareHashtags.length > 0
+                                        ? `&hashtags=${twitterShareHashtags
+                                            .map((item) =>
+                                              encodeURIComponent(item)
+                                            )
+                                            .join()}`
+                                        : ""
+                                      : ""
+                                  }`
+                                : ""
                             }
+                            target="_blank"
+                            rel="noopener noreferrer"
                           >
-                            <GrTwitter />
-                            <p>Tweet</p>
-                          </StyledShareButton>
+                            <StyledShareButton
+                              className="rbq_twitter_share_button"
+                              shareTo="twitter"
+                            >
+                              <GrTwitter className="rbq_twitter_share_button_icon" />
+                              <p>Tweet</p>
+                            </StyledShareButton>
+                          </a>
                         ) : null}
-                        {linkShareButton ? (
-                          <StyledShareButton
-                            shareTo="link"
-                            onClick={() =>
-                              (window.location.href = linkShareLink)
-                            }
-                          >
-                            <IoIosLink />
-                            <p>Copy Link</p>
-                          </StyledShareButton>
+                        {copyShareButton ? (
+                          <StyledShareLinkButtonOuterContainer>
+                            {shareLinkClicked ? (
+                              <StyledTooltipContainer
+                                shareLinkAnimatingOut={shareLinkAnimatingOut}
+                                className="rbq_link_share_copied_tooltip"
+                              >
+                                <IoIosCheckmarkCircle />
+                                <p>Link copied!</p>
+                              </StyledTooltipContainer>
+                            ) : null}
+                            <StyledShareButton
+                              className="rbq_link_share_button"
+                              shareTo="link"
+                              onClick={() =>
+                                handleShareLinkClicked(copyShareLink)
+                              }
+                            >
+                              <IoIosLink className="rbq_link_share_button_icon" />
+                              <p>Copy Link</p>
+                            </StyledShareButton>
+                          </StyledShareLinkButtonOuterContainer>
                         ) : null}
                       </StyledShareLinksList>
                     </StyledResultInnerDescriptionContainer>
-                    <StyledResultInnerImageContainer>
+                    <StyledResultInnerImageContainer className="rbq_result_inner_image_container">
                       <StyledResultInnerImage
+                        className="rbq_result_inner_image"
                         alt="Buzzfeed Quiz Result Image"
                         src={finalResult[0].resultImageSrc}
                       />
                     </StyledResultInnerImageContainer>
-                    <StyledMobileShareLinksList>
+                    <StyledMobileShareLinksList className="rbq_mobile_share_links_container">
                       {facebookShareButton ? (
-                        <StyledShareButton
-                          shareTo="facebook"
-                          onClick={() =>
-                            (window.location.href = facebookShareLink)
+                        <a
+                          href={
+                            facebookShareLink
+                              ? `https://www.facebook.com/sharer.php?u=${encodeURI(
+                                  facebookShareLink
+                                )}`
+                              : ""
                           }
+                          target="_blank"
+                          rel="noopener noreferrer"
                         >
-                          <GrFacebook />
-                          <p>Share</p>
-                        </StyledShareButton>
+                          <StyledShareButton
+                            className="rbq_mobile_facebook_share_button"
+                            shareTo="facebook"
+                          >
+                            <GrFacebook className="rbq_mobile_facebook_share_button_icon" />
+                            <p>Share</p>
+                          </StyledShareButton>
+                        </a>
                       ) : null}
                       {twitterShareButton ? (
-                        <StyledShareButton
-                          shareTo="twitter"
-                          onClick={() =>
-                            (window.location.href = twitterShareLink)
+                        <a
+                          href={
+                            twitterShareLink
+                              ? `https://twitter.com/intent/tweet?url=${encodeURI(
+                                  twitterShareLink
+                                )}${
+                                  twitterShareText
+                                    ? `&text=${encodeURIComponent(
+                                        twitterShareText
+                                      )}`
+                                    : ""
+                                }${
+                                  twitterShareHashtags
+                                    ? twitterShareHashtags.length > 0
+                                      ? `&hashtags=${twitterShareHashtags
+                                          .map((item) =>
+                                            encodeURIComponent(item)
+                                          )
+                                          .join()}`
+                                      : ""
+                                    : ""
+                                }`
+                              : ""
                           }
+                          target="_blank"
+                          rel="noopener noreferrer"
                         >
-                          <GrTwitter />
-                          <p>Tweet</p>
-                        </StyledShareButton>
+                          <StyledShareButton
+                            className="rbq_mobile_twitter_share_button"
+                            shareTo="twitter"
+                          >
+                            <GrTwitter className="rbq_mobile_twitter_share_button_icon" />
+                            <p>Tweet</p>
+                          </StyledShareButton>
+                        </a>
                       ) : null}
-                      {linkShareButton ? (
-                        <StyledShareButton
-                          shareTo="link"
-                          onClick={() => (window.location.href = linkShareLink)}
-                        >
-                          <IoIosLink />
-                          <p>Copy Link</p>
-                        </StyledShareButton>
+                      {copyShareButton ? (
+                        <StyledShareLinkButtonOuterContainer>
+                          {shareLinkClicked ? (
+                            <StyledTooltipContainer
+                              shareLinkAnimatingOut={shareLinkAnimatingOut}
+                              className="rbq_mobile_link_share_copied_tooltip"
+                            >
+                              <IoIosCheckmarkCircle />
+                              <p>Link copied!</p>
+                            </StyledTooltipContainer>
+                          ) : null}
+                          <StyledShareButton
+                            className="rbq_mobile_link_share_button"
+                            shareTo="link"
+                            onClick={() =>
+                              handleShareLinkClicked(copyShareLink)
+                            }
+                          >
+                            <IoIosLink className="rbq_mobile_link_share_icon" />
+                            <p>Copy Link</p>
+                          </StyledShareButton>
+                        </StyledShareLinkButtonOuterContainer>
                       ) : null}
                     </StyledMobileShareLinksList>
                   </StyledResultInnerContainer>
-                  <StyledMobileRetakeQuizContainer onClick={handleRetakeQuiz}>
-                    <GrRefresh />
+                  <StyledMobileRetakeQuizContainer
+                    className="rbq_mobile_retake_container"
+                    onClick={handleRetakeQuiz}
+                  >
+                    <GrRefresh className="rbq_mobile_retake_icon" />
                     <p>Retake Quiz</p>
                   </StyledMobileRetakeQuizContainer>
                 </StyledResultOuterContainer>
@@ -873,23 +1178,13 @@ const ReactBuzzFeedQuiz = (props) => {
   );
 };
 
-export default propTypesChecker(ReactBuzzFeedQuiz);
-
-// Specifies the default values for props:
-ReactBuzzFeedQuiz.defaultProps = {
-  byline: true,
-  autoScroll: true,
-  linkShareButton: true,
-  facebookShareButton: true,
-  twitterShareButton: true,
-  linkShareButton: true,
-};
-
 ReactBuzzFeedQuiz.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   byline: PropTypes.bool,
   bylineAuthor: PropTypes.string,
+  bylineAuthorLink: PropTypes.string,
+  bylineAuthorLinkOpenInNewTab: PropTypes.bool,
   bylineAuthorTagline: PropTypes.string,
   bylineAvatarImageSrc: PropTypes.string,
   generalTheme: PropTypes.string,
@@ -898,8 +1193,10 @@ ReactBuzzFeedQuiz.propTypes = {
   facebookShareLink: PropTypes.string,
   twitterShareButton: PropTypes.bool,
   twitterShareLink: PropTypes.string,
-  linkShareButton: PropTypes.bool,
-  linkShareLink: PropTypes.string,
+  twitterShareText: PropTypes.string,
+  twitterShareHashtags: PropTypes.arrayOf(PropTypes.string),
+  copyShareButton: PropTypes.bool,
+  copyShareLink: PropTypes.string,
   questions: PropTypes.arrayOf(
     PropTypes.shape({
       question: PropTypes.string.isRequired,
@@ -908,7 +1205,7 @@ ReactBuzzFeedQuiz.propTypes = {
         PropTypes.shape({
           answer: PropTypes.string.isRequired,
           specificTheme: PropTypes.string,
-          resultID: PropTypes.number,
+          resultID: PropTypes.number.isRequired,
         })
       ),
     })
@@ -922,3 +1219,16 @@ ReactBuzzFeedQuiz.propTypes = {
     })
   ),
 };
+
+ReactBuzzFeedQuiz.defaultProps = {
+  byline: true,
+  bylineAuthorLinkOpenInNewTab: false,
+  autoScroll: true,
+  copyShareButton: true,
+  facebookShareButton: true,
+  twitterShareButton: true,
+  twitterShareHashtags: [],
+  copyShareButton: true,
+};
+
+export default ReactBuzzFeedQuiz;
