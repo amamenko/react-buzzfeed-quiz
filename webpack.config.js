@@ -17,6 +17,9 @@ module.exports = {
   entry: {
     quizValidatorFunction: "./src/quizValidatorFunction.js",
     ReactBuzzFeedQuiz: "./src/ReactBuzzFeedQuiz.js",
+    "./components/Byline": "./src/components/Byline.js",
+    "./components/Question": "./src/components/Question.js",
+    "./components/Result": "./src/components/Result.js",
     ProximaNovaCSS: "./src/ProximaNova.css",
     ProximaNovaBlack: "./src/ProximaNovaFont/Proxima_Nova_Black.ttf",
     ProximaNovaBold: "./src/ProximaNovaFont/Proxima_Nova_Bold.ttf",
