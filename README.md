@@ -38,7 +38,7 @@ Once it's installed, you can import the `ReactBuzzFeedQuiz` component as follows
 import ReactBuzzFeedQuiz from "react-buzzfeed-quiz";
 ```
 
-## BuzzFeed Font
+### BuzzFeed Font
 
 The module also includes some `.woff` and `.woff2` font assets for [Proxima Nova](https://www.marksimonson.com/fonts/view/proxima-nova), the official BuzzFeed font. Keep in mind, `ReactBuzzFeedQuiz` uses `styled-components` for styling so font preloading for Proxima Nova is included by default if you do intend to use it. 
 
@@ -49,10 +49,10 @@ import "react-buzzfeed-quiz/ProximaNova.css"
 ```
 
 
-## Usage
+## User Guide
 
 
-## API
+### API
 
 The `ReactBuzzFeedQuiz` component accepts the following props:
 
@@ -78,6 +78,37 @@ The `ReactBuzzFeedQuiz` component accepts the following props:
 | copyShareLink | string | `""` | The text that should be copied to the clipboard upon clicking the "Copy Link" button.  |
 | questions | Array[Object] | `[{}]` | An array of question objects (see Question Object below). |
 | results | Array[Object] | `[{}]` | An array of result objects (see Result Object below). | 
+
+### Question Object
+
+`ReactBuzzFeedQuiz`'s `questions` prop accepts an array of question objects with key-value pairs formatted in the following manner:
+
+| Key Name         | Value Type    | Value Description |
+| ------------ | ------- | ----------- |
+| question | string | The text value of the question being asked. |
+| specificTheme | string | Applies a color theme to only the specific question container's background and font colors. Available color themes are the same as those of `generalTheme`. This value supersedes the `generalTheme` prop if supplied to `ReactBuzzFeedQuiz`. If the `generalTheme` prop is supplied and this value is empty, then the color theme in `generalTheme` will be applied. Otherwise, if no color theme or invalid color theme is supplied, the default background color is black and the default font color is white.  |
+| answers | Array[Object] | An array of answer objects (see Answer Object below). |
+
+#### Answer Object
+
+The value of the `answers` key of the Question Object accepts an array of answer objects with key-value pairs formatted in the following manner:
+
+| Key Name         | Value Type    | Value Description |
+| ------------ | ------- | ----------- |
+| answer | string | The text value of the answer choice. |
+| specificTheme | string | Applies a color theme to only the specific answer container's background and font colors. Available color themes are the same as those of `generalTheme`. This value supersedes the `generalTheme` prop if supplied to `ReactBuzzFeedQuiz`. If the `generalTheme` prop is supplied and this value is empty, then the color theme in `generalTheme` will be applied. Otherwise, if no color theme or invalid color theme is supplied, the default background color is black and the default font color is white.  |
+| resultID | number | The numerical ID of the answer's associated Result Object (see below) found in `ReactBuzzFeedQuiz`'s `results` prop. |
+
+### Result Object
+
+`ReactBuzzFeedQuiz`'s `results` prop accepts an array of result objects with key-value pairs formatted in the following manner:
+
+| Key Name         | Value Type    | Value Description |
+| ------------ | ------- | ----------- |
+| title | string | The heading text value of the associated result. Preceded by the string "You got: ". |
+| description | string | The text value of the sub-heading result description. |
+| resultImageSrc | string | URL or local image to be included in the result container image's `src` attribute. |
+| resultID | number | The numerical ID of the Result Object. Used to associate Result Objects to Answer Objects. |
 
 
 
