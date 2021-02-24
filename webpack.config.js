@@ -8,7 +8,9 @@ module.exports = {
     minimizer: [new TerserPlugin({ extractComments: false })],
   },
   plugins: [
-    new RemoveEmptyScriptsPlugin({ extensions: ["css", "ttf"] }),
+    new RemoveEmptyScriptsPlugin({
+      extensions: ["css", "woff", "woff2"],
+    }),
     new MiniCssExtractPlugin({
       filename: "./ProximaNova.css",
     }),
@@ -17,14 +19,28 @@ module.exports = {
   entry: {
     quizValidatorFunction: "./src/quizValidatorFunction.js",
     ReactBuzzFeedQuiz: "./src/ReactBuzzFeedQuiz.js",
+    ProximaNovaGlobalStyle: "./src/ProximaNovaGlobalStyle.js",
     "./components/Byline": "./src/components/Byline.js",
     "./components/Question": "./src/components/Question.js",
     "./components/Result": "./src/components/Result.js",
-    ProximaNovaCSS: "./src/ProximaNova.css",
-    ProximaNovaBlack: "./src/ProximaNovaFont/Proxima_Nova_Black.ttf",
-    ProximaNovaBold: "./src/ProximaNovaFont/Proxima_Nova_Bold.ttf",
-    ProximaNovaRegular: "./src/ProximaNovaFont/Proxima_Nova_Regular.ttf",
-    ProximaNovaSemibold: "./src/ProximaNovaFont/Proxima_Nova_Semibold.ttf",
+
+    "./ProximaNovaFont/woff2/Proxima_Nova_Black":
+      "./src/ProximaNovaFont/woff2/Proxima_Nova_Black.woff2",
+    "./ProximaNovaFont/woff2/Proxima_Nova_Bold":
+      "./src/ProximaNovaFont/woff2/Proxima_Nova_Bold.woff2",
+    "./ProximaNovaFont/woff2/Proxima_Nova_Regular":
+      "./src/ProximaNovaFont/woff2/Proxima_Nova_Regular.woff2",
+    "./ProximaNovaFont/woff2/Proxima_Nova_Semibold":
+      "./src/ProximaNovaFont/woff2/Proxima_Nova_Semibold.woff2",
+
+    "./ProximaNovaFont/woff/Proxima_Nova_Black":
+      "./src/ProximaNovaFont/woff/Proxima_Nova_Black.woff",
+    "./ProximaNovaFont/woff/Proxima_Nova_Bold":
+      "./src/ProximaNovaFont/woff/Proxima_Nova_Bold.woff",
+    "./ProximaNovaFont/woff/Proxima_Nova_Regular":
+      "./src/ProximaNovaFont/woff/Proxima_Nova_Regular.woff",
+    "./ProximaNovaFont/woff/Proxima_Nova_Semibold":
+      "./src/ProximaNovaFont/woff/Proxima_Nova_Semibold.woff",
   },
   output: {
     path: path.resolve("lib"),
@@ -56,13 +72,25 @@ module.exports = {
         ],
       },
       {
-        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.(woff2)$/,
         use: [
           {
             loader: "file-loader",
             options: {
               name: "[name].[ext]",
-              outputPath: "ProximaNovaFont",
+              outputPath: "ProximaNovaFont/woff2",
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(woff)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]",
+              outputPath: "ProximaNovaFont/woff",
             },
           },
         ],
@@ -77,6 +105,7 @@ module.exports = {
     alias: {
       react: path.resolve(__dirname, "./node_modules/react"),
       "react-dom": path.resolve(__dirname, "./node_modules/react-dom"),
+      ProximaNovaFont: path.resolve(__dirname, "src/ProximaNovaFont"),
     },
     extensions: [".js", ".jsx"],
   },

@@ -5,8 +5,10 @@ import { quizValidatorFunction } from "./quizValidatorFunction";
 import Byline from "./components/Byline";
 import Question from "./components/Question";
 import Result from "./components/Result";
+import ProximaNovaGlobalStyle from "./ProximaNovaGlobalStyle";
 
 const StyledOuterQuizContainer = styled.div`
+  font-family: "Proxima Nova";
   position: relative;
   display: flex;
   align-items: center;
@@ -154,72 +156,76 @@ const ReactBuzzFeedQuiz = (props) => {
   }
 
   return (
-    <StyledOuterQuizContainer name="Top" className="react_buzzfeed_quiz">
-      <StyledInnerQuizContainer className="rbq_inner_container">
-        {title ? (
-          <StyledQuizTitle className="rbq_title">{title}</StyledQuizTitle>
-        ) : null}
-        {description ? (
-          <StyledQuizDescription className="rbq_description">
-            {description}
-          </StyledQuizDescription>
-        ) : null}
-        <Byline
-          byline={byline}
-          bylineAuthor={bylineAuthor}
-          bylineAvatarImageSrc={bylineAvatarImageSrc}
-          bylineAuthorLink={bylineAuthorLink}
-          bylineAuthorTagline={bylineAuthorTagline}
-          bylineAuthorLinkOpenInNewTab={bylineAuthorLinkOpenInNewTab}
-        />
+    <>
+      <ProximaNovaGlobalStyle />
+      <StyledOuterQuizContainer name="Top" className="react_buzzfeed_quiz">
+        <StyledInnerQuizContainer className="rbq_inner_container">
+          {title ? (
+            <StyledQuizTitle className="rbq_title">{title}</StyledQuizTitle>
+          ) : null}
+          {description ? (
+            <StyledQuizDescription className="rbq_description">
+              {description}
+            </StyledQuizDescription>
+          ) : null}
+          <Byline
+            byline={byline}
+            bylineAuthor={bylineAuthor}
+            bylineAvatarImageSrc={bylineAvatarImageSrc}
+            bylineAuthorLink={bylineAuthorLink}
+            bylineAuthorTagline={bylineAuthorTagline}
+            bylineAuthorLinkOpenInNewTab={bylineAuthorLinkOpenInNewTab}
+          />
 
-        {questions ? (
-          Array.isArray(questions) && questions.length > 0 ? (
-            <>
-              <StyledQuestionListContainer
-                id="main_questions_container"
-                className="rbq_questions_container"
-              >
-                {questions.map((item, questionIndex) => {
-                  return (
-                    <Question
-                      item={item}
-                      questionIndex={questionIndex}
-                      generalTheme={generalTheme}
-                      resultsAvailable={resultsAvailable}
-                      selectedAnswers={selectedAnswers}
-                      changeSelectedAnswers={changeSelectedAnswers}
-                      scrollFunction={scrollFunction}
-                    />
-                  );
-                })}
-              </StyledQuestionListContainer>
-              <Result
-                title={title}
-                resultsAvailable={resultsAvailable}
-                finalResult={finalResult}
-                facebookShareButton={facebookShareButton}
-                facebookShareLink={facebookShareLink}
-                twitterShareButton={twitterShareButton}
-                twitterShareLink={twitterShareLink}
-                twitterShareText={twitterShareText}
-                twitterShareHashtags={twitterShareHashtags}
-                copyShareButton={copyShareButton}
-                copyShareLink={copyShareLink}
-                shareLinkClicked={shareLinkClicked}
-                changeShareLinkClicked={changeShareLinkClicked}
-                shareLinkAnimatingOut={shareLinkAnimatingOut}
-                changeShareLinkAnimatingOut={changeShareLinkAnimatingOut}
-                scrollFunction={scrollFunction}
-                changeResultsAvailable={changeResultsAvailable}
-                changeSelectedAnswers={changeSelectedAnswers}
-                changeFinalResult={changeFinalResult}
-              />
-            </>
-          ) : null
-        ) : null}
-      </StyledInnerQuizContainer>
-    </StyledOuterQuizContainer>
+          {questions ? (
+            Array.isArray(questions) && questions.length > 0 ? (
+              <>
+                <StyledQuestionListContainer
+                  id="main_questions_container"
+                  className="rbq_questions_container"
+                >
+                  {questions.map((item, questionIndex) => {
+                    return (
+                      <Question
+                        key={questionIndex}
+                        item={item}
+                        questionIndex={questionIndex}
+                        generalTheme={generalTheme}
+                        resultsAvailable={resultsAvailable}
+                        selectedAnswers={selectedAnswers}
+                        changeSelectedAnswers={changeSelectedAnswers}
+                        scrollFunction={scrollFunction}
+                      />
+                    );
+                  })}
+                </StyledQuestionListContainer>
+                <Result
+                  title={title}
+                  resultsAvailable={resultsAvailable}
+                  finalResult={finalResult}
+                  facebookShareButton={facebookShareButton}
+                  facebookShareLink={facebookShareLink}
+                  twitterShareButton={twitterShareButton}
+                  twitterShareLink={twitterShareLink}
+                  twitterShareText={twitterShareText}
+                  twitterShareHashtags={twitterShareHashtags}
+                  copyShareButton={copyShareButton}
+                  copyShareLink={copyShareLink}
+                  shareLinkClicked={shareLinkClicked}
+                  changeShareLinkClicked={changeShareLinkClicked}
+                  shareLinkAnimatingOut={shareLinkAnimatingOut}
+                  changeShareLinkAnimatingOut={changeShareLinkAnimatingOut}
+                  scrollFunction={scrollFunction}
+                  changeResultsAvailable={changeResultsAvailable}
+                  changeSelectedAnswers={changeSelectedAnswers}
+                  changeFinalResult={changeFinalResult}
+                />
+              </>
+            ) : null
+          ) : null}
+        </StyledInnerQuizContainer>
+      </StyledOuterQuizContainer>
+    </>
   );
 };
 
