@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import { GrRefresh, GrFacebook, GrTwitter } from "react-icons/gr";
 import { IoIosLink, IoIosCheckmarkCircle } from "react-icons/io";
@@ -370,6 +370,8 @@ const Result = (props) => {
     changeResultsAvailable,
     changeSelectedAnswers,
     changeFinalResult,
+    onResult,
+    onRestart,
   } = props;
 
   const handleRetakeQuiz = () => {
@@ -384,6 +386,12 @@ const Result = (props) => {
 
     if (shareLinkAnimatingOut) {
       changeShareLinkAnimatingOut(false);
+    }
+
+    if (onRestart) {
+      if (typeof onRestart === "function") {
+        onRestart();
+      }
     }
   };
 
@@ -428,6 +436,28 @@ const Result = (props) => {
       changeShareLinkClicked(true);
     }
   };
+
+  useMemo(() => {
+    const generalOnResultFunction = () => {
+      if (onResult) {
+        if (typeof onResult === "function") {
+          onResult();
+        }
+      }
+    };
+
+    if (resultsAvailable && finalResult.length > 0) {
+      if (finalResult[0].onResult) {
+        if (typeof finalResult[0].onResult === "function") {
+          finalResult[0].onResult();
+        } else {
+          generalOnResultFunction();
+        }
+      } else {
+        generalOnResultFunction();
+      }
+    }
+  }, [resultsAvailable, finalResult, onResult]);
 
   if (resultsAvailable && finalResult.length > 0) {
     return (

@@ -68,6 +68,9 @@ const ReactBuzzFeedQuiz = (props) => {
     generalTheme,
     autoScroll,
     questions,
+    onResult,
+    onAnswerSelection,
+    onRestart,
     facebookShareButton,
     facebookShareLink,
     twitterShareButton,
@@ -195,6 +198,7 @@ const ReactBuzzFeedQuiz = (props) => {
                         selectedAnswers={selectedAnswers}
                         changeSelectedAnswers={changeSelectedAnswers}
                         scrollFunction={scrollFunction}
+                        onAnswerSelection={onAnswerSelection}
                       />
                     );
                   })}
@@ -219,6 +223,8 @@ const ReactBuzzFeedQuiz = (props) => {
                   changeResultsAvailable={changeResultsAvailable}
                   changeSelectedAnswers={changeSelectedAnswers}
                   changeFinalResult={changeFinalResult}
+                  onResult={onResult}
+                  onRestart={onRestart}
                 />
               </>
             ) : null

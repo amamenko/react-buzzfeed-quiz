@@ -36,6 +36,10 @@ const StyledQuestionContainer = styled.div`
       ? "rgb(34, 34, 34)"
       : "rgb(0, 0, 0)"};
   margin-bottom: 2.5rem;
+  background-image: ${(props) =>
+    props.backgroundImageSrc ? `url(${props.backgroundImageSrc})` : "none"};
+  background-repeat: no-repeat;
+  background-size: cover;
   @media (min-width: 52rem) {
     min-height: 345px;
   }
@@ -45,6 +49,10 @@ const StyledQuestionText = styled.p`
   z-index: 3;
   margin: 0;
   line-height: 1.1;
+  text-stroke: ${(props) =>
+    props.backgroundImageSrc ? "calc(2px / 1.5) #000000" : 0};
+  -webkit-text-stroke: ${(props) =>
+    props.backgroundImageSrc ? "calc(2px / 1.5) #000000" : 0};
   padding: 10px;
   font-weight: 900;
   font-size: calc(90px / 2);
@@ -111,6 +119,10 @@ const StyledIndividualAnswerContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: 14.5vh;
+  background-image: ${(props) =>
+    props.backgroundImageSrc ? `url(${props.backgroundImageSrc})` : "none"};
+  background-repeat: no-repeat;
+  background-size: cover;
 
   @keyframes bounceClick {
     0% {
@@ -160,6 +172,10 @@ const StyledIndividualAnswerContainer = styled.div`
     margin: 0 auto;
     right: 0;
     left: 0;
+    text-stroke: ${(props) =>
+      props.backgroundImageSrc ? "calc(1px / 1.5) #000000" : 0};
+    -webkit-text-stroke: ${(props) =>
+      props.backgroundImageSrc ? "calc(1px / 1.5) #000000" : 0};
     color: ${(props) =>
       props.theme === "red"
         ? "rgb(251, 158, 149)"
@@ -177,6 +193,12 @@ const StyledIndividualAnswerContainer = styled.div`
         ? "rgb(144, 144, 144)"
         : "rgb(255, 255, 255)"};
     font-size: calc(50px / 2);
+    @media (min-width: 40rem) {
+      text-stroke: ${(props) =>
+        props.backgroundImageSrc ? "calc(2px / 1.5) #000000" : 0};
+      -webkit-text-stroke: ${(props) =>
+        props.backgroundImageSrc ? "calc(2px / 1.5) #000000" : 0};
+    }
     @media (min-width: 52rem) {
       font-size: 60px;
       transform: scale(0.8);
@@ -193,9 +215,33 @@ const Question = (props) => {
     selectedAnswers,
     changeSelectedAnswers,
     scrollFunction,
+    onAnswerSelection,
   } = props;
 
-  const handleAnswerSelection = (questionIndex, answerIndex, resultID) => {
+  const handleAnswerSelection = (
+    questionIndex,
+    answerIndex,
+    resultID,
+    specificHandleAnswerSelection
+  ) => {
+    const handleGeneralAnswerSelection = () => {
+      if (onAnswerSelection) {
+        if (typeof onAnswerSelection === "function") {
+          onAnswerSelection();
+        }
+      }
+    };
+
+    if (specificHandleAnswerSelection) {
+      if (typeof specificHandleAnswerSelection === "function") {
+        specificHandleAnswerSelection();
+      } else {
+        handleGeneralAnswerSelection();
+      }
+    } else {
+      handleGeneralAnswerSelection();
+    }
+
     if (selectedAnswers.some((item) => item.questionIndex === questionIndex)) {
       const arrCopy = selectedAnswers.slice();
 
@@ -225,6 +271,7 @@ const Question = (props) => {
     >
       <StyledQuestionContainer
         className="rbq_question_inner_container"
+        backgroundImageSrc={item.backgroundImageSrc}
         theme={
           item.specificTheme
             ? item.specificTheme
@@ -235,6 +282,7 @@ const Question = (props) => {
       >
         <StyledQuestionText
           className="rbq_question_text"
+          backgroundImageSrc={item.backgroundImageSrc}
           theme={
             item.specificTheme
               ? item.specificTheme
@@ -254,6 +302,7 @@ const Question = (props) => {
               return (
                 <StyledIndividualAnswerContainer
                   className="rbq_answer"
+                  backgroundImageSrc={x.backgroundImageSrc}
                   resultsAvailable={resultsAvailable}
                   answered={selectedAnswers.some(
                     (el) => el.questionIndex === questionIndex
@@ -275,7 +324,8 @@ const Question = (props) => {
                     handleAnswerSelection(
                       questionIndex,
                       answerIndex,
-                      x.resultID
+                      x.resultID,
+                      x.onAnswerSelection
                     )
                   }
                 >
