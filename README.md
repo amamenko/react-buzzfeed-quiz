@@ -65,7 +65,7 @@ The `ReactBuzzFeedQuiz` component accepts the following props:
 | bylineAuthorLink | string | `""` | URL to redirect to when byline author name is clicked. |
 | bylineAuthorLinkOpenInNewTab | boolean | `false` | Whether or not to open a new tab when redirecting to the byline author link URL upon author name click. |
 | bylineAuthorTagline | string | `""` | Additional text to render under the author name in the byline. |
-| bylineAvatarImageSrc | string | `true` | URL or local image to be included in the byline's circular avatar image's `src` attribute. |
+| bylineAvatarImageSrc | string | `true` | URL or local filename to be included in the byline's circular avatar image's `src` attribute. |
 | generalTheme | string |  | Applies a color theme to every question container and every answer container's background and font colors. Available color themes include "red", "pink", "purple", "blue", "darkGreen", "lightGreen", and "darkGray". If no color theme or invalid color theme is supplied, the default background color is black and the default font color is white. |
 | autoScroll | boolean | `true` | Whether or not to automatically smooth-scroll the quiz to the next available question upon answer selection, to the result when the quiz is finished, and to the top of the quiz when the quiz is restarted. |
 | facebookShareButton | boolean | `true` | Whether or not to include the Facebook share button in the result container. |
@@ -76,6 +76,9 @@ The `ReactBuzzFeedQuiz` component accepts the following props:
 | twitterShareHashtags | Array[string] | `[]` | Array of strings that should be marked as hashtags of the shared tweet. |
 | copyShareButton | boolean | `true` | Whether or not to include the "Copy Link" button in the result container. |
 | copyShareLink | string | `""` | The text that should be copied to the clipboard upon clicking the "Copy Link" button.  |
+| onResult | Function | `NOOP` | Function called when the quiz is completed and a result is available. |
+| onAnswerSelection |Function | `NOOP` | Function called when any answer option is selected. | 
+| onRestart | Function | `NOOP` | Function called when the "Retake Quiz" button is clicked in the result container. | 
 | questions | Array[Object] | `[{}]` | An array of question objects (see Question Object below). |
 | results | Array[Object] | `[{}]` | An array of result objects (see Result Object below). | 
 
@@ -87,6 +90,7 @@ The `ReactBuzzFeedQuiz` component accepts the following props:
 | ------------ | ------- | ----------- |
 | question | string | The text value of the question being asked. |
 | specificTheme | string | Applies a color theme to only the specific question container's background and font colors. Available color themes are the same as those of `generalTheme`. This value supersedes the `generalTheme` prop if supplied to `ReactBuzzFeedQuiz`. If the `generalTheme` prop is supplied and this value is empty, then the color theme in `generalTheme` will be applied. Otherwise, if no color theme or invalid color theme is supplied, the default background color is black and the default font color is white.  |
+| backgroundImageSrc | string | URL or local filename to be included as the background image of the question container. Automatically sets the font color to white and adds a text stroke. Takes precedence over any theme, if supplied.  |
 | answers | Array[Object] | An array of answer objects (see Answer Object below). |
 
 #### Answer Object
@@ -97,6 +101,8 @@ The value of the `answers` key of the Question Object accepts an array of answer
 | ------------ | ------- | ----------- |
 | answer | string | The text value of the answer choice. |
 | specificTheme | string | Applies a color theme to only the specific answer container's background and font colors. Available color themes are the same as those of `generalTheme`. This value supersedes the `generalTheme` prop if supplied to `ReactBuzzFeedQuiz`. If the `generalTheme` prop is supplied and this value is empty, then the color theme in `generalTheme` will be applied. Otherwise, if no color theme or invalid color theme is supplied, the default background color is black and the default font color is white.  |
+| backgroundImageSrc | string | URL or local filename to be included as the background image of the answer container. Automatically sets the font color to white and adds a text stroke. Takes precedence over any theme, if supplied.  |
+| onAnswerSelection | Function | Function called when this specific answer option is selected. This function value supersedes `ReactBuzzFeedQuiz`'s `onAnswerSelection` prop, if supplied, for this specific answer choice.  | 
 | resultID | number | The numerical ID of the answer's associated Result Object (see below) found in `ReactBuzzFeedQuiz`'s `results` prop. |
 
 ### Result Object
@@ -107,7 +113,8 @@ The value of the `answers` key of the Question Object accepts an array of answer
 | ------------ | ------- | ----------- |
 | title | string | The heading text value of the associated result. Preceded by the string "You got: ". |
 | description | string | The text value of the sub-heading result description. |
-| resultImageSrc | string | URL or local image to be included in the result container image's `src` attribute. |
+| resultImageSrc | string | URL or local filename to be included in the result container image's `src` attribute. |
+| onResult | Function | Function called when the quiz is completed and the outcome is this specific result. This function value supersedes `ReactBuzzFeedQuiz`'s `onResult` prop, if supplied, for this specific result outcome.  | 
 | resultID | number | The numerical ID of the Result Object. Used to associate Result Objects to Answer Objects. |
 
 
