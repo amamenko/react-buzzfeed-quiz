@@ -1,6 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
+const isColor = (strColor) => {
+  const s = new Option().style;
+  s.color = strColor;
+  return s.color !== "";
+};
+
 const StyledListItemContainer = styled.li`
   margin-top: ${(props) => (props.questionIndex === 0 ? 0 : "100px")};
   margin-bottom: 2rem;
@@ -20,21 +26,11 @@ const StyledQuestionContainer = styled.div`
   justify-content: center;
   align-items: center;
   background: ${(props) =>
-    props.theme === "red"
-      ? "rgb(238, 50, 34)"
-      : props.theme === "pink"
-      ? "rgb(228, 12, 120)"
-      : props.theme === "purple"
-      ? "rgb(103, 68, 221)"
-      : props.theme === "blue"
-      ? "rgb(15, 101, 238)"
-      : props.theme === "darkGreen"
-      ? "rgb(3, 124, 124)"
-      : props.theme === "lightGreen"
-      ? "rgb(104, 175, 19)"
-      : props.theme === "darkGray"
-      ? "rgb(34, 34, 34)"
-      : "rgb(0, 0, 0)"};
+    props.backgroundColor
+      ? isColor(props.backgroundColor)
+        ? props.backgroundColor
+        : "#000"
+      : "#000"};
   margin-bottom: 2.5rem;
   background-image: ${(props) =>
     props.backgroundImageSrc ? `url(${props.backgroundImageSrc})` : "none"};
@@ -57,21 +53,11 @@ const StyledQuestionText = styled.p`
   font-weight: 900;
   font-size: calc(90px / 2);
   color: ${(props) =>
-    props.theme === "red"
-      ? "rgb(251, 158, 149)"
-      : props.theme === "pink"
-      ? "rgb(133, 33, 78)"
-      : props.theme === "purple"
-      ? "rgb(179, 161, 239)"
-      : props.theme === "blue"
-      ? "rgb(143, 178, 247)"
-      : props.theme === "darkGreen"
-      ? "rgb(145, 189, 189)"
-      : props.theme === "lightGreen"
-      ? "rgb(70, 105, 34)"
-      : props.theme === "darkGray"
-      ? "rgb(144, 144, 144)"
-      : "rgb(255, 255, 255)"};
+    props.fontColor
+      ? isColor(props.fontColor)
+        ? props.fontColor
+        : "#fff"
+      : "#fff"};
   @media (min-width: 52rem) {
     font-size: 90px;
     transform: scale(0.8);
@@ -81,48 +67,71 @@ const StyledQuestionText = styled.p`
 const StyledQuestionAnswersContainer = styled.div`
   display: grid;
   width: 100%;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-gap: 0.5rem 0.5rem;
+  grid-template-columns: ${(props) =>
+    props.numberOfAnswers >= 9 ? "1fr 1fr 1fr" : "1fr 1fr"};
+  grid-template-rows: ${(props) =>
+    props.numberOfAnswers >= 9 ? "1fr 1fr 1fr" : "1fr 1fr"};
+  grid-gap: ${(props) =>
+    props.numberOfAnswers >= 9 ? "0.75rem 0.75rem" : "0.5rem 0.5rem"};
 `;
 
 const StyledIndividualAnswerContainer = styled.div`
+  border: 1px solid #f4f4f4;
   position: relative;
   width: 100%;
   padding: 0;
-  border-radius: 4px;
+  border-radius: ${(props) => (props.backgroundImageSrc ? 0 : "4px")};
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
   overflow: hidden;
   -webkit-box-shadow: 0 1px 1px rgb(173 168 168 / 10%);
   box-shadow: 0 1px 1px rgb(173 168 168 / 10%);
   opacity: ${(props) => (props.answered ? (props.selected ? 1 : 0.6) : 1)};
   transition: opacity 0.5s ease;
   pointer-events: ${(props) => (props.resultsAvailable ? "none" : "auto")};
-  background-color: ${(props) =>
-    props.theme === "red"
-      ? "rgb(238, 50, 34)"
-      : props.theme === "pink"
-      ? "rgb(228, 12, 120)"
-      : props.theme === "purple"
-      ? "rgb(103, 68, 221)"
-      : props.theme === "blue"
-      ? "rgb(15, 101, 238)"
-      : props.theme === "darkGreen"
-      ? "rgb(3, 124, 124)"
-      : props.theme === "lightGreen"
-      ? "rgb(104, 175, 19)"
-      : props.theme === "darkGray"
-      ? "rgb(34, 34, 34)"
-      : "rgb(0, 0, 0)"};
+  background: ${(props) =>
+    props.backgroundColor
+      ? isColor(props.backgroundColor)
+        ? props.backgroundColor
+        : "#000"
+      : "#000"};
   font-weight: 900;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 14.5vh;
-  background-image: ${(props) =>
-    props.backgroundImageSrc ? `url(${props.backgroundImageSrc})` : "none"};
-  background-repeat: no-repeat;
-  background-size: cover;
+  height: ${(props) => (props.numberOfAnswers >= 9 ? "fit-content" : "14.5vh")};
+  line-height: 1.1;
+  word-wrap: normal;
+  word-break: initial;
+  text-align: center;
+  font-size: ${(props) =>
+    props.numberOfAnswers >= 9
+      ? props.answer
+        ? props.answer.length >= 10
+          ? "15px"
+          : props.answer.length >= 7
+          ? "24px"
+          : "33px"
+        : null
+      : "33px"};
+
+  &:before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 0;
+    position: relative;
+    z-index: 1;
+    padding-bottom: 100%;
+  }
+
+  &:hover {
+    img {
+      transform: scale(1.1);
+      transition: all 0.2s cubic-bezier(0.64, 0.57, 0.67, 1.53);
+    }
+  }
 
   @keyframes bounceClick {
     0% {
@@ -138,12 +147,25 @@ const StyledIndividualAnswerContainer = styled.div`
     }
   }
 
+  @media (min-width: 25rem) {
+    font-size: ${(props) =>
+      props.answer
+        ? props.answer.length >= 10
+          ? props.numberOfAnswers >= 9
+            ? "calc(42px/2)"
+            : "calc(55px/2)"
+          : "calc(55px/2)"
+        : "calc(55px/2)"};
+  }
+
   @media (min-width: 40rem) {
-    height: 208.73px;
+    height: ${(props) =>
+      props.numberOfAnswers >= 9 ? "194.66px" : "208.73px"};
   }
 
   @media (min-width: 52rem) {
-    height: 204.83px;
+    height: ${(props) =>
+      props.numberOfAnswers >= 9 ? "194.66px" : "204.83px"};
   }
 
   &:hover {
@@ -159,7 +181,7 @@ const StyledIndividualAnswerContainer = styled.div`
 
       p {
         animation-name: none;
-        transform: scale(0.89);
+        transform: scale(0.85);
         transition: transform 0.1s cubic-bezier(0.64, 0.57, 0.67, 1.53);
       }
     }
@@ -172,45 +194,63 @@ const StyledIndividualAnswerContainer = styled.div`
     margin: 0 auto;
     right: 0;
     left: 0;
+    word-break: break-word;
+
     text-stroke: ${(props) =>
       props.backgroundImageSrc ? "calc(1px / 1.5) #000000" : 0};
     -webkit-text-stroke: ${(props) =>
       props.backgroundImageSrc ? "calc(1px / 1.5) #000000" : 0};
     color: ${(props) =>
-      props.theme === "red"
-        ? "rgb(251, 158, 149)"
-        : props.theme === "pink"
-        ? "rgb(133, 33, 78)"
-        : props.theme === "purple"
-        ? "rgb(179, 161, 239)"
-        : props.theme === "blue"
-        ? "rgb(143, 178, 247)"
-        : props.theme === "darkGreen"
-        ? "rgb(145, 189, 189)"
-        : props.theme === "lightGreen"
-        ? "rgb(70, 105, 34)"
-        : props.theme === "darkGray"
-        ? "rgb(144, 144, 144)"
-        : "rgb(255, 255, 255)"};
-    font-size: calc(50px / 2);
+      props.fontColor
+        ? isColor(props.fontColor)
+          ? props.fontColor
+          : "#fff"
+        : "#fff"};
+
     @media (min-width: 40rem) {
+      font-size: calc(55px / 2);
       text-stroke: ${(props) =>
         props.backgroundImageSrc ? "calc(2px / 1.5) #000000" : 0};
       -webkit-text-stroke: ${(props) =>
         props.backgroundImageSrc ? "calc(2px / 1.5) #000000" : 0};
     }
+
     @media (min-width: 52rem) {
-      font-size: 60px;
+      font-size: ${(props) =>
+        props.numberOfAnswers >= 9
+          ? props.answer
+            ? props.answer.length >= 10
+              ? "30px"
+              : props.answer.length >= 7
+              ? "48px"
+              : "60px"
+            : null
+          : props.answer.length >= 18
+          ? "40px"
+          : props.answer.length >= 11
+          ? "47px"
+          : "60px"};
       transform: scale(0.8);
     }
   }
+`;
+
+const StyledAnswerImage = styled.img`
+  position: absolute;
+  height: 100%;
+  background-image: ${(props) =>
+    props.backgroundImageSrc ? `url(${props.backgroundImageSrc})` : "none"};
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 `;
 
 const Question = (props) => {
   const {
     item,
     questionIndex,
-    generalTheme,
+    generalBackgroundColor,
+    generalFontColor,
     resultsAvailable,
     selectedAnswers,
     changeSelectedAnswers,
@@ -272,22 +312,22 @@ const Question = (props) => {
       <StyledQuestionContainer
         className="rbq_question_inner_container"
         backgroundImageSrc={item.backgroundImageSrc}
-        theme={
-          item.specificTheme
-            ? item.specificTheme
-            : generalTheme
-            ? generalTheme
+        backgroundColor={
+          item.backgroundColor
+            ? item.backgroundColor
+            : generalBackgroundColor
+            ? generalBackgroundColor
             : null
         }
       >
         <StyledQuestionText
           className="rbq_question_text"
           backgroundImageSrc={item.backgroundImageSrc}
-          theme={
-            item.specificTheme
-              ? item.specificTheme
-              : generalTheme
-              ? generalTheme
+          fontColor={
+            item.fontColor
+              ? item.fontColor
+              : generalFontColor
+              ? generalFontColor
               : null
           }
         >
@@ -297,40 +337,97 @@ const Question = (props) => {
 
       {item.answers ? (
         Array.isArray(item.answers) && item.answers.length > 0 ? (
-          <StyledQuestionAnswersContainer className="rbq_answers_container">
+          <StyledQuestionAnswersContainer
+            className="rbq_answers_container"
+            numberOfAnswers={item.answers.length}
+          >
             {item.answers.map((x, answerIndex) => {
               return (
-                <StyledIndividualAnswerContainer
-                  className="rbq_answer"
-                  backgroundImageSrc={x.backgroundImageSrc}
-                  resultsAvailable={resultsAvailable}
-                  answered={selectedAnswers.some(
-                    (el) => el.questionIndex === questionIndex
-                  )}
-                  selected={selectedAnswers.some(
-                    (el) =>
-                      el.questionIndex === questionIndex &&
-                      el.answerIndex === answerIndex
-                  )}
-                  key={answerIndex}
-                  theme={
-                    x.specificTheme
-                      ? x.specificTheme
-                      : generalTheme
-                      ? generalTheme
-                      : null
-                  }
-                  onClick={() =>
-                    handleAnswerSelection(
-                      questionIndex,
-                      answerIndex,
-                      x.resultID,
-                      x.onAnswerSelection
-                    )
-                  }
-                >
-                  <p>{x.answer}</p>
-                </StyledIndividualAnswerContainer>
+                <div>
+                  <StyledIndividualAnswerContainer
+                    className="rbq_answer"
+                    numberOfAnswers={item.answers.length}
+                    answer={x.answer}
+                    backgroundImageSrc={x.backgroundImageSrc}
+                    resultsAvailable={resultsAvailable}
+                    answered={selectedAnswers.some(
+                      (el) => el.questionIndex === questionIndex
+                    )}
+                    selected={selectedAnswers.some(
+                      (el) =>
+                        el.questionIndex === questionIndex &&
+                        el.answerIndex === answerIndex
+                    )}
+                    key={answerIndex}
+                    backgroundColor={
+                      x.backgroundColor
+                        ? x.backgroundColor
+                        : generalBackgroundColor
+                        ? generalBackgroundColor
+                        : null
+                    }
+                    fontColor={
+                      x.fontColor
+                        ? x.fontColor
+                        : generalFontColor
+                        ? generalFontColor
+                        : null
+                    }
+                    onClick={() =>
+                      handleAnswerSelection(
+                        questionIndex,
+                        answerIndex,
+                        x.resultID,
+                        x.onAnswerSelection
+                      )
+                    }
+                  >
+                    {x.backgroundImageSrc ? (
+                      <StyledAnswerImage
+                        src={x.backgroundImageSrc}
+                        alt={`${x.answer} Answer Image`}
+                      />
+                    ) : null}
+
+                    {x.backgroundImageSrc ? null : <p>{x.answer}</p>}
+                  </StyledIndividualAnswerContainer>
+                  {x.backgroundImageSrc ? (
+                    <div
+                      style={{
+                        padding: "0.5rem",
+                        margin: "0",
+                        borderBottom: "1px solid #f4f4f4",
+                        borderLeft: "1px solid #f4f4f4",
+                        borderRight: "1px solid #f4f4f4",
+                        color: selectedAnswers.some(
+                          (el) =>
+                            el.questionIndex === questionIndex &&
+                            el.answerIndex === answerIndex
+                        )
+                          ? "#fff"
+                          : "#222",
+                        background: selectedAnswers.some(
+                          (el) =>
+                            el.questionIndex === questionIndex &&
+                            el.answerIndex === answerIndex
+                        )
+                          ? "#0f65ef"
+                          : "#fff",
+                        lineHeight: "1.3",
+                      }}
+                    >
+                      <p
+                        style={{
+                          fontWeight: 700,
+                          fontSize: "1.125rem",
+                          margin: 0,
+                        }}
+                      >
+                        {x.answer}
+                      </p>
+                    </div>
+                  ) : null}
+                </div>
               );
             })}
           </StyledQuestionAnswersContainer>

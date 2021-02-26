@@ -99,9 +99,7 @@ const Byline = (props) => {
                 <a
                   href={bylineAuthorLink}
                   target={bylineAuthorLinkOpenInNewTab ? "_blank" : "_self"}
-                  rel={
-                    bylineAuthorLinkOpenInNewTab ? "noopener noreferrer" : null
-                  }
+                  rel="noopener noreferrer"
                 >
                   <strong>{bylineAuthor}</strong>
                 </a>

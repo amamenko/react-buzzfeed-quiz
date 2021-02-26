@@ -65,7 +65,8 @@ const ReactBuzzFeedQuiz = (props) => {
     bylineAuthorLinkOpenInNewTab,
     bylineAuthorTagline,
     bylineAvatarImageSrc,
-    generalTheme,
+    generalBackgroundColor,
+    generalFontColor,
     autoScroll,
     questions,
     onResult,
@@ -139,7 +140,7 @@ const ReactBuzzFeedQuiz = (props) => {
         );
       }
     }
-  }, [selectedAnswers, questions, resultsAvailable]);
+  }, [selectedAnswers, questions, resultsAvailable, results]);
 
   useEffect(() => {
     if (shareLinkClicked) {
@@ -193,7 +194,8 @@ const ReactBuzzFeedQuiz = (props) => {
                         key={questionIndex}
                         item={item}
                         questionIndex={questionIndex}
-                        generalTheme={generalTheme}
+                        generalBackgroundColor={generalBackgroundColor}
+                        generalFontColor={generalFontColor}
                         resultsAvailable={resultsAvailable}
                         selectedAnswers={selectedAnswers}
                         changeSelectedAnswers={changeSelectedAnswers}
@@ -236,14 +238,29 @@ const ReactBuzzFeedQuiz = (props) => {
 };
 
 ReactBuzzFeedQuiz.defaultProps = {
+  title: "",
+  description: "",
   byline: true,
+  bylineAuthor: "",
+  bylineAuthorLink: "",
   bylineAuthorLinkOpenInNewTab: false,
+  bylineAuthorTagline: "",
+  bylineAvatarImageSrc: "",
+  generalBackgroundColor: "",
+  generalFontColor: "",
   autoScroll: true,
-  copyShareButton: true,
   facebookShareButton: true,
+  facebookShareLink: "",
   twitterShareButton: true,
+  twitterShareLink: "",
   twitterShareHashtags: [],
   copyShareButton: true,
+  copyShareLink: "",
+  onResult: () => {},
+  onAnswerSelection: () => {},
+  onRestart: () => {},
+  questions: [],
+  results: [],
 };
 
 export default ReactBuzzFeedQuiz;
