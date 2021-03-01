@@ -102,6 +102,7 @@ const ReactBuzzFeedQuiz = (props) => {
       } else {
         scroller.scrollTo(element, {
           duration: 500,
+          offset: -150,
           smooth: true,
           container: "main_questions_container",
         });
