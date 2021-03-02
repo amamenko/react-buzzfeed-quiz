@@ -349,14 +349,6 @@ const StyledTooltipContainer = styled.div`
   }
 `;
 
-const StyledResultAttributionText = styled.p`
-  margin-top: 0.5rem;
-  font-size: 1.125rem;
-  margin-bottom: 0;
-  color: #757575;
-  display: inline-block;
-`;
-
 const Result = (props) => {
   const {
     title,
@@ -488,12 +480,6 @@ const Result = (props) => {
             <StyledResultInnerDescription className="rbq_result_description_body">
               {finalResult[0].description}
             </StyledResultInnerDescription>
-            {finalResult[0].resultImageSrc &&
-            finalResult[0].imageAttribution ? (
-              <StyledResultAttributionText>
-                <i>{finalResult[0].imageAttribution}</i>
-              </StyledResultAttributionText>
-            ) : null}
             <StyledShareLinksList className="rbq_share_links_container">
               {facebookShareButton ? (
                 <a
