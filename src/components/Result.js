@@ -13,7 +13,6 @@ const StyledResultHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   h2 {
     padding-top: 2px;
     color: #fff;
@@ -21,7 +20,6 @@ const StyledResultHeader = styled.div`
     line-height: 1.2;
     font-weight: 700;
     text-align: center;
-
     @media (min-width: 40rem) {
       font-size: 1.375rem;
       line-height: 1.27;
@@ -29,7 +27,6 @@ const StyledResultHeader = styled.div`
       margin-right: 1.5rem;
     }
   }
-
   p {
     font-size: 0.875rem;
     line-height: 1.3;
@@ -38,7 +35,6 @@ const StyledResultHeader = styled.div`
     color: #fff;
     font-weight: 600;
     display: none;
-
     @media (min-width: 40rem) {
       display: inline-block;
     }
@@ -68,7 +64,6 @@ const StyledResultInnerDescriptionHeader = styled.h3`
   font-weight: 700;
   margin-bottom: 0.25em;
   font-size: 1rem;
-
   @media (min-width: 40rem) {
     font-size: 1.125rem;
     line-height: 1.2;
@@ -85,7 +80,6 @@ const StyledResultInnerDescription = styled.p`
 const StyledResultInnerImageContainer = styled.div`
   max-width: 100%;
   border-radius: 0;
-
   @media (min-width: 40rem) {
     min-height: 20rem;
     flex: 1 1 auto;
@@ -105,25 +99,21 @@ const StyledRetakeQuizContainer = styled.div`
   justify-content: center;
   width: 30%;
   cursor: pointer;
-
   svg {
     width: 1.125rem;
     height: 1.125rem;
     vertical-align: middle;
     margin-right: 0.5rem;
-
     path {
       stroke: #fff;
     }
   }
-
   p {
     color: #fff;
     font-size: 0.95rem;
     line-height: 1.3;
     font-weight: 700;
   }
-
   @media (max-width: 40rem) {
     display: none;
   }
@@ -137,16 +127,13 @@ const StyledMobileRetakeQuizContainer = styled.div`
   padding-top: 1rem;
   line-height: 0;
   cursor: pointer;
-
   svg {
     width: 1.125rem;
     height: 1.125rem;
-
     path {
       stroke: #fff;
     }
   }
-
   p {
     color: #fff;
     font-size: 0.95rem;
@@ -155,7 +142,6 @@ const StyledMobileRetakeQuizContainer = styled.div`
     padding-left: 0.5rem;
     font-weight: 700;
   }
-
   @media (min-width: 40rem) {
     display: none;
   }
@@ -167,11 +153,9 @@ const StyledShareLinksList = styled.div`
   display: flex;
   flex-direction: column;
   display: none;
-
   a {
     text-decoration: none;
   }
-
   @media (min-width: 40rem) {
     display: flex;
     flex-direction: row;
@@ -188,11 +172,9 @@ const StyledMobileShareLinksList = styled.div`
   padding-left: 1rem;
   padding-right: 1rem;
   padding-bottom: 0.5rem;
-
   a {
     text-decoration: none;
   }
-
   @media (min-width: 40rem) {
     display: none;
   }
@@ -230,21 +212,18 @@ const StyledShareButton = styled.span`
   text-overflow: ellipsis;
   white-space: nowrap;
   transition: background-color 0.1s ease, border 0.1s ease;
-
   @media (min-width: 40rem) {
     padding: 0.2rem 0.625rem;
     line-height: 1.25rem;
     margin-bottom: 0;
     width: auto;
   }
-
   svg {
     width: 1rem;
     height: 1rem;
     margin-right: 0.7rem;
     position: relative;
     position: relative;
-
     @media (min-width: 40rem) {
       top: auto;
       width: 0.875rem;
@@ -252,7 +231,6 @@ const StyledShareButton = styled.span`
       margin-right: 0.3125rem;
     }
   }
-
   &:hover {
     background-color: ${(props) =>
       props.shareTo === "facebook"
@@ -271,7 +249,6 @@ const StyledShareButton = styled.span`
 
 const StyledShareLinkButtonOuterContainer = styled.div`
   position: relative;
-
   @media (max-width: 40rem) {
     display: flex;
     align-items: center;
@@ -347,6 +324,14 @@ const StyledTooltipContainer = styled.div`
     border-style: solid;
     border-color: #222 transparent transparent transparent;
   }
+`;
+
+const StyledResultAttributionText = styled.p`
+  margin-top: 0.5rem;
+  font-size: 1.125rem;
+  margin-bottom: 0;
+  color: #757575;
+  display: inline-block;
 `;
 
 const Result = (props) => {
@@ -480,6 +465,12 @@ const Result = (props) => {
             <StyledResultInnerDescription className="rbq_result_description_body">
               {finalResult[0].description}
             </StyledResultInnerDescription>
+            {finalResult[0].resultImageSrc &&
+            finalResult[0].imageAttribution ? (
+              <StyledResultAttributionText>
+                <i>{finalResult[0].imageAttribution}</i>
+              </StyledResultAttributionText>
+            ) : null}
             <StyledShareLinksList className="rbq_share_links_container">
               {facebookShareButton ? (
                 <a

@@ -99,10 +99,10 @@ const StyledIndividualAnswerOuterContainer = styled.div`
   border-left: 1px solid #f4f4f4;
   border-right: 1px solid #f4f4f4;
   background: #fff;
+  border-radius: 3px;
   -webkit-box-shadow: 0 1px 1px rgb(173 168 168 / 10%);
   box-shadow: 0 1px 1px rgb(173 168 168 / 10%);
   transition: box-shadow 0.25s, -webkit-box-shadow 0.25s;
-
   &:hover {
     pointer-events: ${(props) => (props.resultsAvailable ? "none" : "all")};
     cursor: ${(props) =>
@@ -110,22 +110,21 @@ const StyledIndividualAnswerOuterContainer = styled.div`
     -webkit-box-shadow: ${(props) =>
       props.resultsAvailable
         ? "0 1px 1px rgb(173 168 168 / 10%)"
-        : "0 3px 3px rgb(173 168 168 / 10%)"};
+        : "0px 0px 1px 3px rgb(173 168 168 / 10%)"};
     box-shadow: ${(props) =>
       props.resultsAvailable
         ? "0 1px 1px rgb(173 168 168 / 10%)"
-        : "0 3px 3px rgb(173 168 168 / 10%)"};
-
+        : "0px 0px 1px 3px rgb(173 168 168 / 10%)"};
+    transform: translateZ(0);
     img {
       transform: ${(props) =>
         props.answered
           ? props.selected
-            ? "none"
+            ? "scale(1)"
             : "scale(1.1)"
           : "scale(1.1)"};
       transition: all 0.2s cubic-bezier(0.64, 0.57, 0.67, 1.53);
     }
-
     * {
       opacity: ${(props) => (props.resultsAvailable ? null : 1)};
       transition: opacity 0.5s ease;
@@ -171,31 +170,26 @@ const StyledIndividualAnswerContainer = styled.div`
           : "33px"
         : null
       : "33px"};
-
   &:before {
     content: "";
-    display: block;
+    display: ${(props) => (props.backgroundImageSrc ? "none" : "block")};
     width: 100%;
     height: 0;
     position: relative;
     z-index: 1;
     padding-bottom: 100%;
   }
-
   @keyframes bounceClick {
     0% {
       transform: none;
     }
-
     50% {
       transform: scale(1.1);
     }
-
     100% {
       transform: none;
     }
   }
-
   @media (min-width: 25rem) {
     font-size: ${(props) =>
       props.answer
@@ -206,37 +200,40 @@ const StyledIndividualAnswerContainer = styled.div`
           : "calc(55px/2)"
         : "calc(55px/2)"};
   }
-
   @media (min-width: 40rem) {
     height: ${(props) =>
       props.numberOfAnswers >= 9 ? "194.66px" : "208.73px"};
   }
-
   @media (min-width: 52rem) {
     height: ${(props) =>
       props.numberOfAnswers >= 9 ? "194.66px" : "204.83px"};
   }
-
   &:hover {
     cursor: ${(props) =>
       props.answered ? (props.selected ? "auto" : "pointer") : "pointer"};
-
     p {
-      animation-name: bounceClick;
+      animation-name: ${(props) =>
+        props.answered
+          ? props.selected
+            ? "none"
+            : "bounceClick"
+          : "bounceClick"};
       animation-duration: 0.2s;
     }
-
     @media (min-width: 900px) {
       opacity: 1;
-
       p {
         animation-name: none;
-        transform: scale(0.85);
+        transform: ${(props) =>
+          props.answered
+            ? props.selected
+              ? "scale(1)"
+              : "scale(0.85)"
+            : "scale(0.85)"};
         transition: transform 0.1s cubic-bezier(0.64, 0.57, 0.67, 1.53);
       }
     }
   }
-
   & > p {
     padding: 0.25rem;
     position: absolute;
@@ -245,7 +242,6 @@ const StyledIndividualAnswerContainer = styled.div`
     right: 0;
     left: 0;
     word-break: break-word;
-
     text-stroke: ${(props) =>
       props.backgroundImageSrc ? "calc(1px / 1.5) #000000" : 0};
     -webkit-text-stroke: ${(props) =>
@@ -256,7 +252,6 @@ const StyledIndividualAnswerContainer = styled.div`
           ? props.fontColor
           : "#fff"
         : "#fff"};
-
     @media (min-width: 40rem) {
       font-size: calc(55px / 2);
       text-stroke: ${(props) =>
@@ -264,7 +259,6 @@ const StyledIndividualAnswerContainer = styled.div`
       -webkit-text-stroke: ${(props) =>
         props.backgroundImageSrc ? "calc(2px / 1.5) #000000" : 0};
     }
-
     @media (min-width: 52rem) {
       font-size: ${(props) =>
         props.numberOfAnswers >= 9
@@ -282,7 +276,12 @@ const StyledIndividualAnswerContainer = styled.div`
             ? "47px"
             : "60px"
           : null};
-      transform: scale(0.8);
+      transform: ${(props) =>
+        props.answered
+          ? props.selected
+            ? "scale(1)"
+            : "scale(0.8)"
+          : "scale(0.8)"};
     }
   }
 `;
@@ -311,7 +310,6 @@ const StyledAnswerImageText = styled.p`
   overflow: hidden;
   max-width: 100%;
   opacity: ${(props) => (props.answered ? (props.selected ? 1 : 0.6) : 1)};
-
   @media (min-width: 52rem) {
     padding: 1rem;
     padding-bottom: 0.5rem;
@@ -332,7 +330,6 @@ const StyledAnswerImageAttribution = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   transition: opacity 0.5s ease color 0.5s ease;
-
   @media (min-width: 52rem) {
     padding: 1rem;
     padding-top: 0;
