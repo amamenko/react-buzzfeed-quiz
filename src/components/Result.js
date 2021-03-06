@@ -275,7 +275,6 @@ const StyledTooltipContainer = styled.div`
   line-height: 1.5rem;
   min-width: 4rem;
   transform: translate(-2%, 0%);
-
   @keyframes fadein {
     from {
       opacity: 0;
@@ -284,7 +283,6 @@ const StyledTooltipContainer = styled.div`
       opacity: 1;
     }
   }
-
   @keyframes fadeout {
     from {
       opacity: 1;
@@ -293,26 +291,21 @@ const StyledTooltipContainer = styled.div`
       opacity: 0;
     }
   }
-
   animation: ${(props) =>
     props.shareLinkAnimatingOut === true
       ? "fadeout 0.5s ease"
       : "fadein 0.2s ease"};
-
   @media (min-width: 40rem) {
     padding: 0.4rem 0.625rem;
     margin-bottom: 45px;
   }
-
   svg {
     padding-right: 0.25rem;
   }
-
   p {
     font-size: 0.8rem;
     padding-left: 0.25rem;
   }
-
   &::after {
     content: "";
     border-top-color: #222;

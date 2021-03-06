@@ -31,7 +31,7 @@ const StyledQuestionContainer = styled.div`
         ? props.backgroundColor
         : "#000"
       : "#000"};
-  margin-bottom: 1rem;
+  margin-bottom: ${(props) => (props.imageAttribution ? 0 : "1rem")};
   background-image: ${(props) =>
     props.backgroundImageSrc ? `url(${props.backgroundImageSrc})` : "none"};
   background-repeat: no-repeat;
@@ -67,19 +67,33 @@ const StyledQuestionText = styled.p`
   }
 `;
 
+const StyledQuestionImageAttributionText = styled.p`
+  color: #222;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.3;
+  display: block;
+  position: relative;
+  z-index: 100;
+`;
+
 const StyledQuestionAnswersContainer = styled.div`
   display: grid;
   width: 100%;
   grid-template-columns: ${(props) =>
-    props.anyImages
+    props.answerArrangement === "row"
+      ? "1fr"
+      : props.anyImages
       ? "1fr 1fr"
       : props.numberOfAnswers >= 9 ||
         (props.numberOfAnswers % 3 === 0 && props.numberOfAnswers % 2 !== 0)
       ? "1fr 1fr 1fr"
       : "1fr 1fr"};
   grid-template-rows: ${(props) =>
-    props.anyImages
-      ? "1fr 1fr"
+    props.answerArrangement === "row"
+      ? "1fr"
+      : props.anyImages
+      ? "none"
       : props.numberOfAnswers >= 9 ||
         (props.numberOfAnswers % 3 === 0 && props.numberOfAnswers % 2 !== 0)
       ? "1fr 1fr 1fr"
@@ -95,9 +109,16 @@ const StyledQuestionAnswersContainer = styled.div`
 
 const StyledIndividualAnswerOuterContainer = styled.div`
   overflow: hidden;
-  border-bottom: 1px solid #f4f4f4;
-  border-left: 1px solid #f4f4f4;
-  border-right: 1px solid #f4f4f4;
+  border-bottom: ${(props) =>
+    props.answerArrangement === "row" ? "none" : "1px solid #f4f4f4"};
+  border-left: ${(props) =>
+    props.answerArrangement === "row" ? "none" : "1px solid #f4f4f4"};
+  border-right: ${(props) =>
+    props.answerArrangement === "row" ? "none" : "1px solid #f4f4f4"};
+  border: ${(props) =>
+    props.answerArrangement === "row" ? "1px solid #f4f4f4" : "none"};
+  max-height: ${(props) =>
+    props.answerArrangement === "row" ? "55px" : "none"};
   background: #fff;
   border-radius: 3px;
   -webkit-box-shadow: 0 1px 1px rgb(173 168 168 / 10%);
@@ -133,43 +154,51 @@ const StyledIndividualAnswerOuterContainer = styled.div`
 `;
 
 const StyledIndividualAnswerContainer = styled.div`
-  border-bottom: 1px solid #f4f4f4;
+  border-bottom: ${(props) =>
+    props.answerArrangement === "tile" ? "1px solid #f4f4f4" : "none"};
   position: relative;
   width: 100%;
   padding: 0;
   border-radius: ${(props) => (props.backgroundImageSrc ? 0 : "4px")};
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+  border-top-left-radius: ${(props) =>
+    props.answerArrangement === "tile" ? "4px" : 0};
+  border-top-right-radius: ${(props) =>
+    props.answerArrangement === "tile" ? "4px" : 0};
   overflow: hidden;
   opacity: ${(props) => (props.answered ? (props.selected ? 1 : 0.6) : 1)};
   transition: opacity 0.5s ease;
   pointer-events: ${(props) => (props.resultsAvailable ? "none" : "auto")};
   background: ${(props) =>
-    props.backgroundColor
-      ? isColor(props.backgroundColor)
-        ? props.backgroundColor
+    props.answerArrangement === "tile"
+      ? props.backgroundColor
+        ? isColor(props.backgroundColor)
+          ? props.backgroundColor
+          : "#000"
         : "#000"
-      : "#000"};
-  font-weight: 900;
+      : "#fff"};
+  font-weight: ${(props) => (props.answerArrangement === "tile" ? 900 : 700)};
   text-align: center;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: ${(props) =>
+    props.answerArrangement === "tile" ? "center" : "flex-start"};
   height: ${(props) => (props.numberOfAnswers >= 9 ? "fit-content" : "14.5vh")};
   line-height: 1.1;
   word-wrap: normal;
   word-break: initial;
   text-align: center;
   font-size: ${(props) =>
-    props.numberOfAnswers >= 9
-      ? props.answer
-        ? props.answer.length >= 10
-          ? "15px"
-          : props.answer.length >= 7
-          ? "24px"
-          : "33px"
-        : null
-      : "33px"};
+    props.answerArrangement === "tile"
+      ? props.numberOfAnswers >= 9
+        ? props.answer
+          ? props.answer.length >= 10
+            ? "18px"
+            : props.answer.length >= 7
+            ? "24px"
+            : "33px"
+          : null
+        : "22px"
+      : "1.125rem"};
   &:before {
     content: "";
     display: ${(props) => (props.backgroundImageSrc ? "none" : "block")};
@@ -177,7 +206,7 @@ const StyledIndividualAnswerContainer = styled.div`
     height: 0;
     position: relative;
     z-index: 1;
-    padding-bottom: 100%;
+    padding-bottom: 75.7%;
   }
   @keyframes bounceClick {
     0% {
@@ -192,21 +221,37 @@ const StyledIndividualAnswerContainer = styled.div`
   }
   @media (min-width: 25rem) {
     font-size: ${(props) =>
-      props.answer
-        ? props.answer.length >= 10
-          ? props.numberOfAnswers >= 9
-            ? "calc(42px/2)"
+      props.answerArrangement === "tile"
+        ? props.answer
+          ? props.answer.length >= 10
+            ? props.numberOfAnswers >= 9
+              ? "calc(42px/2)"
+              : "calc(55px/2)"
             : "calc(55px/2)"
           : "calc(55px/2)"
-        : "calc(55px/2)"};
+        : "1.125rem"};
   }
   @media (min-width: 40rem) {
     height: ${(props) =>
-      props.numberOfAnswers >= 9 ? "194.66px" : "208.73px"};
+      props.answerArrangement === "row"
+        ? "55px"
+        : props.numberOfAnswers >= 9 ||
+          (props.numberOfAnswers % 3 === 0 && props.numberOfAnswers % 2 !== 0)
+        ? "194.66px"
+        : "208.73px"};
+
+    &:before {
+      padding-bottom: 100%;
+    }
   }
   @media (min-width: 52rem) {
     height: ${(props) =>
-      props.numberOfAnswers >= 9 ? "194.66px" : "204.83px"};
+      props.answerArrangement === "row"
+        ? "55px"
+        : props.numberOfAnswers >= 9 ||
+          (props.numberOfAnswers % 3 === 0 && props.numberOfAnswers % 2 !== 0)
+        ? "194.66px"
+        : "204.83px"};
   }
   &:hover {
     cursor: ${(props) =>
@@ -225,63 +270,90 @@ const StyledIndividualAnswerContainer = styled.div`
       p {
         animation-name: none;
         transform: ${(props) =>
-          props.answered
-            ? props.selected
-              ? "scale(1)"
+          props.answerArrangement === "tile"
+            ? props.answered
+              ? props.selected
+                ? "scale(1)"
+                : "scale(0.85)"
               : "scale(0.85)"
-            : "scale(0.85)"};
+            : "scale(1)"};
         transition: transform 0.1s cubic-bezier(0.64, 0.57, 0.67, 1.53);
       }
     }
   }
   & > p {
-    padding: 0.25rem;
+    padding: ${(props) =>
+      props.answerArrangement === "tile" ? "0.25rem" : "1rem"};
     position: absolute;
     z-index: 3;
     margin: 0 auto;
-    right: 0;
+    right: ${(props) => (props.answerArrangement === "tile" ? 0 : "auto")};
     left: 0;
     word-break: break-word;
+    width: 100%;
+    text-align: ${(props) =>
+      props.answerArrangement === "tile" ? "center" : "left"};
     text-stroke: ${(props) =>
-      props.backgroundImageSrc ? "calc(1px / 1.5) #000000" : 0};
+      props.answerArrangement === "tile"
+        ? props.backgroundImageSrc
+          ? "calc(1px / 1.5) #000000"
+          : 0
+        : 0};
     -webkit-text-stroke: ${(props) =>
-      props.backgroundImageSrc ? "calc(1px / 1.5) #000000" : 0};
+      props.answerArrangement === "tile"
+        ? props.backgroundImageSrc
+          ? "calc(1px / 1.5) #000000"
+          : 0
+        : 0};
     color: ${(props) =>
-      props.fontColor
-        ? isColor(props.fontColor)
-          ? props.fontColor
+      props.answerArrangement === "tile"
+        ? props.fontColor
+          ? isColor(props.fontColor)
+            ? props.fontColor
+            : "#fff"
           : "#fff"
-        : "#fff"};
+        : "#000"};
     @media (min-width: 40rem) {
-      font-size: calc(55px / 2);
       text-stroke: ${(props) =>
-        props.backgroundImageSrc ? "calc(2px / 1.5) #000000" : 0};
+        props.answerArrangement === "tile"
+          ? props.backgroundImageSrc
+            ? "calc(2px / 1.5) #000000"
+            : 0
+          : 0};
       -webkit-text-stroke: ${(props) =>
-        props.backgroundImageSrc ? "calc(2px / 1.5) #000000" : 0};
+        props.answerArrangement === "tile"
+          ? props.backgroundImageSrc
+            ? "calc(2px / 1.5) #000000"
+            : 0
+          : 0};
     }
     @media (min-width: 52rem) {
       font-size: ${(props) =>
-        props.numberOfAnswers >= 9
-          ? props.answer
-            ? props.answer.length >= 10
-              ? "30px"
-              : props.answer.length >= 7
-              ? "48px"
+        props.answerArrangement === "tile"
+          ? props.numberOfAnswers >= 9
+            ? props.answer
+              ? props.answer.length >= 10
+                ? "30px"
+                : props.answer.length >= 7
+                ? "48px"
+                : "60px"
+              : null
+            : props.answer
+            ? props.answer.length >= 18
+              ? "40px"
+              : props.answer.length >= 11
+              ? "47px"
               : "60px"
             : null
-          : props.answer
-          ? props.answer.length >= 18
-            ? "40px"
-            : props.answer.length >= 11
-            ? "47px"
-            : "60px"
-          : null};
+          : "1.125rem"};
       transform: ${(props) =>
-        props.answered
-          ? props.selected
-            ? "scale(1)"
+        props.answerArrangement === "tile"
+          ? props.answered
+            ? props.selected
+              ? "scale(1)"
+              : "scale(0.8)"
             : "scale(0.8)"
-          : "scale(0.8)"};
+          : "scale(1)"};
     }
   }
 `;
@@ -324,7 +396,7 @@ const StyledAnswerImageAttribution = styled.p`
   margin-top: 0;
   color: ${(props) =>
     props.answered ? (props.selected ? "#fff" : "#666") : "#666"};
-  opacity: ${(props) => (props.answered ? (props.selected ? 1 : 0.6) : 1)};
+  opacity: ${(props) => (props.answered ? (props.selected ? 1 : 0.75) : 1)};
   font-size: 0.875rem;
   line-height: 1.3;
   overflow: hidden;
@@ -401,6 +473,7 @@ const Question = (props) => {
     >
       <StyledQuestionContainer
         className="rbq_question_inner_container"
+        imageAttribution={item.imageAttribution}
         backgroundImageSrc={item.backgroundImageSrc}
         backgroundColor={
           item.backgroundColor
@@ -424,6 +497,11 @@ const Question = (props) => {
           {item.question ? item.question : null}
         </StyledQuestionText>
       </StyledQuestionContainer>
+      {item.backgroundImageSrc && item.imageAttribution ? (
+        <StyledQuestionImageAttributionText>
+          <i>{item.imageAttribution}</i>
+        </StyledQuestionImageAttributionText>
+      ) : null}
 
       {item.answers ? (
         Array.isArray(item.answers) && item.answers.length > 0 ? (
@@ -431,12 +509,14 @@ const Question = (props) => {
             className="rbq_answers_container"
             numberOfAnswers={item.answers.length}
             anyImages={item.answers.some((answer) => answer.backgroundImageSrc)}
+            answerArrangement={item.answerArrangement}
           >
             {item.answers.map((x, answerIndex) => {
               return (
                 <StyledIndividualAnswerOuterContainer
                   key={answerIndex}
                   resultsAvailable={resultsAvailable}
+                  answerArrangement={item.answerArrangement}
                   answered={selectedAnswers.some(
                     (el) => el.questionIndex === questionIndex
                   )}
@@ -449,6 +529,7 @@ const Question = (props) => {
                   <StyledIndividualAnswerContainer
                     className="rbq_answer"
                     numberOfAnswers={item.answers.length}
+                    answerArrangement={item.answerArrangement}
                     answer={x.answer}
                     backgroundImageSrc={x.backgroundImageSrc}
                     resultsAvailable={resultsAvailable}
@@ -483,16 +564,20 @@ const Question = (props) => {
                       )
                     }
                   >
-                    {x.backgroundImageSrc ? (
+                    {x.backgroundImageSrc &&
+                    item.answerArrangement !== "row" ? (
                       <StyledAnswerImage
                         src={x.backgroundImageSrc}
                         alt={`${x.answer} Answer Image`}
                       />
                     ) : null}
 
-                    {x.backgroundImageSrc ? null : <p>{x.answer}</p>}
+                    {x.backgroundImageSrc &&
+                    item.answerArrangement === "tile" ? null : (
+                      <p>{x.answer}</p>
+                    )}
                   </StyledIndividualAnswerContainer>
-                  {x.backgroundImageSrc ? (
+                  {x.backgroundImageSrc && item.answerArrangement === "tile" ? (
                     <StyledAnswerImageBottomTextContainer
                       selected={selectedAnswers.some(
                         (el) =>
