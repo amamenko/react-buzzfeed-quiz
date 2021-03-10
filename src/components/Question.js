@@ -124,6 +124,15 @@ const StyledIndividualAnswerOuterContainer = styled.div`
   -webkit-box-shadow: 0 1px 1px rgb(173 168 168 / 10%);
   box-shadow: 0 1px 1px rgb(173 168 168 / 10%);
   transition: box-shadow 0.25s, -webkit-box-shadow 0.25s;
+
+  p {
+    transform: scale(1);
+    transition: ${(props) =>
+      props.answerArrangement === "row"
+        ? "transform 0.2s cubic-bezier(0, 0.73, 0.31, 1.67)"
+        : "transform 0.1s cubic-bezier(0.64, 0.57, 0.67, 1.53)"};
+  }
+
   &:hover {
     pointer-events: ${(props) => (props.resultsAvailable ? "none" : "all")};
     cursor: ${(props) =>
@@ -136,7 +145,6 @@ const StyledIndividualAnswerOuterContainer = styled.div`
       props.resultsAvailable
         ? "0 1px 1px rgb(173 168 168 / 10%)"
         : "0px 0px 1px 3px rgb(173 168 168 / 10%)"};
-    transform: translateZ(0);
     img {
       transform: ${(props) =>
         props.answered
@@ -145,6 +153,42 @@ const StyledIndividualAnswerOuterContainer = styled.div`
             : "scale(1.1)"
           : "scale(1.1)"};
       transition: all 0.2s cubic-bezier(0.64, 0.57, 0.67, 1.53);
+    }
+    p {
+      @media (min-width: 900px) {
+        transform: ${(props) =>
+          props.answerArrangement === "row"
+            ? props.answered
+              ? props.selected
+                ? "scale(1)"
+                : "scale(1.01)"
+              : "scale(1.01)"
+            : props.answered
+            ? props.selected
+              ? "scale(1)"
+              : "scale(1.05)"
+            : "scale(1.05)"};
+      }
+
+      @media (min-width: 52rem) {
+        transform: ${(props) =>
+          props.answerArrangement === "row"
+            ? props.answered
+              ? props.selected
+                ? "scale(1)"
+                : "scale(1.01)"
+              : "scale(1.01)"
+            : props.answered
+            ? props.selected
+              ? "scale(1)"
+              : "scale(1.05)"
+            : "scale(1.05)"};
+      }
+
+      transition: ${(props) =>
+        props.answerArrangement === "row"
+          ? "transform 0.2s cubic-bezier(0, 0.73, 0.31, 1.67)"
+          : "transform 0.1s cubic-bezier(0.64, 0.57, 0.67, 1.53)"};
     }
     * {
       opacity: ${(props) => (props.resultsAvailable ? null : 1)};
@@ -155,50 +199,55 @@ const StyledIndividualAnswerOuterContainer = styled.div`
 
 const StyledIndividualAnswerContainer = styled.div`
   border-bottom: ${(props) =>
-    props.answerArrangement === "tile" ? "1px solid #f4f4f4" : "none"};
+    props.answerArrangement === "row" ? "none" : "1px solid #f4f4f4"};
   position: relative;
   width: 100%;
   padding: 0;
   border-radius: ${(props) => (props.backgroundImageSrc ? 0 : "4px")};
   border-top-left-radius: ${(props) =>
-    props.answerArrangement === "tile" ? "4px" : 0};
+    props.answerArrangement === "row" ? 0 : "4px"};
   border-top-right-radius: ${(props) =>
-    props.answerArrangement === "tile" ? "4px" : 0};
+    props.answerArrangement === "row" ? 0 : "4px"};
   overflow: hidden;
   opacity: ${(props) => (props.answered ? (props.selected ? 1 : 0.6) : 1)};
   transition: opacity 0.5s ease;
   pointer-events: ${(props) => (props.resultsAvailable ? "none" : "auto")};
   background: ${(props) =>
-    props.answerArrangement === "tile"
-      ? props.backgroundColor
-        ? isColor(props.backgroundColor)
-          ? props.backgroundColor
-          : "#000"
+    props.answerArrangement === "row"
+      ? props.answered
+        ? props.selected
+          ? "#0f65ef"
+          : "#fff"
+        : "#fff"
+      : props.backgroundColor
+      ? isColor(props.backgroundColor)
+        ? props.backgroundColor
         : "#000"
-      : "#fff"};
-  font-weight: ${(props) => (props.answerArrangement === "tile" ? 900 : 700)};
+      : "#000"};
+  font-weight: ${(props) => (props.answerArrangement === "row" ? 700 : 900)};
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: ${(props) =>
-    props.answerArrangement === "tile" ? "center" : "flex-start"};
+    props.answerArrangement === "row" ? "flex-start" : "center"};
   height: ${(props) => (props.numberOfAnswers >= 9 ? "fit-content" : "14.5vh")};
   line-height: 1.1;
   word-wrap: normal;
   word-break: initial;
   text-align: center;
   font-size: ${(props) =>
-    props.answerArrangement === "tile"
-      ? props.numberOfAnswers >= 9
-        ? props.answer
-          ? props.answer.length >= 10
-            ? "18px"
-            : props.answer.length >= 7
-            ? "24px"
-            : "33px"
-          : null
-        : "22px"
-      : "1.125rem"};
+    props.answerArrangement === "row"
+      ? "1.125rem"
+      : props.numberOfAnswers >= 9
+      ? props.answer
+        ? props.answer.length >= 10
+          ? "16px"
+          : props.answer.length >= 7
+          ? "22px"
+          : "31px"
+        : null
+      : "22px"};
+
   &:before {
     content: "";
     display: ${(props) => (props.backgroundImageSrc ? "none" : "block")};
@@ -221,15 +270,15 @@ const StyledIndividualAnswerContainer = styled.div`
   }
   @media (min-width: 25rem) {
     font-size: ${(props) =>
-      props.answerArrangement === "tile"
-        ? props.answer
-          ? props.answer.length >= 10
-            ? props.numberOfAnswers >= 9
-              ? "calc(42px/2)"
-              : "calc(55px/2)"
-            : "calc(55px/2)"
-          : "calc(55px/2)"
-        : "1.125rem"};
+      props.answerArrangement === "row"
+        ? "1.125rem"
+        : props.answer
+        ? props.answer.length >= 10
+          ? props.numberOfAnswers >= 9
+            ? "calc(38px/2)"
+            : "calc(46px/2)"
+          : "calc(46px/2)"
+        : "calc(46px/2)"};
   }
   @media (min-width: 40rem) {
     height: ${(props) =>
@@ -239,7 +288,6 @@ const StyledIndividualAnswerContainer = styled.div`
           (props.numberOfAnswers % 3 === 0 && props.numberOfAnswers % 2 !== 0)
         ? "194.66px"
         : "208.73px"};
-
     &:before {
       padding-bottom: 100%;
     }
@@ -253,12 +301,89 @@ const StyledIndividualAnswerContainer = styled.div`
         ? "194.66px"
         : "204.83px"};
   }
+  & > p {
+    padding-left: ${(props) =>
+      props.answerArrangement === "row" ? "1rem" : 0};
+    margin: ${(props) => (props.answerArrangement === "row" ? null : "0 auto")};
+    position: absolute;
+    z-index: 3;
+    right: ${(props) => (props.answerArrangement === "row" ? "auto" : 0)};
+    left: 0;
+    top: ${(props) => (props.answerArrangement === "row" ? 0 : "auto")};
+    bottom: ${(props) => (props.answerArrangement === "row" ? 0 : "auto")};
+    word-break: break-word;
+    width: 100%;
+
+    text-align: ${(props) =>
+      props.answerArrangement === "row" ? "left" : "center"};
+    text-stroke: ${(props) =>
+      props.answerArrangement === "row"
+        ? 0
+        : props.backgroundImageSrc
+        ? "calc(1px / 1.5) #000000"
+        : 0};
+    -webkit-text-stroke: ${(props) =>
+      props.answerArrangement === "row"
+        ? 0
+        : props.backgroundImageSrc
+        ? "calc(1px / 1.5) #000000"
+        : 0};
+    color: ${(props) =>
+      props.answerArrangement === "row"
+        ? props.answered
+          ? props.selected
+            ? "#fff"
+            : "#000"
+          : "#000"
+        : props.fontColor
+        ? isColor(props.fontColor)
+          ? props.fontColor
+          : "#fff"
+        : "#fff"};
+    @media (min-width: 40rem) {
+      text-stroke: ${(props) =>
+        props.answerArrangement === "row"
+          ? 0
+          : props.backgroundImageSrc
+          ? "calc(2px / 1.5) #000000"
+          : 0};
+      -webkit-text-stroke: ${(props) =>
+        props.answerArrangement === "row"
+          ? 0
+          : props.backgroundImageSrc
+          ? "calc(2px / 1.5) #000000"
+          : 0};
+    }
+    @media (min-width: 52rem) {
+      font-size: ${(props) =>
+        props.answerArrangement === "row"
+          ? "1.125rem"
+          : props.numberOfAnswers >= 9
+          ? props.answer
+            ? props.answer.length >= 10
+              ? "30px"
+              : props.answer.length >= 7
+              ? "48px"
+              : "60px"
+            : null
+          : props.answer
+          ? props.answer.length >= 18
+            ? "40px"
+            : props.answer.length >= 11
+            ? "47px"
+            : "60px"
+          : null};
+    }
+  }
+
   &:hover {
     cursor: ${(props) =>
       props.answered ? (props.selected ? "auto" : "pointer") : "pointer"};
     p {
       animation-name: ${(props) =>
-        props.answered
+        props.answerArrangement === "row"
+          ? "none"
+          : props.answered
           ? props.selected
             ? "none"
             : "bounceClick"
@@ -269,91 +394,7 @@ const StyledIndividualAnswerContainer = styled.div`
       opacity: 1;
       p {
         animation-name: none;
-        transform: ${(props) =>
-          props.answerArrangement === "tile"
-            ? props.answered
-              ? props.selected
-                ? "scale(1)"
-                : "scale(0.85)"
-              : "scale(0.85)"
-            : "scale(1)"};
-        transition: transform 0.1s cubic-bezier(0.64, 0.57, 0.67, 1.53);
       }
-    }
-  }
-  & > p {
-    padding: ${(props) =>
-      props.answerArrangement === "tile" ? "0.25rem" : "1rem"};
-    position: absolute;
-    z-index: 3;
-    margin: 0 auto;
-    right: ${(props) => (props.answerArrangement === "tile" ? 0 : "auto")};
-    left: 0;
-    word-break: break-word;
-    width: 100%;
-    text-align: ${(props) =>
-      props.answerArrangement === "tile" ? "center" : "left"};
-    text-stroke: ${(props) =>
-      props.answerArrangement === "tile"
-        ? props.backgroundImageSrc
-          ? "calc(1px / 1.5) #000000"
-          : 0
-        : 0};
-    -webkit-text-stroke: ${(props) =>
-      props.answerArrangement === "tile"
-        ? props.backgroundImageSrc
-          ? "calc(1px / 1.5) #000000"
-          : 0
-        : 0};
-    color: ${(props) =>
-      props.answerArrangement === "tile"
-        ? props.fontColor
-          ? isColor(props.fontColor)
-            ? props.fontColor
-            : "#fff"
-          : "#fff"
-        : "#000"};
-    @media (min-width: 40rem) {
-      text-stroke: ${(props) =>
-        props.answerArrangement === "tile"
-          ? props.backgroundImageSrc
-            ? "calc(2px / 1.5) #000000"
-            : 0
-          : 0};
-      -webkit-text-stroke: ${(props) =>
-        props.answerArrangement === "tile"
-          ? props.backgroundImageSrc
-            ? "calc(2px / 1.5) #000000"
-            : 0
-          : 0};
-    }
-    @media (min-width: 52rem) {
-      font-size: ${(props) =>
-        props.answerArrangement === "tile"
-          ? props.numberOfAnswers >= 9
-            ? props.answer
-              ? props.answer.length >= 10
-                ? "30px"
-                : props.answer.length >= 7
-                ? "48px"
-                : "60px"
-              : null
-            : props.answer
-            ? props.answer.length >= 18
-              ? "40px"
-              : props.answer.length >= 11
-              ? "47px"
-              : "60px"
-            : null
-          : "1.125rem"};
-      transform: ${(props) =>
-        props.answerArrangement === "tile"
-          ? props.answered
-            ? props.selected
-              ? "scale(1)"
-              : "scale(0.8)"
-            : "scale(0.8)"
-          : "scale(1)"};
     }
   }
 `;
@@ -498,7 +539,7 @@ const Question = (props) => {
         </StyledQuestionText>
       </StyledQuestionContainer>
       {item.backgroundImageSrc && item.imageAttribution ? (
-        <StyledQuestionImageAttributionText>
+        <StyledQuestionImageAttributionText className="rbq_question_attribution">
           <i>{item.imageAttribution}</i>
         </StyledQuestionImageAttributionText>
       ) : null}
@@ -601,6 +642,7 @@ const Question = (props) => {
                       ) : null}
                       {x.imageAttribution ? (
                         <StyledAnswerImageAttribution
+                          className="rbq_answer_attribution"
                           answered={selectedAnswers.some(
                             (el) => el.questionIndex === questionIndex
                           )}
