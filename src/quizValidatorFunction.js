@@ -233,115 +233,136 @@ export const quizValidatorFunction = (props) => {
                       !questions[i].imageAttribution ||
                       typeof questions[i].imageAttribution === "string"
                     ) {
-                      if (!questions[i].answers) {
-                        throw new Error(
-                          "Every object in React BuzzFeed Quiz's 'questions' prop array must contain an 'answers' key of an array type."
-                        );
-                      } else {
-                        if (!Array.isArray(questions[i].answers)) {
-                          throw new Error(
-                            "The value of the 'answers' key of every object in React BuzzFeed Quiz's 'questions' prop array must be an array."
-                          );
-                        } else {
-                          if (questions[i].answers.length > 0) {
-                            if (
-                              questions[i].answers.every(
-                                (item) => typeof item === "object"
-                              )
-                            ) {
-                              for (
-                                let j = 0;
-                                j < questions[i].answers.length;
-                                j++
-                              ) {
+                      if (
+                        !questions[i].answerArrangement ||
+                        typeof questions[i].answerArrangement === "string"
+                      ) {
+                        if (
+                          !questions[i].questionRelativeToImage ||
+                          typeof questions[i].questionRelativeToImage ===
+                            "string"
+                        ) {
+                          if (!questions[i].answers) {
+                            throw new Error(
+                              "Every object in React BuzzFeed Quiz's 'questions' prop array must contain an 'answers' key of an array type."
+                            );
+                          } else {
+                            if (!Array.isArray(questions[i].answers)) {
+                              throw new Error(
+                                "The value of the 'answers' key of every object in React BuzzFeed Quiz's 'questions' prop array must be an array."
+                              );
+                            } else {
+                              if (questions[i].answers.length > 0) {
                                 if (
-                                  questions[i].answers[j].answer &&
-                                  typeof questions[i].answers[j].answer !==
-                                    "string"
+                                  questions[i].answers.every(
+                                    (item) => typeof item === "object"
+                                  )
                                 ) {
-                                  throw new Error(
-                                    "The associated value of the 'answer' key of every object in the 'answers' array of every object in React BuzzFeed Quiz's 'questions' prop array must be a string."
-                                  );
-                                } else {
-                                  if (
-                                    !questions[i].answers[j].backgroundColor ||
-                                    typeof questions[i].answers[j]
-                                      .backgroundColor === "string"
+                                  for (
+                                    let j = 0;
+                                    j < questions[i].answers.length;
+                                    j++
                                   ) {
                                     if (
-                                      !questions[i].answers[j].fontColor ||
-                                      typeof questions[i].answers[j]
-                                        .fontColor === "string"
+                                      questions[i].answers[j].answer &&
+                                      typeof questions[i].answers[j].answer !==
+                                        "string"
                                     ) {
+                                      throw new Error(
+                                        "The associated value of the 'answer' key of every object in the 'answers' array of every object in React BuzzFeed Quiz's 'questions' prop array must be a string."
+                                      );
+                                    } else {
                                       if (
-                                        questions[i].answers[j]
-                                          .backgroundImageSrc
+                                        !questions[i].answers[j]
+                                          .backgroundColor ||
+                                        typeof questions[i].answers[j]
+                                          .backgroundColor === "string"
                                       ) {
                                         if (
+                                          !questions[i].answers[j].fontColor ||
                                           typeof questions[i].answers[j]
-                                            .backgroundImageSrc !== "string"
+                                            .fontColor === "string"
                                         ) {
-                                          throw new Error(
-                                            "The associated value of the 'backgroundImageSrc' key in React BuzzFeed Quiz must be a string."
-                                          );
-                                        }
-                                      }
-
-                                      if (
-                                        !questions[i].answers[j].resultID &&
-                                        questions[i].answers[j].resultID !== 0
-                                      ) {
-                                        throw new Error(
-                                          "Every object in the 'answers' array of every object in React BuzzFeed Quiz's 'questions' prop array must contain a 'resultID' prop of a number type."
-                                        );
-                                      } else {
-                                        if (
-                                          typeof questions[i].answers[j]
-                                            .resultID !== "number"
-                                        ) {
-                                          throw new Error(
-                                            "The associated value of the 'resultID' key of every object in the 'answers' array of every object in React BuzzFeed Quiz's 'questions' prop array must be a number."
-                                          );
-                                        } else {
                                           if (
                                             questions[i].answers[j]
-                                              .onAnswerSelection
+                                              .backgroundImageSrc
                                           ) {
                                             if (
                                               typeof questions[i].answers[j]
-                                                .onAnswerSelection !==
-                                              "function"
+                                                .backgroundImageSrc !== "string"
                                             ) {
                                               throw new Error(
-                                                "The associated value of the 'onAnswerSelection' key of every object in the 'answers' array of every object in React BuzzFeed Quiz's 'questions' prop array must be a function."
+                                                "The associated value of the 'backgroundImageSrc' key in React BuzzFeed Quiz must be a string."
                                               );
                                             }
                                           }
+
+                                          if (
+                                            !questions[i].answers[j].resultID &&
+                                            questions[i].answers[j].resultID !==
+                                              0
+                                          ) {
+                                            throw new Error(
+                                              "Every object in the 'answers' array of every object in React BuzzFeed Quiz's 'questions' prop array must contain a 'resultID' prop of a number type."
+                                            );
+                                          } else {
+                                            if (
+                                              typeof questions[i].answers[j]
+                                                .resultID !== "number"
+                                            ) {
+                                              throw new Error(
+                                                "The associated value of the 'resultID' key of every object in the 'answers' array of every object in React BuzzFeed Quiz's 'questions' prop array must be a number."
+                                              );
+                                            } else {
+                                              if (
+                                                questions[i].answers[j]
+                                                  .onAnswerSelection
+                                              ) {
+                                                if (
+                                                  typeof questions[i].answers[j]
+                                                    .onAnswerSelection !==
+                                                  "function"
+                                                ) {
+                                                  throw new Error(
+                                                    "The associated value of the 'onAnswerSelection' key of every object in the 'answers' array of every object in React BuzzFeed Quiz's 'questions' prop array must be a function."
+                                                  );
+                                                }
+                                              }
+                                            }
+                                          }
+                                        } else {
+                                          throw new Error(
+                                            "The associated value of the 'fontColor' key of every object in the 'answers' array of every object in React BuzzFeed Quiz's 'questions' prop array must be a string."
+                                          );
                                         }
+                                      } else {
+                                        throw new Error(
+                                          "The associated value of the 'backgroundColor' key of every object in the 'answers' array of every object in React BuzzFeed Quiz's 'questions' prop array must be a string."
+                                        );
                                       }
-                                    } else {
-                                      throw new Error(
-                                        "The associated value of the 'fontColor' key of every object in the 'answers' array of every object in React BuzzFeed Quiz's 'questions' prop array must be a string."
-                                      );
                                     }
-                                  } else {
-                                    throw new Error(
-                                      "The associated value of the 'backgroundColor' key of every object in the 'answers' array of every object in React BuzzFeed Quiz's 'questions' prop array must be a string."
-                                    );
                                   }
+                                } else {
+                                  throw new Error(
+                                    "The associated array value of the 'answers' key of every object in React BuzzFeed Quiz's 'questions' prop array must only contain objects."
+                                  );
                                 }
+                              } else {
+                                throw new Error(
+                                  "The value of the 'answers' key of every object in React BuzzFeed Quiz's 'questions' prop array must contain at least one object."
+                                );
                               }
-                            } else {
-                              throw new Error(
-                                "The associated array value of the 'answers' key of every object in React BuzzFeed Quiz's 'questions' prop array must only contain objects."
-                              );
                             }
-                          } else {
-                            throw new Error(
-                              "The value of the 'answers' key of every object in React BuzzFeed Quiz's 'questions' prop array must contain at least one object."
-                            );
                           }
+                        } else {
+                          throw new Error(
+                            "The associated value of the 'questionRelativeToImage' key of every object in React BuzzFeed Quiz's 'questions' prop array must be a string."
+                          );
                         }
+                      } else {
+                        throw new Error(
+                          "The associated value of the 'answerArrangement' key of every object in React BuzzFeed Quiz's 'questions' prop array must be a string."
+                        );
                       }
                     } else {
                       throw new Error(

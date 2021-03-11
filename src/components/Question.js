@@ -13,7 +13,10 @@ const StyledListItemContainer = styled.li`
 `;
 
 const StyledQuestionContainer = styled.div`
-  min-height: calc(345px / 1.5);
+  min-height: ${(props) =>
+    props.questionRelativeToImage === "adjacent"
+      ? "calc(277px / 1.5)"
+      : "calc(345px / 1.5)"};
   position: relative;
   overflow: hidden;
   line-height: 1.1;
@@ -36,12 +39,64 @@ const StyledQuestionContainer = styled.div`
     props.backgroundImageSrc ? `url(${props.backgroundImageSrc})` : "none"};
   background-repeat: no-repeat;
   background-size: cover;
+  @media (min-width: 320px) {
+    min-height: ${(props) =>
+      props.questionRelativeToImage === "adjacent"
+        ? "calc(322px / 1.5)"
+        : "calc(345px / 1.5)"};
+  }
+  @media (min-width: 360px) {
+    min-height: ${(props) =>
+      props.questionRelativeToImage === "adjacent"
+        ? "calc(384px / 1.5)"
+        : "calc(345px / 1.5)"};
+  }
+  @media (min-width: 400px) {
+    min-height: ${(props) =>
+      props.questionRelativeToImage === "adjacent"
+        ? "calc(424px / 1.5)"
+        : "calc(345px / 1.5)"};
+  }
+  @media (min-width: 500px) {
+    min-height: ${(props) =>
+      props.questionRelativeToImage === "adjacent"
+        ? "calc(568px / 1.5)"
+        : "calc(345px / 1.5)"};
+  }
+  @media (min-width: 40rem) {
+    min-height: ${(props) =>
+      props.questionRelativeToImage === "adjacent"
+        ? "443px"
+        : "calc(345px / 1.5)"};
+  }
   @media (min-width: 52rem) {
-    min-height: 345px;
+    min-height: ${(props) =>
+      props.questionRelativeToImage === "adjacent" ? "443px" : "345px"};
   }
 `;
 
-const StyledQuestionText = styled.p`
+const StyledQuestionAdjacentText = styled.h2`
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 1.125rem;
+  line-height: 1.2;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: ${(props) =>
+    props.fontColor
+      ? isColor(props.fontColor)
+        ? props.fontColor
+        : "#000"
+      : "#000"};
+
+  @media (min-width: 40rem) {
+    font-size: 1.375rem;
+    line-height: 1.27;
+  }
+`;
+
+const StyledQuestionOverlapText = styled.p`
   z-index: 3;
   margin: 0;
   line-height: 1.1;
@@ -115,8 +170,7 @@ const StyledIndividualAnswerOuterContainer = styled.div`
     props.answerArrangement === "row" ? "none" : "1px solid #f4f4f4"};
   border-right: ${(props) =>
     props.answerArrangement === "row" ? "none" : "1px solid #f4f4f4"};
-  border: ${(props) =>
-    props.answerArrangement === "row" ? "1px solid #f4f4f4" : "none"};
+  border: 1px solid #f4f4f4;
   max-height: ${(props) =>
     props.answerArrangement === "row" ? "55px" : "none"};
   background: #fff;
@@ -166,7 +220,11 @@ const StyledIndividualAnswerOuterContainer = styled.div`
             : props.answered
             ? props.selected
               ? "scale(1)"
+              : props.backgroundImageSrc
+              ? "scale(1)"
               : "scale(1.05)"
+            : props.backgroundImageSrc
+            ? "scale(1)"
             : "scale(1.05)"};
       }
 
@@ -181,7 +239,11 @@ const StyledIndividualAnswerOuterContainer = styled.div`
             : props.answered
             ? props.selected
               ? "scale(1)"
+              : props.backgroundImageSrc
+              ? "scale(1)"
               : "scale(1.05)"
+            : props.backgroundImageSrc
+            ? "scale(1)"
             : "scale(1.05)"};
       }
 
@@ -512,6 +574,20 @@ const Question = (props) => {
       questionIndex={questionIndex}
       name={`Question${questionIndex}`}
     >
+      {item.questionRelativeToImage === "adjacent" ? (
+        <StyledQuestionAdjacentText
+          className="rbq_question_adjacent_text"
+          fontColor={
+            item.fontColor
+              ? item.fontColor
+              : generalFontColor
+              ? generalFontColor
+              : null
+          }
+        >
+          {item.question ? item.question : null}
+        </StyledQuestionAdjacentText>
+      ) : null}
       <StyledQuestionContainer
         className="rbq_question_inner_container"
         imageAttribution={item.imageAttribution}
@@ -523,20 +599,23 @@ const Question = (props) => {
             ? generalBackgroundColor
             : null
         }
+        questionRelativeToImage={item.questionRelativeToImage}
       >
-        <StyledQuestionText
-          className="rbq_question_text"
-          backgroundImageSrc={item.backgroundImageSrc}
-          fontColor={
-            item.fontColor
-              ? item.fontColor
-              : generalFontColor
-              ? generalFontColor
-              : null
-          }
-        >
-          {item.question ? item.question : null}
-        </StyledQuestionText>
+        {item.questionRelativeToImage !== "adjacent" ? (
+          <StyledQuestionOverlapText
+            className="rbq_question_overlap_text"
+            backgroundImageSrc={item.backgroundImageSrc}
+            fontColor={
+              item.fontColor
+                ? item.fontColor
+                : generalFontColor
+                ? generalFontColor
+                : null
+            }
+          >
+            {item.question ? item.question : null}
+          </StyledQuestionOverlapText>
+        ) : null}
       </StyledQuestionContainer>
       {item.backgroundImageSrc && item.imageAttribution ? (
         <StyledQuestionImageAttributionText className="rbq_question_attribution">
@@ -566,6 +645,7 @@ const Question = (props) => {
                       el.questionIndex === questionIndex &&
                       el.answerIndex === answerIndex
                   )}
+                  backgroundImageSrc={x.backgroundImageSrc}
                 >
                   <StyledIndividualAnswerContainer
                     className="rbq_answer"

@@ -460,7 +460,7 @@ const Result = (props) => {
             </StyledResultInnerDescription>
             {finalResult[0].resultImageSrc &&
             finalResult[0].imageAttribution ? (
-              <StyledResultAttributionText>
+              <StyledResultAttributionText className="rbq_result_attribution">
                 <i>{finalResult[0].imageAttribution}</i>
               </StyledResultAttributionText>
             ) : null}
