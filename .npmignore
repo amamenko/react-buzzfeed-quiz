@@ -1,4 +1,5 @@
 src
+example
 webpack.config.js
 webpack.local.config.js
 webpack.production.config.js

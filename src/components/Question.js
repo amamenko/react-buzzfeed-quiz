@@ -211,7 +211,9 @@ const StyledIndividualAnswerOuterContainer = styled.div`
     p {
       @media (min-width: 900px) {
         transform: ${(props) =>
-          props.answerArrangement === "row"
+          props.resultsAvailable
+            ? "scale(1)"
+            : props.answerArrangement === "row"
             ? props.answered
               ? props.selected
                 ? "scale(1)"
@@ -230,7 +232,9 @@ const StyledIndividualAnswerOuterContainer = styled.div`
 
       @media (min-width: 52rem) {
         transform: ${(props) =>
-          props.answerArrangement === "row"
+          props.resultsAvailable
+            ? "scale(1)"
+            : props.answerArrangement === "row"
             ? props.answered
               ? props.selected
                 ? "scale(1)"
@@ -443,7 +447,9 @@ const StyledIndividualAnswerContainer = styled.div`
       props.answered ? (props.selected ? "auto" : "pointer") : "pointer"};
     p {
       animation-name: ${(props) =>
-        props.answerArrangement === "row"
+        props.resultsAvailable
+          ? "none"
+          : props.answerArrangement === "row"
           ? "none"
           : props.answered
           ? props.selected

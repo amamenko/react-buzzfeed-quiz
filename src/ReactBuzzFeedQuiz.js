@@ -95,6 +95,7 @@ const ReactBuzzFeedQuiz = (props) => {
         setTimeout(() => {
           scroller.scrollTo("Result", {
             duration: 500,
+            offset: -80,
             smooth: true,
             container: "main_questions_container",
           });
