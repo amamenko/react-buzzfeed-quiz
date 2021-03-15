@@ -1,0 +1,21 @@
+body {
+  font-family: "Proxima Nova";
+  margin: 0;
+  padding: 0;
+}
+
+.react_buzzfeed_quiz {
+  margin-top: 4rem;
+}
+
+@media only screen and (max-width: 375px) {
+  .react_buzzfeed_quiz {
+    margin-top: 2.5rem;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .react_buzzfeed_quiz {
+    margin-top: 6rem;
+  }
+}

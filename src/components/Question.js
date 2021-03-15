@@ -140,8 +140,7 @@ const StyledQuestionAnswersContainer = styled.div`
       ? "1fr"
       : props.anyImages
       ? "1fr 1fr"
-      : props.numberOfAnswers >= 9 ||
-        (props.numberOfAnswers % 3 === 0 && props.numberOfAnswers % 2 !== 0)
+      : props.numberOfAnswers >= 9 || props.numberOfAnswers === 3
       ? "1fr 1fr 1fr"
       : "1fr 1fr"};
   grid-template-rows: ${(props) =>
@@ -149,9 +148,10 @@ const StyledQuestionAnswersContainer = styled.div`
       ? "1fr"
       : props.anyImages
       ? "none"
-      : props.numberOfAnswers >= 9 ||
-        (props.numberOfAnswers % 3 === 0 && props.numberOfAnswers % 2 !== 0)
+      : props.numberOfAnswers >= 9
       ? "1fr 1fr 1fr"
+      : props.numberOfAnswers === 3
+      ? "1fr"
       : "1fr 1fr"};
   grid-gap: ${(props) =>
     props.anyImages
@@ -652,6 +652,14 @@ const Question = (props) => {
                       el.answerIndex === answerIndex
                   )}
                   backgroundImageSrc={x.backgroundImageSrc}
+                  onClick={() =>
+                    handleAnswerSelection(
+                      questionIndex,
+                      answerIndex,
+                      x.resultID,
+                      x.onAnswerSelection
+                    )
+                  }
                 >
                   <StyledIndividualAnswerContainer
                     className="rbq_answer"
@@ -681,14 +689,6 @@ const Question = (props) => {
                         : generalFontColor
                         ? generalFontColor
                         : null
-                    }
-                    onClick={() =>
-                      handleAnswerSelection(
-                        questionIndex,
-                        answerIndex,
-                        x.resultID,
-                        x.onAnswerSelection
-                      )
                     }
                   >
                     {x.backgroundImageSrc &&
