@@ -1,6 +1,6 @@
 {
   "name": "react-buzzfeed-quiz",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "React-friendly BuzzFeed Quiz Module",
   "main": "./lib/ReactBuzzFeedQuiz.js",
   "private": true,
@@ -33,6 +33,15 @@
   "scripts": {
     "build": "webpack"
   },
+  "keywords": [
+    "buzzfeed",
+    "quiz",
+    "answer",
+    "test",
+    "personality",
+    "react-buzzfeed-quiz",
+    "buzzfeed-quiz"
+  ],
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -50,5 +59,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "author": "Avraham Mamenko",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amamenko/react-buzzfeed-quiz.git"
+  },
+  "bugs": {
+    "url": "https://github.com/amamenko/react-buzzfeed-quiz/issues"
+  },
+  "homepage": "https://github.com/amamenko/react-buzzfeed-quiz#readme"
 }

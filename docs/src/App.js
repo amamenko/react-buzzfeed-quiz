@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ProfilePhoto from "./images/ProfilePhoto.jpg";
 import StockCatPhoto from "./images/StockCatPhoto.jpg";
 import AdditionalCatPhoto from "./images/AdditionalCatPhoto.jpg";
@@ -9,7 +9,9 @@ import ThirdResultCatImage from "./images/ThirdResultCatImage.jpg";
 import ReactBuzzFeedQuiz from "react-buzzfeed-quiz";
 import styled from "styled-components";
 import { FaYarn, FaNpm, FaGithub } from "react-icons/fa";
+import { Modal } from "react-responsive-modal";
 import "react-buzzfeed-quiz/ProximaNovaFont.css";
+import "react-responsive-modal/styles.css";
 
 const StyledNav = styled.div`
   position: fixed;
@@ -103,9 +105,48 @@ const StyledLinksContainer = styled.div`
   }
 `;
 
+const StyledInstallationInstructions = styled.div`
+  padding: 16px;
+  margin: 100px auto;
+  color: #000;
+  background: #2b303b;
+  max-width: 600px;
+
+  @media (max-width: 767px) {
+    margin: 100px 16px;
+    margin-top: 70px;
+    margin-bottom: 0px;
+  }
+
+  code {
+    margin: 0 auto;
+    font-family: Courier New, Courier, monospace;
+    opacity: 0.9;
+    color: #fff;
+  }
+`;
+
 const App = () => {
+  const [modalOpen, changeModalOpen] = useState(false);
+
+  const openModal = () => {
+    changeModalOpen(true);
+  };
+
+  const closeModal = () => {
+    changeModalOpen(false);
+  };
+
   return (
     <>
+      <Modal open={modalOpen} onClose={closeModal}>
+        <h2>Simple centered modal</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+          pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet
+          hendrerit risus, sed porttitor quam.
+        </p>
+      </Modal>
       <StyledNav>
         <a href="/">
           <StyledLogoContainer>
@@ -138,6 +179,11 @@ const App = () => {
           </a>
         </StyledLinksContainer>
       </StyledNav>
+      <StyledInstallationInstructions>
+        <code>
+          <span>npm i react-buzzfeed-quiz</span>
+        </code>
+      </StyledInstallationInstructions>
       <ReactBuzzFeedQuiz
         title={"Wanna See A Demo of React BuzzFeed Quiz?"}
         description={"Here it is, this is the demo."}
