@@ -5,17 +5,5 @@ body {
 }
 
 .react_buzzfeed_quiz {
-  margin-top: 2rem;
-}
-
-@media only screen and (max-width: 375px) {
-  .react_buzzfeed_quiz {
-    margin-top: 1rem;
-  }
-}
-
-@media only screen and (min-width: 1200px) {
-  .react_buzzfeed_quiz {
-    margin-top: 6rem;
-  }
+  margin-top: 1rem;
 }

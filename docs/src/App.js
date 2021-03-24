@@ -107,14 +107,14 @@ const StyledLinksContainer = styled.div`
 
 const StyledInstallationInstructions = styled.div`
   padding: 16px;
-  margin: 100px auto;
-  color: #000;
-  background: #2b303b;
+  margin: 0px auto;
+  background: rgb(30, 30, 30);
   max-width: 600px;
+  margin-bottom: 0px;
+  text-align: center;
 
   @media (max-width: 767px) {
-    margin: 100px 16px;
-    margin-top: 70px;
+    margin: 0px 16px;
     margin-bottom: 0px;
   }
 
@@ -123,6 +123,21 @@ const StyledInstallationInstructions = styled.div`
     font-family: Courier New, Courier, monospace;
     opacity: 0.9;
     color: #fff;
+  }
+`;
+
+const StyledInstallationSeparator = styled.div`
+  position: relative;
+  background: #fff;
+  color: #000;
+  max-width: 630px;
+  text-align: left;
+  margin: 0px 16px;
+  margin-top: ${(props) => (props.first ? "70px" : "0px")};
+
+  @media (min-width: 768px) {
+    margin: auto;
+    margin-top: ${(props) => (props.first ? "100px" : "0px")};
   }
 `;
 
@@ -179,11 +194,23 @@ const App = () => {
           </a>
         </StyledLinksContainer>
       </StyledNav>
+      <StyledInstallationSeparator first>
+        <p>Install with NPM:</p>
+      </StyledInstallationSeparator>
       <StyledInstallationInstructions>
         <code>
           <span>npm i react-buzzfeed-quiz</span>
         </code>
       </StyledInstallationInstructions>
+      <StyledInstallationSeparator>
+        <p>Install with Yarn:</p>
+      </StyledInstallationSeparator>
+      <StyledInstallationInstructions second>
+        <code>
+          <span>yarn add react-buzzfeed-quiz</span>
+        </code>
+      </StyledInstallationInstructions>
+
       <ReactBuzzFeedQuiz
         title={"Wanna See A Demo of React BuzzFeed Quiz?"}
         description={"Here it is, this is the demo."}
@@ -280,7 +307,7 @@ const App = () => {
                 resultID: 2,
               },
               {
-                answer: "answers",
+                answer: "choices",
                 backgroundColor: "#e66465",
                 resultID: 2,
               },
