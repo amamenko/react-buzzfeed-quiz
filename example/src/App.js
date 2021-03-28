@@ -9,9 +9,7 @@ import ThirdResultCatImage from "./images/ThirdResultCatImage.jpg";
 import ReactBuzzFeedQuiz from "react-buzzfeed-quiz";
 import styled from "styled-components";
 import { FaYarn, FaNpm, FaGithub } from "react-icons/fa";
-import { Modal } from "react-responsive-modal";
 import "react-buzzfeed-quiz/ProximaNovaFont.css";
-import "react-responsive-modal/styles.css";
 
 const StyledNav = styled.div`
   position: fixed;
@@ -142,26 +140,8 @@ const StyledInstallationSeparator = styled.div`
 `;
 
 const App = () => {
-  const [modalOpen, changeModalOpen] = useState(false);
-
-  const openModal = () => {
-    changeModalOpen(true);
-  };
-
-  const closeModal = () => {
-    changeModalOpen(false);
-  };
-
   return (
     <>
-      <Modal open={modalOpen} onClose={closeModal}>
-        <h2>Simple centered modal</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-          pulvinar risus non risus hendrerit venenatis. Pellentesque sit amet
-          hendrerit risus, sed porttitor quam.
-        </p>
-      </Modal>
       <StyledNav>
         <a href="/">
           <StyledLogoContainer>
