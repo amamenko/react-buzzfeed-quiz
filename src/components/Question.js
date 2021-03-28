@@ -640,6 +640,7 @@ const Question = (props) => {
             {item.answers.map((x, answerIndex) => {
               return (
                 <StyledIndividualAnswerOuterContainer
+                  className="rbq_answer_container"
                   key={answerIndex}
                   resultsAvailable={resultsAvailable}
                   answerArrangement={item.answerArrangement}
@@ -694,6 +695,7 @@ const Question = (props) => {
                     {x.backgroundImageSrc &&
                     item.answerArrangement !== "row" ? (
                       <StyledAnswerImage
+                        className="rbq_answer_image"
                         src={x.backgroundImageSrc}
                         alt={`${x.answer} Answer Image`}
                       />
@@ -701,11 +703,12 @@ const Question = (props) => {
 
                     {x.backgroundImageSrc &&
                     item.answerArrangement === "tile" ? null : (
-                      <p>{x.answer}</p>
+                      <p className="rbq_answer_text">{x.answer}</p>
                     )}
                   </StyledIndividualAnswerContainer>
                   {x.backgroundImageSrc && item.answerArrangement === "tile" ? (
                     <StyledAnswerImageBottomTextContainer
+                      className="rbq_answer_image_text_container"
                       selected={selectedAnswers.some(
                         (el) =>
                           el.questionIndex === questionIndex &&
@@ -714,6 +717,7 @@ const Question = (props) => {
                     >
                       {x.answer ? (
                         <StyledAnswerImageText
+                          className="rbq_answer_image_text"
                           answered={selectedAnswers.some(
                             (el) => el.questionIndex === questionIndex
                           )}

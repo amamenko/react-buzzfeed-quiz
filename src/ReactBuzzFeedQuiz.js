@@ -255,6 +255,7 @@ ReactBuzzFeedQuiz.defaultProps = {
   facebookShareLink: "",
   twitterShareButton: true,
   twitterShareLink: "",
+  twitterShareText: "",
   twitterShareHashtags: [],
   copyShareButton: true,
   copyShareLink: "",

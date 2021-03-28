@@ -536,7 +536,7 @@ const Result = (props) => {
                     onClick={() => handleShareLinkClicked(copyShareLink)}
                   >
                     <IoIosLink className="rbq_link_share_button_icon" />
-                    <p>Copy Link</p>
+                    <p className="rbq_link_share_button_text">Copy Link</p>
                   </StyledShareButton>
                 </StyledShareLinkButtonOuterContainer>
               ) : null}
@@ -600,12 +600,12 @@ const Result = (props) => {
                   shareTo="twitter"
                 >
                   <GrTwitter className="rbq_mobile_twitter_share_button_icon" />
-                  <p>Tweet</p>
+                  <p className="rbq_mobile_twitter_share_button_text">Tweet</p>
                 </StyledShareButton>
               </a>
             ) : null}
             {copyShareButton ? (
-              <StyledShareLinkButtonOuterContainer>
+              <StyledShareLinkButtonOuterContainer className="rbq_mobile_link_container">
                 {shareLinkClicked ? (
                   <StyledTooltipContainer
                     shareLinkAnimatingOut={shareLinkAnimatingOut}
@@ -621,7 +621,7 @@ const Result = (props) => {
                   onClick={() => handleShareLinkClicked(copyShareLink)}
                 >
                   <IoIosLink className="rbq_mobile_link_share_icon" />
-                  <p>Copy Link</p>
+                  <p className="rbq_mobile_link_share_text">Copy Link</p>
                 </StyledShareButton>
               </StyledShareLinkButtonOuterContainer>
             ) : null}
@@ -632,7 +632,7 @@ const Result = (props) => {
           onClick={handleRetakeQuiz}
         >
           <GrRefresh className="rbq_mobile_retake_icon" />
-          <p>Retake Quiz</p>
+          <p className="rbq_mobile_retake_text">Retake Quiz</p>
         </StyledMobileRetakeQuizContainer>
       </StyledResultOuterContainer>
     );
