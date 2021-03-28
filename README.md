@@ -80,8 +80,8 @@ The `ReactBuzzFeedQuiz` component accepts the following props:
 | onResult | Function | `NOOP` | Function called when the quiz is completed and a result is available. |
 | onAnswerSelection |Function | `NOOP` | Function called when any answer option is selected. | 
 | onRestart | Function | `NOOP` | Function called when the "Retake Quiz" button is clicked in the result container. | 
-| questions | Array[Object] | `[{}]` | An array of question objects (see Question Object below). |
-| results | Array[Object] | `[{}]` | An array of result objects (see Result Object below). | 
+| questions | Array[Object] | `[]` | An array of question objects (see Question Object below). |
+| results | Array[Object] | `[]` | An array of result objects (see Result Object below). | 
 
 ### Question Object
 
