@@ -159,14 +159,14 @@ const App = () => {
             <FaGithub />
           </a>
           <a
-            href="https://github.com/amamenko/react-buzzfeed-quiz"
+            href="https://www.npmjs.com/package/react-buzzfeed-quiz"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaNpm />
           </a>
           <a
-            href="https://github.com/amamenko/react-buzzfeed-quiz"
+            href="https://yarnpkg.com/package/react-buzzfeed-quiz"
             target="_blank"
             rel="noopener noreferrer"
           >
