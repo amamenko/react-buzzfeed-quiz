@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ProfilePhoto from "./images/ProfilePhoto.jpg";
 import StockCatPhoto from "./images/StockCatPhoto.jpg";
 import AdditionalCatPhoto from "./images/AdditionalCatPhoto.jpg";
