@@ -5,6 +5,11 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
+   <a href="https://github.com/amamenko/react-buzzfeed-quiz">
+    <img src="example/src/images/RBQLogo.jpg" alt="Logo" width="150" />
+  </a>
+</p>
+<p align="center">
   <a href="https://github.com/amamenko/react-buzzfeed-quiz">
     <img src="images/ReactBuzzFeedQuizLogo.jpg" alt="Logo" width="500" />
   </a>
@@ -47,6 +52,12 @@ If you'd like to use the font, import the CSS file defining the font-faces into 
 ```js
 import "react-buzzfeed-quiz/ProximaNova.css"
 ```
+
+## Disclaimer
+
+react-buzzfeed-quiz is not affiliated, associated, authorized, endorsed by, or in any way officially connected with BuzzFeed, Inc., or any of its subsidiaries or its affiliates. The official BuzzFeed, Inc. website can be found at [https://www.buzzfeed.com](https://www.buzzfeed.com).
+
+The name BuzzFeed as well as related names, marks, emblems/logos, and images are registered trademarks of BuzzFeed, Inc.
 
 
 ## User Guide
