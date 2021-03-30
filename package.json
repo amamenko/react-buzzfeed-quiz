@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "React-friendly BuzzFeed Quiz Module",
   "main": "./lib/ReactBuzzFeedQuiz.js",
-  "private": true,
+  "private": "false",
   "dependencies": {
     "react-icons": "^4.2.0",
     "react-scroll": "^1.8.1",
