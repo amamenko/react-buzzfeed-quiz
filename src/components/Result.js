@@ -542,13 +542,15 @@ const Result = (props) => {
               ) : null}
             </StyledShareLinksList>
           </StyledResultInnerDescriptionContainer>
-          <StyledResultInnerImageContainer className="rbq_result_inner_image_container">
-            <StyledResultInnerImage
-              className="rbq_result_inner_image"
-              alt="Buzzfeed Quiz Result Image"
-              src={finalResult[0].resultImageSrc}
-            />
-          </StyledResultInnerImageContainer>
+          {finalResult[0].resultImageSrc ? (
+            <StyledResultInnerImageContainer className="rbq_result_inner_image_container">
+              <StyledResultInnerImage
+                className="rbq_result_inner_image"
+                alt="Buzzfeed Quiz Result Image"
+                src={finalResult[0].resultImageSrc}
+              />
+            </StyledResultInnerImageContainer>
+          ) : null}
           <StyledMobileShareLinksList className="rbq_mobile_share_links_container">
             {facebookShareButton ? (
               <a
