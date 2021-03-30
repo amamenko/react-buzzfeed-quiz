@@ -1,12 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-const isColor = (strColor) => {
-  const s = new Option().style;
-  s.color = strColor;
-  return s.color !== "";
-};
-
 const StyledListItemContainer = styled.li`
   margin-top: ${(props) => (props.questionIndex === 0 ? 0 : "100px")};
   margin-bottom: 2rem;
@@ -29,11 +23,7 @@ const StyledQuestionContainer = styled.div`
   justify-content: center;
   align-items: center;
   background: ${(props) =>
-    props.backgroundColor
-      ? isColor(props.backgroundColor)
-        ? props.backgroundColor
-        : "#000"
-      : "#000"};
+    props.backgroundColor ? props.backgroundColor : "#000"};
   margin-bottom: ${(props) => (props.imageAttribution ? 0 : "1rem")};
   background-image: ${(props) =>
     props.backgroundImageSrc ? `url(${props.backgroundImageSrc})` : "none"};
@@ -83,12 +73,7 @@ const StyledQuestionAdjacentText = styled.h2`
   line-height: 1.2;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: ${(props) =>
-    props.fontColor
-      ? isColor(props.fontColor)
-        ? props.fontColor
-        : "#000"
-      : "#000"};
+  color: ${(props) => (props.fontColor ? props.fontColor : "#000")};
 
   @media (min-width: 40rem) {
     font-size: 1.375rem;
@@ -107,12 +92,7 @@ const StyledQuestionOverlapText = styled.p`
   padding: 10px;
   font-weight: 900;
   font-size: calc(62px / 2);
-  color: ${(props) =>
-    props.fontColor
-      ? isColor(props.fontColor)
-        ? props.fontColor
-        : "#fff"
-      : "#fff"};
+  color: ${(props) => (props.fontColor ? props.fontColor : "#fff")};
   @media (min-width: 40rem) {
     font-size: calc(55px / 1.5);
   }
@@ -286,9 +266,7 @@ const StyledIndividualAnswerContainer = styled.div`
           : "#fff"
         : "#fff"
       : props.backgroundColor
-      ? isColor(props.backgroundColor)
-        ? props.backgroundColor
-        : "#000"
+      ? props.backgroundColor
       : "#000"};
   font-weight: ${(props) => (props.answerArrangement === "row" ? 700 : 900)};
   text-align: center;
@@ -402,9 +380,7 @@ const StyledIndividualAnswerContainer = styled.div`
             : "#000"
           : "#000"
         : props.fontColor
-        ? isColor(props.fontColor)
-          ? props.fontColor
-          : "#fff"
+        ? props.fontColor
         : "#fff"};
     @media (min-width: 40rem) {
       text-stroke: ${(props) =>
