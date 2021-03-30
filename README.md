@@ -21,17 +21,17 @@
   
 ## Demo
 
-Check out the demo page [here](https://github.com/amamenko/react-buzzfeed-quiz)!
+Check out the demo page [here](https://react-buzzfeed-quiz.netlify.app)!
 
 ## Installation
 
-react-buzzfeed-quiz is available through [Yarn](https://yarnpkg.com):
+react-buzzfeed-quiz is available through [Yarn](https://yarnpkg.com/package/react-buzzfeed-quiz):
 
 ```bash
 yarn add react-buzzfeed-quiz
 ```
 
-or through [npm](https://www.npmjs.com):
+or through [npm](https://www.npmjs.com/package/react-buzzfeed-quiz):
 
 ```bash
 npm install react-buzzfeed-quiz
