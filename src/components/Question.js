@@ -22,11 +22,11 @@ const StyledQuestionContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${(props) =>
+  background-color: ${(props) =>
     props.backgroundColor
       ? props.backgroundColor
       : props.backgroundImageSrc
-      ? "none"
+      ? "transparent"
       : "#000"};
   margin-bottom: ${(props) => (props.imageAttribution ? 0 : "1rem")};
   background-image: ${(props) =>
