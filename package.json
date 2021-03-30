@@ -6,12 +6,12 @@
   "private": false,
   "dependencies": {
     "react-icons": "^4.2.0",
-    "react-scroll": "^1.8.1",
-    "styled-components": "^5.2.1"
+    "react-scroll": "^1.8.1"
   },
   "peerDependencies": {
     "react": ">=15.0.1",
-    "react-dom": ">=15.0.1"
+    "react-dom": ">=15.0.1",
+    "styled-components": "^5.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.17",
