@@ -1,13 +1,13 @@
 {
   "presets": ["@babel/react", "@babel/env"],
   "plugins": [
-    "transform-object-rest-spread",
-    "@babel/transform-react-jsx",
     [
       "babel-plugin-styled-components",
       {
         "namespace": "react-buzzfeed-quiz"
       }
-    ]
+    ],
+    "transform-object-rest-spread",
+    "@babel/transform-react-jsx"
   ]
 }

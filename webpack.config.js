@@ -110,7 +110,7 @@ module.exports = {
     extensions: [".js", ".jsx"],
   },
   externals: {
-    // Don't bundle react or react-dom
+    // Don't bundle react, react-dom, or styled-components
     react: {
       commonjs: "react",
       commonjs2: "react",
@@ -122,6 +122,11 @@ module.exports = {
       commonjs2: "react-dom",
       amd: "ReactDOM",
       root: "ReactDOM",
+    },
+    "styled-components": {
+      commonjs: "styled-components",
+      commonjs2: "styled-components",
+      amd: "styled-components",
     },
   },
 };
