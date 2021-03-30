@@ -23,7 +23,11 @@ const StyledQuestionContainer = styled.div`
   justify-content: center;
   align-items: center;
   background: ${(props) =>
-    props.backgroundColor ? props.backgroundColor : "#000"};
+    props.backgroundColor
+      ? props.backgroundColor
+      : props.backgroundImageSrc
+      ? "none"
+      : "#000"};
   margin-bottom: ${(props) => (props.imageAttribution ? 0 : "1rem")};
   background-image: ${(props) =>
     props.backgroundImageSrc ? `url(${props.backgroundImageSrc})` : "none"};
@@ -267,6 +271,8 @@ const StyledIndividualAnswerContainer = styled.div`
         : "#fff"
       : props.backgroundColor
       ? props.backgroundColor
+      : props.backgroundImageSrc
+      ? "none"
       : "#000"};
   font-weight: ${(props) => (props.answerArrangement === "row" ? 700 : 900)};
   text-align: center;
