@@ -25,7 +25,9 @@ Check out the demo page [here](https://react-buzzfeed-quiz.netlify.app)!
 
 ## Installation
 
-react-buzzfeed-quiz is available through [Yarn](https://yarnpkg.com/package/react-buzzfeed-quiz):
+### Step One: Install the package itself
+
+`react-buzzfeed-quiz` is available through [Yarn](https://yarnpkg.com/package/react-buzzfeed-quiz):
 
 ```bash
 yarn add react-buzzfeed-quiz
@@ -43,9 +45,35 @@ Once it's installed, you can import the `ReactBuzzFeedQuiz` component as follows
 import ReactBuzzFeedQuiz from "react-buzzfeed-quiz";
 ```
 
+### Step Two: Install `styled-components`
+
+`ReactBuzzFeedQuiz` uses `styled-components` for styling, which is not bundled with the package as a direct dependency (as recommended [here](https://styled-components.com/docs/faqs#i-am-a-library-author-should-i-bundle-styledcomponents-with-my-library)), but rather as a peer dependency. This is to prevent multiple instances of `styled-components` being initialized, which can cause issues with class name collisions and dynamic styles not working properly.
+
+Thus, you will have to install `styled-components` yourself using [Yarn](https://yarnpkg.com/package/styled-components):
+
+```bash
+yarn add styled-components
+```
+
+or [npm](https://www.npmjs.com/package/styled-components):
+
+```bash
+npm install styled-components
+```
+
+and import it like so:
+
+```js
+import styled from "styled-components";
+
+const Quiz = styled(ReactBuzzFeedQuiz)([]);
+```
+
+
+
 ### BuzzFeed Font
 
-The module also includes some `.woff` and `.woff2` font assets for [Proxima Nova](https://www.marksimonson.com/fonts/view/proxima-nova), the official BuzzFeed font. Keep in mind, `ReactBuzzFeedQuiz` uses `styled-components` for styling so font preloading for Proxima Nova is included by default if you do intend to use it. 
+The module also includes some `.woff` and `.woff2` font assets for [Proxima Nova](https://www.marksimonson.com/fonts/view/proxima-nova), the official BuzzFeed font.
 
 If you'd like to use the font, import the CSS file defining the font-faces into your project:
 
@@ -63,11 +91,14 @@ import BackgroundImage from "./path/to/BackgroundImage.jpg";
 import FirstResultImage from "./path/to/FirstResultImage.jpg";
 import SecondResultImage from "./path/to/SecondResultImage.jpg";
 import ReactBuzzFeedQuiz from "react-buzzfeed-quiz"; 
+import styled from "styled-components";
 import "react-buzzfeed-quiz/ProximaNovaFont.css";
+
+const Quiz = styled(ReactBuzzFeedQuiz)([]);
 
 const App = () => {
    return (
-       <ReactBuzzFeedQuiz
+       <Quiz
            title={"Your title goes here."}
            description={"Your description goes here."}
            byline={true}
