@@ -11,6 +11,8 @@ import styled from "styled-components";
 import { FaYarn, FaNpm, FaGithub } from "react-icons/fa";
 import "react-buzzfeed-quiz/ProximaNovaFont.css";
 
+const Quiz = styled(ReactBuzzFeedQuiz)([]);
+
 const StyledNav = styled.div`
   position: fixed;
   display: flex;
@@ -191,7 +193,7 @@ const App = () => {
         </code>
       </StyledInstallationInstructions>
 
-      <ReactBuzzFeedQuiz
+      <Quiz
         title={"Wanna See A Demo of React BuzzFeed Quiz?"}
         description={"Here it is, this is the demo."}
         byline={true}

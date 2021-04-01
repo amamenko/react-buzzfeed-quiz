@@ -5,7 +5,7 @@ import { quizValidatorFunction } from "./quizValidatorFunction";
 import Byline from "./components/Byline";
 import Question from "./components/Question";
 import Result from "./components/Result";
-import ProximaNovaGlobalStyle from "./ProximaNovaGlobalStyle";
+import "./fontPreload.css";
 
 const StyledOuterQuizContainer = styled.div`
   font-family: "Proxima Nova";
@@ -163,7 +163,6 @@ const ReactBuzzFeedQuiz = (props) => {
 
   return (
     <>
-      <ProximaNovaGlobalStyle />
       <StyledOuterQuizContainer name="Top" className="react_buzzfeed_quiz">
         <StyledInnerQuizContainer className="rbq_inner_container">
           {title ? (
