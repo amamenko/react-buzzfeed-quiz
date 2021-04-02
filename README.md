@@ -47,7 +47,9 @@ import ReactBuzzFeedQuiz from "react-buzzfeed-quiz";
 
 ### Step Two: Install `styled-components`
 
-`ReactBuzzFeedQuiz` uses `styled-components` for styling, which is not bundled with the package as a direct dependency (as recommended [here](https://styled-components.com/docs/faqs#i-am-a-library-author-should-i-bundle-styledcomponents-with-my-library)), but rather as a peer dependency. This is to prevent multiple instances of `styled-components` being initialized, which can cause issues with class name collisions and dynamic styles not working properly.
+`ReactBuzzFeedQuiz` uses `styled-components` for styling, which is not bundled with the package as a direct dependency (as recommended [here](https://styled-components.com/docs/faqs#i-am-a-library-author-should-i-bundle-styledcomponents-with-my-library)), but rather as a peer dependency. 
+
+This is to prevent multiple instances of `styled-components` being initialized, which can cause issues with class name collisions and dynamic styles not working properly.
 
 Thus, you will have to install `styled-components` yourself using [Yarn](https://yarnpkg.com/package/styled-components):
 
