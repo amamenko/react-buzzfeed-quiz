@@ -6,12 +6,12 @@ export const StyledIndividualAnswerContainer = styled.div`
   position: relative;
   width: 100%;
   padding: 0;
+  overflow: hidden;
   border-radius: ${(props) => (props.backgroundImageSrc ? 0 : "4px")};
   border-top-left-radius: ${(props) =>
     props.answerArrangement === "row" ? 0 : "4px"};
   border-top-right-radius: ${(props) =>
     props.answerArrangement === "row" ? 0 : "4px"};
-  overflow: hidden;
   opacity: ${(props) => (props.answered ? (props.selected ? 1 : 0.6) : 1)};
   transition: opacity 0.5s ease;
   pointer-events: ${(props) => (props.resultsAvailable ? "none" : "auto")};
@@ -33,33 +33,26 @@ export const StyledIndividualAnswerContainer = styled.div`
   align-items: center;
   justify-content: ${(props) =>
     props.answerArrangement === "row" ? "flex-start" : "center"};
-  height: ${(props) => (props.numberOfAnswers >= 9 ? "fit-content" : "14.5vh")};
+  height: 14.5vh;
   line-height: 1.1;
   word-wrap: normal;
   word-break: initial;
   text-align: center;
-  font-size: ${(props) =>
-    props.answerArrangement === "row"
-      ? "1.125rem"
-      : props.numberOfAnswers >= 9
-      ? props.answer
-        ? props.answer.length >= 10
-          ? "16px"
-          : props.answer.length >= 7
-          ? "22px"
-          : "31px"
-        : null
-      : "22px"};
+  p {
+    font-size: ${(props) =>
+      props.answerArrangement === "row" ? "1.125rem" : null};
+  }
 
   &:before {
     content: "";
     display: ${(props) => (props.backgroundImageSrc ? "none" : "block")};
-    width: 100%;
+    width: 0;
     height: 0;
     position: relative;
     z-index: 1;
     padding-bottom: 75.7%;
   }
+
   @keyframes bounceClick {
     0% {
       transform: none;
@@ -70,18 +63,6 @@ export const StyledIndividualAnswerContainer = styled.div`
     100% {
       transform: none;
     }
-  }
-  @media (min-width: 25rem) {
-    font-size: ${(props) =>
-      props.answerArrangement === "row"
-        ? "1.125rem"
-        : props.answer
-        ? props.answer.length >= 10
-          ? props.numberOfAnswers >= 9
-            ? "calc(38px/2)"
-            : "calc(46px/2)"
-          : "calc(46px/2)"
-        : "calc(46px/2)"};
   }
   @media (min-width: 40rem) {
     height: ${(props) =>
@@ -119,18 +100,6 @@ export const StyledIndividualAnswerContainer = styled.div`
 
     text-align: ${(props) =>
       props.answerArrangement === "row" ? "left" : "center"};
-    text-stroke: ${(props) =>
-      props.answerArrangement === "row"
-        ? 0
-        : props.backgroundImageSrc
-        ? "calc(1px / 1.5) #000000"
-        : 0};
-    -webkit-text-stroke: ${(props) =>
-      props.answerArrangement === "row"
-        ? 0
-        : props.backgroundImageSrc
-        ? "calc(1px / 1.5) #000000"
-        : 0};
     color: ${(props) =>
       props.answerArrangement === "row"
         ? props.answered
@@ -141,40 +110,6 @@ export const StyledIndividualAnswerContainer = styled.div`
         : props.fontColor
         ? props.fontColor
         : "#fff"};
-    @media (min-width: 40rem) {
-      text-stroke: ${(props) =>
-        props.answerArrangement === "row"
-          ? 0
-          : props.backgroundImageSrc
-          ? "calc(2px / 1.5) #000000"
-          : 0};
-      -webkit-text-stroke: ${(props) =>
-        props.answerArrangement === "row"
-          ? 0
-          : props.backgroundImageSrc
-          ? "calc(2px / 1.5) #000000"
-          : 0};
-    }
-    @media (min-width: 52rem) {
-      font-size: ${(props) =>
-        props.answerArrangement === "row"
-          ? "1.125rem"
-          : props.numberOfAnswers >= 9
-          ? props.answer
-            ? props.answer.length >= 10
-              ? "30px"
-              : props.answer.length >= 7
-              ? "48px"
-              : "60px"
-            : null
-          : props.answer
-          ? props.answer.length >= 18
-            ? "40px"
-            : props.answer.length >= 11
-            ? "47px"
-            : "60px"
-          : null};
-    }
   }
 
   &:hover {

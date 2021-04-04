@@ -1,24 +1,23 @@
 import styled from "styled-components";
 
-export const StyledQuestionContainer = styled.div`
+export const StyledQuestionImageContainer = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
   min-height: ${(props) =>
     props.questionRelativeToImage === "adjacent"
       ? "calc(277px / 1.5)"
       : "calc(345px / 1.5)"};
-  position: relative;
   overflow: hidden;
-  line-height: 1.1;
   font-weight: 900;
   word-wrap: normal;
   word-break: initial;
   border-radius: 3px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${(props) =>
-    props.backgroundColor ? props.backgroundColor : "#000"};
-  margin-bottom: 1rem;
+  margin-bottom: ${(props) => (props.imageAttribution ? 0 : "1rem")};
+
   @media (min-width: 320px) {
     min-height: ${(props) =>
       props.questionRelativeToImage === "adjacent"
@@ -46,11 +45,11 @@ export const StyledQuestionContainer = styled.div`
   @media (min-width: 40rem) {
     min-height: ${(props) =>
       props.questionRelativeToImage === "adjacent"
-        ? "443px"
+        ? "420px"
         : "calc(345px / 1.5)"};
   }
   @media (min-width: 52rem) {
     min-height: ${(props) =>
-      props.questionRelativeToImage === "adjacent" ? "443px" : "345px"};
+      props.questionRelativeToImage === "adjacent" ? "420px" : "345px"};
   }
 `;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyledAnswerImage } from "./styled/Question/StyledAnswerImage";
 import { StyledAnswerImageAttribution } from "./styled/Question/StyledAnswerImageAttribution";
 import { StyledAnswerImageBottomTextContainer } from "./styled/Question/StyledAnswerImageBottomTextContainer";
@@ -11,6 +11,9 @@ import { StyledQuestionAnswersContainer } from "./styled/Question/StyledQuestion
 import { StyledQuestionContainer } from "./styled/Question/StyledQuestionContainer";
 import { StyledQuestionImageAttributionText } from "./styled/Question/StyledQuestionImageAttributionText";
 import { StyledQuestionOverlapText } from "./styled/Question/StyledQuestionOverlapText";
+import { StyledQuestionImageContainer } from "./styled/Question/StyledQuestionImageContainer";
+import { StyledQuestionImage } from "./styled/Question/StyledQuestionImage";
+import { StyledTextfit } from "./styled/Question/StyledTextfit";
 
 const Question = (props) => {
   const {
@@ -24,6 +27,18 @@ const Question = (props) => {
     scrollFunction,
     onAnswerSelection,
   } = props;
+
+  const [answerHovered, changeAnswerHovered] = useState("");
+  const [componentMounted, changeComponentMounted] = useState(false);
+
+  // Tells TextFit to update itself now that component has been initially mounted
+  useEffect(() => {
+    if (!componentMounted) {
+      setTimeout(() => {
+        changeComponentMounted(true);
+      }, 100);
+    }
+  }, [componentMounted]);
 
   const handleAnswerSelection = (
     questionIndex,
@@ -69,6 +84,28 @@ const Question = (props) => {
     }
   };
 
+  const renderOverlapText = (item) => {
+    if (item.questionRelativeToImage !== "adjacent") {
+      return (
+        <StyledQuestionOverlapText
+          className="rbq_question_overlap_text"
+          backgroundImageSrc={item.backgroundImageSrc}
+          fontColor={
+            item.fontColor
+              ? item.fontColor
+              : generalFontColor
+              ? generalFontColor
+              : null
+          }
+        >
+          {item.question ? item.question : null}
+        </StyledQuestionOverlapText>
+      );
+    } else {
+      return null;
+    }
+  };
+
   return (
     <StyledListItemContainer
       className="rbq_question"
@@ -89,35 +126,33 @@ const Question = (props) => {
           {item.question ? item.question : null}
         </StyledQuestionAdjacentText>
       ) : null}
-      <StyledQuestionContainer
-        className="rbq_question_inner_container"
-        imageAttribution={item.imageAttribution}
-        backgroundImageSrc={item.backgroundImageSrc}
-        backgroundColor={
-          item.backgroundColor
-            ? item.backgroundColor
-            : generalBackgroundColor
-            ? generalBackgroundColor
-            : null
-        }
-        questionRelativeToImage={item.questionRelativeToImage}
-      >
-        {item.questionRelativeToImage !== "adjacent" ? (
-          <StyledQuestionOverlapText
-            className="rbq_question_overlap_text"
-            backgroundImageSrc={item.backgroundImageSrc}
-            fontColor={
-              item.fontColor
-                ? item.fontColor
-                : generalFontColor
-                ? generalFontColor
-                : null
-            }
-          >
-            {item.question ? item.question : null}
-          </StyledQuestionOverlapText>
-        ) : null}
-      </StyledQuestionContainer>
+      {item.backgroundImageSrc ? (
+        <StyledQuestionImageContainer
+          questionRelativeToImage={item.questionRelativeToImage}
+          imageAttribution={item.imageAttribution}
+        >
+          <StyledQuestionImage
+            className="rbq_question_image"
+            src={item.backgroundImageSrc}
+            alt={`Question ${questionIndex} Image`}
+          />
+          {renderOverlapText(item)}
+        </StyledQuestionImageContainer>
+      ) : (
+        <StyledQuestionContainer
+          className="rbq_question_inner_container"
+          backgroundColor={
+            item.backgroundColor
+              ? item.backgroundColor
+              : generalBackgroundColor
+              ? generalBackgroundColor
+              : null
+          }
+          questionRelativeToImage={item.questionRelativeToImage}
+        >
+          {renderOverlapText(item)}
+        </StyledQuestionContainer>
+      )}
       {item.backgroundImageSrc && item.imageAttribution ? (
         <StyledQuestionImageAttributionText className="rbq_question_attribution">
           <i>{item.imageAttribution}</i>
@@ -148,6 +183,8 @@ const Question = (props) => {
                       el.answerIndex === answerIndex
                   )}
                   backgroundImageSrc={x.backgroundImageSrc}
+                  onMouseEnter={() => changeAnswerHovered(answerIndex)}
+                  onMouseLeave={() => changeAnswerHovered("")}
                   onClick={() =>
                     handleAnswerSelection(
                       questionIndex,
@@ -197,8 +234,16 @@ const Question = (props) => {
                     ) : null}
 
                     {x.backgroundImageSrc &&
-                    item.answerArrangement === "tile" ? null : (
+                    item.answerArrangement ===
+                      "tile" ? null : item.answerArrangement === "row" ? (
                       <p className="rbq_answer_text">{x.answer}</p>
+                    ) : (
+                      <StyledTextfit
+                        componentMounted={componentMounted}
+                        hovered={answerHovered === answerIndex}
+                      >
+                        {x.answer}
+                      </StyledTextfit>
                     )}
                   </StyledIndividualAnswerContainer>
                   {x.backgroundImageSrc && item.answerArrangement === "tile" ? (

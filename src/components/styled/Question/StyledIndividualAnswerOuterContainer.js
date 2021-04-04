@@ -25,6 +25,10 @@ export const StyledIndividualAnswerOuterContainer = styled.div`
         : "transform 0.1s cubic-bezier(0.64, 0.57, 0.67, 1.53)"};
   }
 
+  img {
+    transition: all 0.2s cubic-bezier(0.64, 0.57, 0.67, 1.53);
+  }
+
   &:hover {
     pointer-events: ${(props) => (props.resultsAvailable ? "none" : "all")};
     cursor: ${(props) =>
@@ -39,7 +43,9 @@ export const StyledIndividualAnswerOuterContainer = styled.div`
         : "0px 0px 1px 3px rgb(173 168 168 / 10%)"};
     img {
       transform: ${(props) =>
-        props.answered
+        props.resultsAvailable
+          ? "scale(1)"
+          : props.answered
           ? props.selected
             ? "scale(1)"
             : "scale(1.1)"

@@ -52,10 +52,16 @@ module.exports = {
       "./src/components/styled/Question/StyledQuestionAnswersContainer.js",
     "./components/styled/Question/StyledQuestionContainer":
       "./src/components/styled/Question/StyledQuestionContainer.js",
+    "./components/styled/Question/StyledQuestionImage":
+      "./src/components/styled/Question/StyledQuestionImage.js",
     "./components/styled/Question/StyledQuestionImageAttributionText":
       "./src/components/styled/Question/StyledQuestionImageAttributionText.js",
+    "./components/styled/Question/StyledQuestionImageContainer":
+      "./src/components/styled/Question/StyledQuestionImageContainer.js",
     "./components/styled/Question/StyledQuestionOverlapText":
       "./src/components/styled/Question/StyledQuestionOverlapText.js",
+    "./components/styled/Question/StyledTextfit":
+      "./src/components/styled/Question/StyledTextfit.js",
 
     // Result Styled Components
     "./components/styled/Result/StyledMobileRetakeQuizContainer":
