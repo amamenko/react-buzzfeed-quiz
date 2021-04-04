@@ -14,6 +14,7 @@ import { StyledQuestionOverlapText } from "./styled/Question/StyledQuestionOverl
 import { StyledQuestionImageContainer } from "./styled/Question/StyledQuestionImageContainer";
 import { StyledQuestionImage } from "./styled/Question/StyledQuestionImage";
 import { StyledTextfit } from "./styled/Question/StyledTextfit";
+import ScaleText from "react-scale-text";
 
 const Question = (props) => {
   const {
@@ -29,16 +30,14 @@ const Question = (props) => {
   } = props;
 
   const [answerHovered, changeAnswerHovered] = useState("");
-  const [componentMounted, changeComponentMounted] = useState(false);
 
-  // Tells TextFit to update itself now that component has been initially mounted
+  // Necessary for ScaleText to refresh font-size right after component mount
   useEffect(() => {
-    if (!componentMounted) {
-      setTimeout(() => {
-        changeComponentMounted(true);
-      }, 100);
-    }
-  }, [componentMounted]);
+    setTimeout(() => {
+      changeAnswerHovered(0);
+      changeAnswerHovered("");
+    }, 400);
+  }, []);
 
   const handleAnswerSelection = (
     questionIndex,
@@ -239,10 +238,18 @@ const Question = (props) => {
                       <p className="rbq_answer_text">{x.answer}</p>
                     ) : (
                       <StyledTextfit
-                        componentMounted={componentMounted}
                         hovered={answerHovered === answerIndex}
+                        fontColor={
+                          x.fontColor
+                            ? x.fontColor
+                            : generalFontColor
+                            ? generalFontColor
+                            : null
+                        }
                       >
-                        {x.answer}
+                        <ScaleText>
+                          <p>{x.answer}</p>
+                        </ScaleText>
                       </StyledTextfit>
                     )}
                   </StyledIndividualAnswerContainer>

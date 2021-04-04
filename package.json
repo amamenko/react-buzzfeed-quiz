@@ -1,13 +1,13 @@
 {
   "name": "react-buzzfeed-quiz",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "React-friendly BuzzFeed Quiz Module",
   "main": "./lib/ReactBuzzFeedQuiz.js",
   "private": false,
   "dependencies": {
     "react-icons": "^4.2.0",
-    "react-scroll": "^1.8.1",
-    "react-textfit": "^1.1.1"
+    "react-scale-text": "^1.2.2",
+    "react-scroll": "^1.8.1"
   },
   "peerDependencies": {
     "react": ">=15.0.1",
