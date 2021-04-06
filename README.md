@@ -333,7 +333,17 @@ The value of the `answers` key of the Question Object accepts an array of answer
 | onResult | Function | Function called when the quiz is completed and the outcome is this specific result. This function value supersedes `ReactBuzzFeedQuiz`'s `onResult` prop, if supplied, for this specific result outcome.  | 
 | resultID | number | The numerical ID of the Result Object. Used to associate Result Objects to Answer Objects. |
 
+<!-- CONTRIBUTING -->
 
+## Contributing
+
+Contributions are welcome!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/MyFeature`)
+3. Commit your Changes (`git commit -m 'Add my feature'`)
+4. Push to the Branch (`git push origin feature/MyFeature`)
+5. Open a Pull Request
 
 <!-- LICENSE -->
 ## License
