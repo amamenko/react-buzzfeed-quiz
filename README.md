@@ -273,11 +273,11 @@ The `ReactBuzzFeedQuiz` component accepts the following props:
 | title | string | `""` | The main title header for the quiz. |
 | description | string | `""` | The sub-heading description for the quiz. |
 | byline | boolean | `true` | Whether or not to render the author information sub-header. |
-| bylineAuthor | string | `""` | The name of the quiz creator. |
-| bylineAuthorLink | string | `""` | URL to redirect to when byline author name is clicked. |
-| bylineAuthorLinkOpenInNewTab | boolean | `false` | Whether or not to open a new tab when redirecting to the byline author link URL upon author name click. |
-| bylineAuthorTagline | string | `""` | Additional text to render under the author name in the byline. |
-| bylineAvatarImageSrc | string | `true` | URL or local filename to be included in the byline's circular avatar image's `src` attribute. |
+| bylineAuthor | string | `""` | The name of the quiz creator. Only takes effect when `byline` prop is set to `true`. |
+| bylineAuthorLink | string | `""` | URL to redirect to when byline author name is clicked. Only takes effect when `byline` prop is set to `true`. |
+| bylineAuthorLinkOpenInNewTab | boolean | `false` | Whether or not to open a new tab when redirecting to the byline author link URL upon author name click. Only takes effect when `byline` prop is set to `true`. |
+| bylineAuthorTagline | string | `""` | Additional text to render under the author name in the byline. Only takes effect when `byline` prop is set to `true`. |
+| bylineAvatarImageSrc | string | `true` | URL or local filename to be included in the byline's circular avatar image's `src` attribute. Only takes effect when `byline` prop is set to `true`. |
 | generalBackgroundColor | string | `""` | Applies a given color to every question container and every answer container's background. If no color or invalid color is supplied, the default background color is black. |
 | generalFontColor | string | `""` | Applies a given color to every question container and every answer container's font. If no color or invalid color is supplied, the default font color is white. |
 | autoScroll | boolean | `true` | Whether or not to automatically smooth-scroll the quiz to the next available question upon answer selection, to the result when the quiz is finished, and to the top of the quiz when the quiz is restarted. |
