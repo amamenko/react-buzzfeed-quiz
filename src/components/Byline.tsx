@@ -1,12 +1,13 @@
-import React from "react";
+import React, { FC } from "react";
 import { FaUser } from "react-icons/fa";
 import { StyledAvatar } from "./styled/Byline/StyledAvatar";
 import { StyledAvatarContainer } from "./styled/Byline/StyledAvatarContainer";
 import { StyledBylineAuthorDescriptor } from "./styled/Byline/StyledBylineAuthorDescriptor";
 import { StyledBylineAuthorDescriptorContainer } from "./styled/Byline/StyledBylineAuthorDescriptorContainer";
 import { StyledBylineContainer } from "./styled/Byline/StyledBylineContainer";
+import { BylineType } from "../interfaces";
 
-const Byline = (props) => {
+const Byline: FC<BylineType> = (props) => {
   const {
     byline,
     bylineAuthor,

@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, FC } from "react";
 import styled from "styled-components";
 import { scroller } from "react-scroll";
-import { quizValidatorFunction } from "./quizValidatorFunction";
 import Byline from "./components/Byline";
 import Question from "./components/Question";
 import Result from "./components/Result";
-import "./fontPreload.css";
+import {
+  ISelectedAnswer,
+  ReactBuzzFeedQuizProps,
+  ResultType,
+} from "./interfaces";
 
 const StyledOuterQuizContainer = styled.div`
   font-family: "Proxima Nova";
@@ -55,7 +58,7 @@ const StyledQuestionListContainer = styled.ol`
   margin: 0;
 `;
 
-const ReactBuzzFeedQuiz = (props) => {
+const ReactBuzzFeedQuiz: FC<ReactBuzzFeedQuizProps> = (props) => {
   const {
     title,
     description,
@@ -83,13 +86,15 @@ const ReactBuzzFeedQuiz = (props) => {
     results,
   } = props;
 
-  const [selectedAnswers, changeSelectedAnswers] = useState([]);
+  const [selectedAnswers, changeSelectedAnswers] = useState<ISelectedAnswer[]>(
+    []
+  );
   const [resultsAvailable, changeResultsAvailable] = useState(false);
-  const [finalResult, changeFinalResult] = useState([]);
+  const [finalResult, changeFinalResult] = useState<ResultType[]>([]);
   const [shareLinkClicked, changeShareLinkClicked] = useState(false);
   const [shareLinkAnimatingOut, changeShareLinkAnimatingOut] = useState(false);
 
-  const scrollFunction = (element, questionIndex) => {
+  const scrollFunction = (element: string, questionIndex: number) => {
     if (autoScroll) {
       if (questionIndex + 1 === questions.length) {
         setTimeout(() => {
@@ -117,7 +122,7 @@ const ReactBuzzFeedQuiz = (props) => {
       selectedAnswers.length === questions.length
     ) {
       const allAnswers = selectedAnswers.map((answer) => answer.resultID);
-      const answerFreq = {};
+      const answerFreq: { [key: string]: number } = {};
 
       for (let i = 0; i < allAnswers.length; i++) {
         if (answerFreq[allAnswers[i]]) {
@@ -156,10 +161,6 @@ const ReactBuzzFeedQuiz = (props) => {
       }, 4800);
     }
   }, [shareLinkClicked]);
-
-  if (!quizValidatorFunction(props)) {
-    return null;
-  }
 
   return (
     <>

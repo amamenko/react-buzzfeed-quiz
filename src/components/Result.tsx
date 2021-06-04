@@ -1,6 +1,7 @@
-import React, { useMemo } from "react";
+import React, { FC, useMemo } from "react";
 import { GrRefresh, GrFacebook, GrTwitter } from "react-icons/gr";
 import { IoIosLink, IoIosCheckmarkCircle } from "react-icons/io";
+import { ResultProps } from "../interfaces";
 import { StyledMobileRetakeQuizContainer } from "./styled/Result/StyledMobileRetakeQuizContainer";
 import { StyledMobileShareLinksList } from "./styled/Result/StyledMobileShareLinksList";
 import { StyledResultAttributionText } from "./styled/Result/StyledResultAttributionText";
@@ -18,7 +19,7 @@ import { StyledShareLinkButtonOuterContainer } from "./styled/Result/StyledShare
 import { StyledShareLinksList } from "./styled/Result/StyledShareLinksList";
 import { StyledTooltipContainer } from "./styled/Result/StyledTooltipContainer";
 
-const Result = (props) => {
+const Result: FC<ResultProps> = (props) => {
   const {
     title,
     resultsAvailable,
@@ -44,7 +45,7 @@ const Result = (props) => {
   } = props;
 
   const handleRetakeQuiz = () => {
-    scrollFunction("Top");
+    scrollFunction("Top", -2);
     changeResultsAvailable(false);
     changeSelectedAnswers([]);
     changeFinalResult([]);
@@ -64,36 +65,39 @@ const Result = (props) => {
     }
   };
 
-  const handleShareLinkClicked = (shareLink) => {
+  const handleShareLinkClicked = (shareLink: string) => {
     // Handle copy to clipboard
     const el = document.createElement("textarea");
     el.value = shareLink;
     el.setAttribute("readonly", "");
-    el.style = { position: "absolute", left: "-9999px" };
+    el.setAttribute("style", "position: absolute; left: -9999px;");
     document.body.appendChild(el);
 
     if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
       // save current contentEditable/readOnly status
-      var editable = el.contentEditable;
-      var readOnly = el.readOnly;
+      let editable = el.contentEditable;
+      let readOnly = el.readOnly;
 
       // convert to editable with readonly to stop iOS keyboard opening
-      el.contentEditable = true;
+      el.contentEditable = "true";
       el.readOnly = true;
 
       // create a selectable range
-      var range = document.createRange();
+      let range = document.createRange();
       range.selectNodeContents(el);
 
       // select the range
-      var selection = window.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(range);
-      el.setSelectionRange(0, 999999);
+      let selection = window.getSelection();
 
-      // restore contentEditable/readOnly to original state
-      el.contentEditable = editable;
-      el.readOnly = readOnly;
+      if (selection) {
+        selection.removeAllRanges();
+        selection.addRange(range);
+        el.setSelectionRange(0, 999999);
+
+        // restore contentEditable/readOnly to original state
+        el.contentEditable = editable;
+        el.readOnly = readOnly;
+      }
     } else {
       el.select();
     }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, FC } from "react";
 import { StyledAnswerImage } from "./styled/Question/StyledAnswerImage";
 import { StyledAnswerImageAttribution } from "./styled/Question/StyledAnswerImageAttribution";
 import { StyledAnswerImageBottomTextContainer } from "./styled/Question/StyledAnswerImageBottomTextContainer";
@@ -15,8 +15,9 @@ import { StyledQuestionImageContainer } from "./styled/Question/StyledQuestionIm
 import { StyledQuestionImage } from "./styled/Question/StyledQuestionImage";
 import { StyledTextfit } from "./styled/Question/StyledTextfit";
 import ScaleText from "react-scale-text";
+import { QuestionType, QuestionProps } from "../interfaces";
 
-const Question = (props) => {
+const Question: FC<QuestionProps> = (props) => {
   const {
     item,
     questionIndex,
@@ -29,21 +30,21 @@ const Question = (props) => {
     onAnswerSelection,
   } = props;
 
-  const [answerHovered, changeAnswerHovered] = useState("");
+  const [answerHovered, changeAnswerHovered] = useState<number | null>(null);
 
   // Necessary for ScaleText to refresh font-size right after component mount
   useEffect(() => {
     setTimeout(() => {
       changeAnswerHovered(0);
-      changeAnswerHovered("");
+      changeAnswerHovered(null);
     }, 400);
   }, []);
 
   const handleAnswerSelection = (
-    questionIndex,
-    answerIndex,
-    resultID,
-    specificHandleAnswerSelection
+    questionIndex: number,
+    answerIndex: number,
+    resultID: number,
+    specificHandleAnswerSelection?: () => void
   ) => {
     const handleGeneralAnswerSelection = () => {
       if (onAnswerSelection) {
@@ -83,7 +84,7 @@ const Question = (props) => {
     }
   };
 
-  const renderOverlapText = (item) => {
+  const renderOverlapText = (item: QuestionType) => {
     if (item.questionRelativeToImage !== "adjacent") {
       return (
         <StyledQuestionOverlapText
@@ -183,7 +184,7 @@ const Question = (props) => {
                   )}
                   backgroundImageSrc={x.backgroundImageSrc}
                   onMouseEnter={() => changeAnswerHovered(answerIndex)}
-                  onMouseLeave={() => changeAnswerHovered("")}
+                  onMouseLeave={() => changeAnswerHovered(null)}
                   onClick={() =>
                     handleAnswerSelection(
                       questionIndex,

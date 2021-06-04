@@ -5,9 +5,14 @@
   "main": "./lib/ReactBuzzFeedQuiz.js",
   "private": false,
   "dependencies": {
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.12.0",
+    "@types/react": "^17.0.9",
+    "@types/react-dom": "^17.0.6",
     "react-icons": "^4.2.0",
     "react-scale-text": "^1.2.2",
-    "react-scroll": "^1.8.1"
+    "react-scroll": "^1.8.1",
+    "typescript": "^4.3.2"
   },
   "peerDependencies": {
     "react": ">=15.0.1",
