@@ -257,6 +257,9 @@ react-buzzfeed-quiz is not affiliated, associated, authorized, endorsed by, or i
 
 The name BuzzFeed as well as related names, marks, emblems/logos, and images are registered trademarks of BuzzFeed, Inc.
 
+## Upcoming Features
+
+Versions 2+ of react-buzzfeed-quiz will include Typescript and SCSS instead of styled-components. The library will also not be bundled with fonts.
 
 ## User Guide
 
@@ -304,6 +307,7 @@ The `ReactBuzzFeedQuiz` component accepts the following props:
 | backgroundColor | string | Applies a given color to only the specific question container's background. This value supersedes the `generalBackgroundColor` prop if supplied to `ReactBuzzFeedQuiz`. If the `generalBackgroundColor` prop is supplied and this value is empty, then the color in `generalBackgroundColor` will be applied. Otherwise, if no color or invalid color is supplied, the default background color is black.  |
 | fontColor | string | Applies a given color to only the specific question container's font. This value supersedes the `generalFontColor` prop if supplied to `ReactBuzzFeedQuiz`. If the `generalFontColor` prop is supplied and this value is empty, then the color in `generalFontColor` will be applied. Otherwise, if no color or invalid color is supplied, the default font color is white.  |
 | backgroundImageSrc | string | URL or local filename to be included as the background image of the question container. Automatically sets the font color to white and adds a text stroke. Takes precedence over any theme, if supplied.  |
+| imageAttribution | string | If background image is supplied, this will add attribution text below the image giving credit to its original source.  |
 | answers | Array[Object] | An array of answer objects (see Answer Object below). |
 
 #### Answer Object
