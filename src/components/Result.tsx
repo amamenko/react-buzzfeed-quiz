@@ -2,22 +2,7 @@ import React, { FC, useMemo } from "react";
 import { GrRefresh, GrFacebook, GrTwitter } from "react-icons/gr";
 import { IoIosLink, IoIosCheckmarkCircle } from "react-icons/io";
 import { ResultProps } from "../interfaces";
-import { StyledMobileRetakeQuizContainer } from "./styled/Result/StyledMobileRetakeQuizContainer";
-import { StyledMobileShareLinksList } from "./styled/Result/StyledMobileShareLinksList";
-import { StyledResultAttributionText } from "./styled/Result/StyledResultAttributionText";
-import { StyledResultHeader } from "./styled/Result/StyledResultHeader";
-import { StyledResultInnerContainer } from "./styled/Result/StyledResultInnerContainer";
-import { StyledResultInnerDescription } from "./styled/Result/StyledResultInnerDescription";
-import { StyledResultInnerDescriptionContainer } from "./styled/Result/StyledResultInnerDescriptionContainer";
-import { StyledResultInnerDescriptionHeader } from "./styled/Result/StyledResultInnerDescriptionHeader";
-import { StyledResultInnerImage } from "./styled/Result/StyledResultInnerImage";
-import { StyledResultInnerImageContainer } from "./styled/Result/StyledResultInnerImageContainer";
-import { StyledResultOuterContainer } from "./styled/Result/StyledResultOuterContainer";
-import { StyledRetakeQuizContainer } from "./styled/Result/StyledRetakeQuizContainer";
-import { StyledShareButton } from "./styled/Result/StyledShareButton";
-import { StyledShareLinkButtonOuterContainer } from "./styled/Result/StyledShareLinkButtonOuterContainer";
-import { StyledShareLinksList } from "./styled/Result/StyledShareLinksList";
-import { StyledTooltipContainer } from "./styled/Result/StyledTooltipContainer";
+import { Element } from "react-scroll";
 
 const Result: FC<ResultProps> = (props) => {
   const {
@@ -134,33 +119,30 @@ const Result: FC<ResultProps> = (props) => {
 
   if (resultsAvailable && finalResult.length > 0) {
     return (
-      <StyledResultOuterContainer className="rbq_result" name="Result">
-        <StyledResultHeader className="rbq_result_header">
+      <Element className="rbq_result_outer_container" name="Result">
+        <div className="rbq_result_header">
           <h2>{title}</h2>
-          <StyledRetakeQuizContainer
-            className="rbq_retake_container"
-            onClick={handleRetakeQuiz}
-          >
+          <div className="rbq_retake_quiz_container" onClick={handleRetakeQuiz}>
             <GrRefresh className="rbq_retake_icon" />
             <p>Retake Quiz</p>
-          </StyledRetakeQuizContainer>
-        </StyledResultHeader>
-        <StyledResultInnerContainer className="rbq_result_inner_container">
-          <StyledResultInnerDescriptionContainer className="rbq_result_description_container">
-            <StyledResultInnerDescriptionHeader className="rbq_result_description_header">
+          </div>
+        </div>
+        <div className="rbq_result_inner_container">
+          <div className="rbq_result_inner_description_container">
+            <h3 className="rbq_result_inner_description_header">
               You got: {finalResult[0].title}
-            </StyledResultInnerDescriptionHeader>
-            <StyledResultInnerDescription className="rbq_result_description_body">
+            </h3>
+            <p className="rbq_result_inner_description">
               {finalResult[0].description}
-            </StyledResultInnerDescription>
+            </p>
             {finalResult[0].resultImageSrc &&
             finalResult[0].imageAttribution ? (
-              <StyledResultAttributionText className="rbq_result_attribution">
+              <p className="rbq_result_attribution_text">
                 <i>{finalResult[0].imageAttribution}</i>
-              </StyledResultAttributionText>
+              </p>
             ) : null}
-            <StyledShareLinksList className="rbq_share_links_container">
-              {facebookShareButton ? (
+            <div className="rbq_share_links_container">
+              {facebookShareButton && (
                 <a
                   href={
                     facebookShareLink
@@ -172,16 +154,13 @@ const Result: FC<ResultProps> = (props) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <StyledShareButton
-                    className="rbq_facebook_share_button"
-                    shareTo="facebook"
-                  >
+                  <span className="rbq_share_button rbq_facebook_share_button">
                     <GrFacebook className="rbq_facebook_share_button_icon" />
                     <p>Share</p>
-                  </StyledShareButton>
+                  </span>
                 </a>
-              ) : null}
-              {twitterShareButton ? (
+              )}
+              {twitterShareButton && (
                 <a
                   href={
                     twitterShareLink
@@ -205,49 +184,46 @@ const Result: FC<ResultProps> = (props) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <StyledShareButton
-                    className="rbq_twitter_share_button"
-                    shareTo="twitter"
-                  >
+                  <span className="rbq_share_button rbq_twitter_share_button">
                     <GrTwitter className="rbq_twitter_share_button_icon" />
                     <p>Tweet</p>
-                  </StyledShareButton>
+                  </span>
                 </a>
-              ) : null}
-              {copyShareButton ? (
-                <StyledShareLinkButtonOuterContainer>
-                  {shareLinkClicked ? (
-                    <StyledTooltipContainer
-                      shareLinkAnimatingOut={shareLinkAnimatingOut}
-                      className="rbq_link_share_copied_tooltip"
+              )}
+              {copyShareButton && (
+                <div className="rbq_share_link_button_outer_container">
+                  {shareLinkClicked && (
+                    <div
+                      className={`rbq_tooltip_container rbq_link_share_copied_tooltip ${
+                        shareLinkAnimatingOut && "rbq_tooltip_animating_out"
+                      }`}
                     >
                       <IoIosCheckmarkCircle />
                       <p>Link copied!</p>
-                    </StyledTooltipContainer>
-                  ) : null}
-                  <StyledShareButton
-                    className="rbq_link_share_button"
-                    shareTo="link"
+                    </div>
+                  )}
+                  <span
+                    className="rbq_share_button rbq_link_share_button"
                     onClick={() => handleShareLinkClicked(copyShareLink)}
                   >
                     <IoIosLink className="rbq_link_share_button_icon" />
                     <p className="rbq_link_share_button_text">Copy Link</p>
-                  </StyledShareButton>
-                </StyledShareLinkButtonOuterContainer>
-              ) : null}
-            </StyledShareLinksList>
-          </StyledResultInnerDescriptionContainer>
-          {finalResult[0].resultImageSrc ? (
-            <StyledResultInnerImageContainer className="rbq_result_inner_image_container">
-              <StyledResultInnerImage
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+          {finalResult[0].resultImageSrc && (
+            <div className="rbq_result_inner_image_container">
+              <img
                 className="rbq_result_inner_image"
                 alt="Buzzfeed Quiz Result Image"
                 src={finalResult[0].resultImageSrc}
               />
-            </StyledResultInnerImageContainer>
-          ) : null}
-          <StyledMobileShareLinksList className="rbq_mobile_share_links_container">
-            {facebookShareButton ? (
+            </div>
+          )}
+          <div className="rbq_mobile_share_links_container">
+            {facebookShareButton && (
               <a
                 href={
                   facebookShareLink
@@ -259,16 +235,13 @@ const Result: FC<ResultProps> = (props) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <StyledShareButton
-                  className="rbq_mobile_facebook_share_button"
-                  shareTo="facebook"
-                >
+                <span className="rbq_share_button rbq_facebook_share_button rbq_mobile_facebook_share_button">
                   <GrFacebook className="rbq_mobile_facebook_share_button_icon" />
                   <p>Share</p>
-                </StyledShareButton>
+                </span>
               </a>
-            ) : null}
-            {twitterShareButton ? (
+            )}
+            {twitterShareButton && (
               <a
                 href={
                   twitterShareLink
@@ -292,46 +265,43 @@ const Result: FC<ResultProps> = (props) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <StyledShareButton
-                  className="rbq_mobile_twitter_share_button"
-                  shareTo="twitter"
-                >
+                <span className="rbq_share_button rbq_twitter_share_button rbq_mobile_twitter_share_button">
                   <GrTwitter className="rbq_mobile_twitter_share_button_icon" />
                   <p className="rbq_mobile_twitter_share_button_text">Tweet</p>
-                </StyledShareButton>
+                </span>
               </a>
-            ) : null}
-            {copyShareButton ? (
-              <StyledShareLinkButtonOuterContainer className="rbq_mobile_link_container">
+            )}
+            {copyShareButton && (
+              <div className="rbq_mobile_link_container">
                 {shareLinkClicked ? (
-                  <StyledTooltipContainer
-                    shareLinkAnimatingOut={shareLinkAnimatingOut}
-                    className="rbq_mobile_link_share_copied_tooltip"
+                  <div
+                    className={`rbq_tooltip_container rbq_mobile_link_share_copied_tooltip ${
+                      shareLinkAnimatingOut && "rbq_tooltip_animating_out"
+                    }`}
                   >
                     <IoIosCheckmarkCircle />
                     <p>Link copied!</p>
-                  </StyledTooltipContainer>
+                  </div>
                 ) : null}
-                <StyledShareButton
-                  className="rbq_mobile_link_share_button"
-                  shareTo="link"
+                <span
+                  className="rbq_share_button rbq_link_share_button rbq_mobile_link_share_button"
                   onClick={() => handleShareLinkClicked(copyShareLink)}
                 >
                   <IoIosLink className="rbq_mobile_link_share_icon" />
                   <p className="rbq_mobile_link_share_text">Copy Link</p>
-                </StyledShareButton>
-              </StyledShareLinkButtonOuterContainer>
-            ) : null}
-          </StyledMobileShareLinksList>
-        </StyledResultInnerContainer>
-        <StyledMobileRetakeQuizContainer
-          className="rbq_mobile_retake_container"
+                </span>
+              </div>
+            )}
+          </div>
+        </div>
+        <div
+          className="rbq_mobile_retake_quiz_container"
           onClick={handleRetakeQuiz}
         >
           <GrRefresh className="rbq_mobile_retake_icon" />
           <p className="rbq_mobile_retake_text">Retake Quiz</p>
-        </StyledMobileRetakeQuizContainer>
-      </StyledResultOuterContainer>
+        </div>
+      </Element>
     );
   } else {
     return null;

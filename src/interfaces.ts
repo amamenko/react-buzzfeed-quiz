@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, ReactNode } from "react";
 
 export type Falsy = false | 0 | "" | null | undefined;
 
@@ -91,25 +91,22 @@ export interface QuestionProps {
   onAnswerSelection(): void;
 }
 
-export type BylineType =
-  | {
-      byline: true;
-      bylineAuthor?: string;
-      bylineAuthorLink?: string;
-      bylineAuthorLinkOpenInNewTab?: boolean;
-      bylineAuthorTagline?: string;
-      bylineAvatarImageSrc?: string;
-    }
-  | {
-      byline: false;
-      bylineAuthor: never;
-      bylineAuthorLink: never;
-      bylineAuthorLinkOpenInNewTab: never;
-      bylineAuthorTagline: never;
-      bylineAvatarImageSrc: never;
-    };
+export interface ListItemContainerElementProps {
+  className: string;
+  name: string;
+  children: ReactNode;
+}
 
-export type ReactBuzzFeedQuizProps = BylineType & {
+export type BylineProps = {
+  byline: boolean;
+  bylineAuthor?: string;
+  bylineAuthorLink?: string;
+  bylineAuthorLinkOpenInNewTab?: boolean;
+  bylineAuthorTagline?: string;
+  bylineAvatarImageSrc?: string;
+};
+
+export type ReactBuzzFeedQuizProps = BylineProps & {
   title: string;
   description: string;
   generalBackgroundColor?: string;

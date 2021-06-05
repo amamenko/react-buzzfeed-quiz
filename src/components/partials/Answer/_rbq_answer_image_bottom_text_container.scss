@@ -1,0 +1,15 @@
+.rbq_answer_image_bottom_text_container {
+    width: 100%;
+    margin: 0;
+    -webkit-box-shadow: inset 0 0 0 8px rgb(0 0 0 / 0%);
+    box-shadow: inset 0 0 0 8px rgb(0 0 0 / 0%);
+    color: #222;
+    background: #fff;
+    line-height: 1.3;
+
+    .rbq_selected_answer {
+        color: #fff;
+        background: #0f65ef;
+    }
+}
+

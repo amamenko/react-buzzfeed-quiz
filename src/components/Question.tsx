@@ -1,21 +1,11 @@
-import React, { useEffect, useState, FC } from "react";
-import { StyledAnswerImage } from "./styled/Question/StyledAnswerImage";
-import { StyledAnswerImageAttribution } from "./styled/Question/StyledAnswerImageAttribution";
-import { StyledAnswerImageBottomTextContainer } from "./styled/Question/StyledAnswerImageBottomTextContainer";
-import { StyledAnswerImageText } from "./styled/Question/StyledAnswerImageText";
-import { StyledIndividualAnswerContainer } from "./styled/Question/StyledIndividualAnswerContainer";
-import { StyledIndividualAnswerOuterContainer } from "./styled/Question/StyledIndividualAnswerOuterContainer";
-import { StyledListItemContainer } from "./styled/Question/StyledListItemContainer";
-import { StyledQuestionAdjacentText } from "./styled/Question/StyledQuestionAdjacentText";
-import { StyledQuestionAnswersContainer } from "./styled/Question/StyledQuestionAnswersContainer";
-import { StyledQuestionContainer } from "./styled/Question/StyledQuestionContainer";
-import { StyledQuestionImageAttributionText } from "./styled/Question/StyledQuestionImageAttributionText";
-import { StyledQuestionOverlapText } from "./styled/Question/StyledQuestionOverlapText";
-import { StyledQuestionImageContainer } from "./styled/Question/StyledQuestionImageContainer";
-import { StyledQuestionImage } from "./styled/Question/StyledQuestionImage";
-import { StyledTextfit } from "./styled/Question/StyledTextfit";
-import ScaleText from "react-scale-text";
-import { QuestionType, QuestionProps } from "../interfaces";
+import React, { useEffect, useState, FC, useRef } from "react";
+// import ScaleText from "react-scale-text";
+import { ScrollElement } from "react-scroll";
+import {
+  QuestionType,
+  QuestionProps,
+  ListItemContainerElementProps,
+} from "../interfaces";
 
 const Question: FC<QuestionProps> = (props) => {
   const {
@@ -87,102 +77,141 @@ const Question: FC<QuestionProps> = (props) => {
   const renderOverlapText = (item: QuestionType) => {
     if (item.questionRelativeToImage !== "adjacent") {
       return (
-        <StyledQuestionOverlapText
-          className="rbq_question_overlap_text"
-          backgroundImageSrc={item.backgroundImageSrc}
-          fontColor={
-            item.fontColor
+        <p
+          className={`rbq_question_overlap_text ${
+            item.backgroundImageSrc && "rbq_question_with_bg_image"
+          }`}
+          style={{
+            color: item.fontColor
               ? item.fontColor
               : generalFontColor
               ? generalFontColor
-              : null
-          }
+              : "#fff",
+          }}
         >
           {item.question ? item.question : null}
-        </StyledQuestionOverlapText>
+        </p>
       );
     } else {
       return null;
     }
   };
 
+  const listItemContainerRef = useRef(null);
+
+  const ListItemContainerElement: FC<ListItemContainerElementProps> = (
+    elProps
+  ) => (
+    <li {...elProps} ref={listItemContainerRef}>
+      {elProps.children}
+    </li>
+  );
+
+  const ListItemContainerScrollElement = ScrollElement(
+    ListItemContainerElement
+  );
+
   return (
-    <StyledListItemContainer
-      className="rbq_question"
-      questionIndex={questionIndex}
+    <ListItemContainerScrollElement
+      className={`rbq_question ${questionIndex === 0 && "rbq_first_question"}`}
       name={`Question${questionIndex}`}
     >
       {item.questionRelativeToImage === "adjacent" ? (
-        <StyledQuestionAdjacentText
+        <h2
           className="rbq_question_adjacent_text"
-          fontColor={
-            item.fontColor
+          style={{
+            color: item.fontColor
               ? item.fontColor
               : generalFontColor
               ? generalFontColor
-              : null
-          }
+              : "#000",
+          }}
         >
           {item.question ? item.question : null}
-        </StyledQuestionAdjacentText>
+        </h2>
       ) : null}
       {item.backgroundImageSrc ? (
-        <StyledQuestionImageContainer
-          questionRelativeToImage={item.questionRelativeToImage}
-          imageAttribution={item.imageAttribution}
+        <div
+          className={`rbq_question_image_container ${
+            item.questionRelativeToImage === "adjacent" &&
+            "rbq_question_adjacent_to_image"
+          } ${item.imageAttribution && "rbq_image_attribution"}`}
         >
-          <StyledQuestionImage
+          <img
             className="rbq_question_image"
             src={item.backgroundImageSrc}
             alt={`Question ${questionIndex} Image`}
           />
           {renderOverlapText(item)}
-        </StyledQuestionImageContainer>
+        </div>
       ) : (
-        <StyledQuestionContainer
-          className="rbq_question_inner_container"
-          backgroundColor={
-            item.backgroundColor
+        <div
+          className={`rbq_question_inner_container ${
+            item.questionRelativeToImage === "adjacent" &&
+            "rbq_question_adjacent_to_image"
+          }`}
+          style={{
+            backgroundColor: item.backgroundColor
               ? item.backgroundColor
               : generalBackgroundColor
               ? generalBackgroundColor
-              : null
-          }
-          questionRelativeToImage={item.questionRelativeToImage}
+              : "#000",
+          }}
         >
           {renderOverlapText(item)}
-        </StyledQuestionContainer>
+        </div>
       )}
       {item.backgroundImageSrc && item.imageAttribution ? (
-        <StyledQuestionImageAttributionText className="rbq_question_attribution">
+        <p className="rbq_question_image_attribution_text">
           <i>{item.imageAttribution}</i>
-        </StyledQuestionImageAttributionText>
+        </p>
       ) : null}
 
-      {item.answers ? (
-        Array.isArray(item.answers) && item.answers.length > 0 ? (
-          <StyledQuestionAnswersContainer
-            className="rbq_answers_container"
-            numberOfAnswers={item.answers.length}
-            anyImages={item.answers.some((answer) => answer.backgroundImageSrc)}
-            answerArrangement={item.answerArrangement}
+      {item.answers &&
+        (Array.isArray(item.answers) && item.answers.length > 0 ? (
+          <div
+            className={`rbq_answers_container ${
+              item.answerArrangement === "row" && "rbq_answer_row_arrangement"
+            } ${
+              item.answers.some((answer) => answer.backgroundImageSrc) &&
+              "rbq_answers_contain_images"
+            } ${item.answers.length >= 9 && "rbq_more_than_9_answers"} ${
+              item.answers.length === 3 && "rbq_3_answers"
+            } ${
+              item.answers.length >= 9 ||
+              (item.answers.length % 3 === 0 && item.answers.length % 2 !== 0)
+                ? "rbq_answer_grid_layout"
+                : null
+            }`}
           >
             {item.answers.map((x, answerIndex) => {
+              const questionAnswered = selectedAnswers.some(
+                (el) => el.questionIndex === questionIndex
+              );
+
+              const answerSelected = selectedAnswers.some(
+                (el) =>
+                  el.questionIndex === questionIndex &&
+                  el.answerIndex === answerIndex
+              );
+
+              const actualBackgroundColor = x.backgroundColor
+                ? x.backgroundColor
+                : generalBackgroundColor
+                ? generalBackgroundColor
+                : null;
+
               return (
-                <StyledIndividualAnswerOuterContainer
-                  className="rbq_answer_container"
+                <div
+                  className={`rbq_individual_answer_outer_container ${
+                    resultsAvailable && "rbq_results_available"
+                  } ${
+                    item.answerArrangement === "row" &&
+                    "rbq_answer_row_arrangement"
+                  } ${questionAnswered && "rbq_question_answered"} ${
+                    answerSelected && "rbq_answer_selected"
+                  } ${x.backgroundImageSrc && "rbq_answer_background_image"}`}
                   key={answerIndex}
-                  resultsAvailable={resultsAvailable}
-                  answerArrangement={item.answerArrangement}
-                  answered={selectedAnswers.some(
-                    (el) => el.questionIndex === questionIndex
-                  )}
-                  selected={selectedAnswers.some(
-                    (el) =>
-                      el.questionIndex === questionIndex &&
-                      el.answerIndex === answerIndex
-                  )}
-                  backgroundImageSrc={x.backgroundImageSrc}
                   onMouseEnter={() => changeAnswerHovered(answerIndex)}
                   onMouseLeave={() => changeAnswerHovered(null)}
                   onClick={() =>
@@ -194,114 +223,115 @@ const Question: FC<QuestionProps> = (props) => {
                     )
                   }
                 >
-                  <StyledIndividualAnswerContainer
-                    className="rbq_answer"
-                    numberOfAnswers={item.answers.length}
-                    answerArrangement={item.answerArrangement}
-                    answer={x.answer}
-                    backgroundImageSrc={x.backgroundImageSrc}
-                    resultsAvailable={resultsAvailable}
-                    answered={selectedAnswers.some(
-                      (el) => el.questionIndex === questionIndex
-                    )}
-                    selected={selectedAnswers.some(
-                      (el) =>
-                        el.questionIndex === questionIndex &&
-                        el.answerIndex === answerIndex
-                    )}
-                    backgroundColor={
-                      x.backgroundColor
-                        ? x.backgroundColor
-                        : generalBackgroundColor
-                        ? generalBackgroundColor
-                        : null
-                    }
-                    fontColor={
-                      x.fontColor
-                        ? x.fontColor
-                        : generalFontColor
-                        ? generalFontColor
-                        : null
-                    }
+                  <div
+                    className={`rbq_individual_answer_container ${
+                      item.answerArrangement === "row" &&
+                      "rbq_answer_row_arrangement"
+                    } ${x.backgroundImageSrc && "rbq_answer_background_image"}
+                      ${questionAnswered && "rbq_question_answered"} ${
+                      answerSelected && "rbq_answer_selected"
+                    } ${resultsAvailable && "rbq_results_available"}
+                      ${
+                        item.answers.length >= 9 ||
+                        (item.answers.length % 3 === 0 &&
+                          item.answers.length % 2 !== 0)
+                          ? "rbq_answer_grid_layout"
+                          : null
+                      }
+                    `}
+                    style={{
+                      background:
+                        item.answerArrangement === "row"
+                          ? questionAnswered
+                            ? answerSelected
+                              ? "#0f65ef"
+                              : "#fff"
+                            : "#fff"
+                          : actualBackgroundColor
+                          ? actualBackgroundColor
+                          : x.backgroundImageSrc
+                          ? "none"
+                          : "#000",
+                    }}
                   >
                     {x.backgroundImageSrc &&
                     item.answerArrangement !== "row" ? (
-                      <StyledAnswerImage
+                      <img
                         className="rbq_answer_image"
                         src={x.backgroundImageSrc}
                         alt={`${x.answer} Answer Image`}
                       />
                     ) : null}
 
-                    {x.backgroundImageSrc &&
-                    item.answerArrangement ===
-                      "tile" ? null : item.answerArrangement === "row" ? (
-                      <p className="rbq_answer_text">{x.answer}</p>
+                    {x.backgroundImageSrc ? (
+                      item.answerArrangement === "tile" ? null : (
+                        <p className="rbq_answer_text">{x.answer}</p>
+                      )
                     ) : (
-                      <StyledTextfit
-                        hovered={answerHovered === answerIndex}
-                        fontColor={
-                          x.fontColor
+                      <div
+                        className={`rbq_text_fit ${
+                          answerHovered === answerIndex && "rbq_text_hovered"
+                        } ${resultsAvailable && "rbq_results_available"} ${
+                          item.answerArrangement === "row" &&
+                          "rbq_answer_row_arrangement"
+                        } ${questionAnswered && "rbq_question_answered"} ${
+                          answerSelected && "rbq_answer_selected"
+                        }`}
+                        style={{
+                          color: x.fontColor
                             ? x.fontColor
                             : generalFontColor
                             ? generalFontColor
-                            : null
-                        }
+                            : "#fff",
+                        }}
                       >
-                        <ScaleText>
-                          <p>{x.answer}</p>
-                        </ScaleText>
-                      </StyledTextfit>
-                    )}
-                  </StyledIndividualAnswerContainer>
-                  {x.backgroundImageSrc && item.answerArrangement === "tile" ? (
-                    <StyledAnswerImageBottomTextContainer
-                      className="rbq_answer_image_text_container"
-                      selected={selectedAnswers.some(
-                        (el) =>
-                          el.questionIndex === questionIndex &&
-                          el.answerIndex === answerIndex
-                      )}
-                    >
-                      {x.answer ? (
-                        <StyledAnswerImageText
-                          className="rbq_answer_image_text"
-                          answered={selectedAnswers.some(
-                            (el) => el.questionIndex === questionIndex
-                          )}
-                          selected={selectedAnswers.some(
-                            (el) =>
-                              el.questionIndex === questionIndex &&
-                              el.answerIndex === answerIndex
-                          )}
+                        {/* <ScaleText> */}
+                        <p
+                          style={{
+                            color:
+                              item.answerArrangement === "row"
+                                ? questionAnswered
+                                  ? answerSelected
+                                    ? "#fff"
+                                    : "#000"
+                                  : "#000"
+                                : x.fontColor
+                                ? x.fontColor
+                                : "#fff",
+                          }}
                         >
                           {x.answer}
-                        </StyledAnswerImageText>
-                      ) : null}
-                      {x.imageAttribution ? (
-                        <StyledAnswerImageAttribution
-                          className="rbq_answer_attribution"
-                          answered={selectedAnswers.some(
-                            (el) => el.questionIndex === questionIndex
-                          )}
-                          selected={selectedAnswers.some(
-                            (el) =>
-                              el.questionIndex === questionIndex &&
-                              el.answerIndex === answerIndex
-                          )}
+                        </p>
+                        {/* </ScaleText> */}
+                      </div>
+                    )}
+                  </div>
+                  {x.backgroundImageSrc && item.answerArrangement === "tile" ? (
+                    <div
+                      className={`rbq_answer_image_bottom_text_container ${
+                        answerSelected && "rbq_selected_answer"
+                      }`}
+                    >
+                      {x.answer && (
+                        <p className="rbq_answer_image_text">{x.answer}</p>
+                      )}
+                      {x.imageAttribution && (
+                        <p
+                          className={`rbq_answer_image_attribution ${
+                            questionAnswered && "rbq_question_answered"
+                          } ${answerSelected && "rbq_answer_selected"}`}
                         >
                           {x.imageAttribution}
-                        </StyledAnswerImageAttribution>
-                      ) : null}
-                    </StyledAnswerImageBottomTextContainer>
+                        </p>
+                      )}
+                    </div>
                   ) : null}
-                </StyledIndividualAnswerOuterContainer>
+                </div>
               );
             })}
-          </StyledQuestionAnswersContainer>
-        ) : null
-      ) : null}
-    </StyledListItemContainer>
+          </div>
+        ) : null)}
+    </ListItemContainerScrollElement>
   );
 };
 

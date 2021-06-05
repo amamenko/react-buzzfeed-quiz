@@ -251,6 +251,10 @@ react-buzzfeed-quiz is not affiliated, associated, authorized, endorsed by, or i
 
 The name BuzzFeed as well as related names, marks, emblems/logos, and images are registered trademarks of BuzzFeed, Inc.
 
+## Upcoming Features
+
+Versions 2+ of react-buzzfeed-quiz will include Typescript and SCSS instead of styled-components. The library will also not be bundled with fonts.
+
 ## User Guide
 
 ### API
@@ -262,11 +266,11 @@ The `ReactBuzzFeedQuiz` component accepts the following props:
 | title                        | string        | `""`    | The main title header for the quiz.                                                                                                                                                                          |
 | description                  | string        | `""`    | The sub-heading description for the quiz.                                                                                                                                                                    |
 | byline                       | boolean       | `true`  | Whether or not to render the author information sub-header.                                                                                                                                                  |
-| bylineAuthor                 | string        | `""`    | The name of the quiz creator.                                                                                                                                                                                |
-| bylineAuthorLink             | string        | `""`    | URL to redirect to when byline author name is clicked.                                                                                                                                                       |
-| bylineAuthorLinkOpenInNewTab | boolean       | `false` | Whether or not to open a new tab when redirecting to the byline author link URL upon author name click.                                                                                                      |
-| bylineAuthorTagline          | string        | `""`    | Additional text to render under the author name in the byline.                                                                                                                                               |
-| bylineAvatarImageSrc         | string        | `true`  | URL or local filename to be included in the byline's circular avatar image's `src` attribute.                                                                                                                |
+| bylineAuthor                 | string        | `""`    | The name of the quiz creator. Only takes effect when `byline` prop is set to `true`.                                                                                                                         |
+| bylineAuthorLink             | string        | `""`    | URL to redirect to when byline author name is clicked. Only takes effect when `byline` prop is set to `true`.                                                                                                |
+| bylineAuthorLinkOpenInNewTab | boolean       | `false` | Whether or not to open a new tab when redirecting to the byline author link URL upon author name click. Only takes effect when `byline` prop is set to `true`.                                               |
+| bylineAuthorTagline          | string        | `""`    | Additional text to render under the author name in the byline. Only takes effect when `byline` prop is set to `true`.                                                                                        |
+| bylineAvatarImageSrc         | string        | `true`  | URL or local filename to be included in the byline's circular avatar image's `src` attribute. Only takes effect when `byline` prop is set to `true`.                                                         |
 | generalBackgroundColor       | string        | `""`    | Applies a given color to every question container and every answer container's background. If no color or invalid color is supplied, the default background color is black.                                  |
 | generalFontColor             | string        | `""`    | Applies a given color to every question container and every answer container's font. If no color or invalid color is supplied, the default font color is white.                                              |
 | autoScroll                   | boolean       | `true`  | Whether or not to automatically smooth-scroll the quiz to the next available question upon answer selection, to the result when the quiz is finished, and to the top of the quiz when the quiz is restarted. |
@@ -296,6 +300,7 @@ The `ReactBuzzFeedQuiz` component accepts the following props:
 | backgroundColor         | string        | Applies a given color to only the specific question container's background. This value supersedes the `generalBackgroundColor` prop if supplied to `ReactBuzzFeedQuiz`. If the `generalBackgroundColor` prop is supplied and this value is empty, then the color in `generalBackgroundColor` will be applied. Otherwise, if no color or invalid color is supplied, the default background color is black. |
 | fontColor               | string        | Applies a given color to only the specific question container's font. This value supersedes the `generalFontColor` prop if supplied to `ReactBuzzFeedQuiz`. If the `generalFontColor` prop is supplied and this value is empty, then the color in `generalFontColor` will be applied. Otherwise, if no color or invalid color is supplied, the default font color is white.                               |
 | backgroundImageSrc      | string        | URL or local filename to be included as the background image of the question container. Automatically sets the font color to white and adds a text stroke. Takes precedence over any theme, if supplied.                                                                                                                                                                                                  |
+| imageAttribution        | string        | If background image is supplied, this will add attribution text below the image giving credit to its original source.                                                                                                                                                                                                                                                                                     |
 | answers                 | Array[Object] | An array of answer objects (see Answer Object below).                                                                                                                                                                                                                                                                                                                                                     |
 
 #### Answer Object

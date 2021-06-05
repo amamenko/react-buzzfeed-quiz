@@ -1,13 +1,8 @@
 import React, { FC } from "react";
 import { FaUser } from "react-icons/fa";
-import { StyledAvatar } from "./styled/Byline/StyledAvatar";
-import { StyledAvatarContainer } from "./styled/Byline/StyledAvatarContainer";
-import { StyledBylineAuthorDescriptor } from "./styled/Byline/StyledBylineAuthorDescriptor";
-import { StyledBylineAuthorDescriptorContainer } from "./styled/Byline/StyledBylineAuthorDescriptorContainer";
-import { StyledBylineContainer } from "./styled/Byline/StyledBylineContainer";
-import { BylineType } from "../interfaces";
+import { BylineProps } from "../interfaces";
 
-const Byline: FC<BylineType> = (props) => {
+const Byline: FC<BylineProps> = (props) => {
   const {
     byline,
     bylineAuthor,
@@ -19,23 +14,23 @@ const Byline: FC<BylineType> = (props) => {
 
   if (byline) {
     return (
-      <StyledBylineContainer className="rbq_byline_container">
-        {bylineAuthor ? (
-          <StyledAvatarContainer className="rbq_byline_avatar_container">
+      <div className="rbq_byline_container">
+        {bylineAuthor && (
+          <div className="rbq_avatar_container">
             {bylineAvatarImageSrc ? (
-              <StyledAvatar
-                className="rbq_byline_avatar"
+              <img
+                className="rbq_avatar"
                 alt={bylineAuthor}
                 src={bylineAvatarImageSrc}
               />
             ) : (
-              <FaUser className="rbq_byline_avatar_icon" />
+              <FaUser className="rbq_avatar_icon" />
             )}
-          </StyledAvatarContainer>
-        ) : null}
-        <StyledBylineAuthorDescriptorContainer className="rbq_byline_descriptor_container">
-          {bylineAuthor ? (
-            <StyledBylineAuthorDescriptor className="rbq_byline_author">
+          </div>
+        )}
+        <span className="rbq_byline_author_descriptor_container">
+          {bylineAuthor && (
+            <p className="rbq_byline_author_descriptor rbq_byline_author">
               by{" "}
               {bylineAuthorLink ? (
                 <a
@@ -48,15 +43,15 @@ const Byline: FC<BylineType> = (props) => {
               ) : (
                 <strong>{bylineAuthor}</strong>
               )}
-            </StyledBylineAuthorDescriptor>
-          ) : null}
-          {bylineAuthorTagline ? (
-            <StyledBylineAuthorDescriptor className="rbq_byline_tagline">
+            </p>
+          )}
+          {bylineAuthorTagline && (
+            <p className="rbq_byline_author_descriptor rbq_byline_tagline">
               {bylineAuthorTagline}
-            </StyledBylineAuthorDescriptor>
-          ) : null}
-        </StyledBylineAuthorDescriptorContainer>
-      </StyledBylineContainer>
+            </p>
+          )}
+        </span>
+      </div>
     );
   } else {
     return null;

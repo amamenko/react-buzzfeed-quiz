@@ -1,6 +1,5 @@
 import React, { useState, useEffect, FC } from "react";
-import styled from "styled-components";
-import { scroller } from "react-scroll";
+import { scroller, Element } from "react-scroll";
 import Byline from "./components/Byline";
 import Question from "./components/Question";
 import Result from "./components/Result";
@@ -9,54 +8,6 @@ import {
   ReactBuzzFeedQuizProps,
   ResultType,
 } from "./interfaces";
-
-const StyledOuterQuizContainer = styled.div`
-  font-family: "Proxima Nova";
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-`;
-
-const StyledInnerQuizContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  max-width: 600px;
-  width: 100%;
-  margin-bottom: 3rem;
-`;
-
-const StyledQuizTitle = styled.h1`
-  font-size: 1.625rem;
-  line-height: 1.2;
-  font-weight: 700;
-  text-align: left;
-  margin: 0;
-  padding: 0;
-  margin-bottom: 0.5rem;
-  @media (min-width: 40rem) {
-    font-size: 2.5rem;
-    line-height: 1.025;
-    line-height: 1.05;
-  }
-`;
-
-const StyledQuizDescription = styled.p`
-  font-size: 1.125rem;
-  line-height: 1.2;
-  text-align: left;
-  margin: 0;
-  padding: 0;
-  margin-bottom: 1rem;
-`;
-
-const StyledQuestionListContainer = styled.ol`
-  list-style: none;
-  padding: 0;
-  margin: 0;
-`;
 
 const ReactBuzzFeedQuiz: FC<ReactBuzzFeedQuizProps> = (props) => {
   const {
@@ -164,15 +115,11 @@ const ReactBuzzFeedQuiz: FC<ReactBuzzFeedQuizProps> = (props) => {
 
   return (
     <>
-      <StyledOuterQuizContainer name="Top" className="react_buzzfeed_quiz">
-        <StyledInnerQuizContainer className="rbq_inner_container">
-          {title ? (
-            <StyledQuizTitle className="rbq_title">{title}</StyledQuizTitle>
-          ) : null}
+      <Element name="Top" className="rbq_outer_quiz_container">
+        <div className="rbq_inner_quiz_container">
+          {title ? <h1 className="rbq_quiz_title">{title}</h1> : null}
           {description ? (
-            <StyledQuizDescription className="rbq_description">
-              {description}
-            </StyledQuizDescription>
+            <p className="rbq_quiz_description">{description}</p>
           ) : null}
           <Byline
             byline={byline}
@@ -186,9 +133,9 @@ const ReactBuzzFeedQuiz: FC<ReactBuzzFeedQuizProps> = (props) => {
           {questions ? (
             Array.isArray(questions) && questions.length > 0 ? (
               <>
-                <StyledQuestionListContainer
+                <ol
                   id="main_questions_container"
-                  className="rbq_questions_container"
+                  className="rbq_question_list_container"
                 >
                   {questions.map((item, questionIndex) => {
                     return (
@@ -206,7 +153,7 @@ const ReactBuzzFeedQuiz: FC<ReactBuzzFeedQuizProps> = (props) => {
                       />
                     );
                   })}
-                </StyledQuestionListContainer>
+                </ol>
                 <Result
                   title={title}
                   resultsAvailable={resultsAvailable}
@@ -233,8 +180,8 @@ const ReactBuzzFeedQuiz: FC<ReactBuzzFeedQuizProps> = (props) => {
               </>
             ) : null
           ) : null}
-        </StyledInnerQuizContainer>
-      </StyledOuterQuizContainer>
+        </div>
+      </Element>
     </>
   );
 };
