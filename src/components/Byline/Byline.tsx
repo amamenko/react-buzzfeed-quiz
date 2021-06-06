@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { FaUser } from "react-icons/fa";
-import { BylineProps } from "../interfaces";
+import { BylineProps } from "../../interfaces";
 
 const Byline: FC<BylineProps> = (props) => {
   const {

@@ -44,6 +44,27 @@ export interface ResultProps {
   onRestart?(): void;
 }
 
+// SHARE LINK BUTTON INTERFACES
+export interface FacebookButtonProps {
+  facebookShareLink: string;
+  isMobile?: boolean;
+}
+
+export interface TwitterButtonProps {
+  twitterShareLink: string;
+  twitterShareText: string;
+  twitterShareHashtags: string[];
+  isMobile?: boolean;
+}
+
+export interface CopyLinkButtonProps {
+  shareLinkClicked: boolean;
+  changeShareLinkClicked: Dispatch<SetStateAction<boolean>>;
+  shareLinkAnimatingOut: boolean;
+  copyShareLink: string;
+  isMobile?: boolean;
+}
+
 export type ImageType =
   | {
       backgroundImageSrc?: Falsy;
@@ -55,6 +76,20 @@ export type ImageType =
     };
 
 // ANSWER TYPES/INTERFACES
+export interface AnswersProps {
+  item: QuestionType;
+  selectedAnswers: ISelectedAnswer[];
+  changeSelectedAnswers: Dispatch<SetStateAction<ISelectedAnswer[]>>;
+  answerHovered: number | null;
+  changeAnswerHovered: Dispatch<SetStateAction<number | null>>;
+  questionIndex: number;
+  resultsAvailable: boolean;
+  onAnswerSelection(): void;
+  scrollFunction(element: string, questionIndex: number): void;
+  generalBackgroundColor?: string;
+  generalFontColor?: string;
+}
+
 export type AnswerType = ImageType & {
   answer: string;
   backgroundColor?: string;

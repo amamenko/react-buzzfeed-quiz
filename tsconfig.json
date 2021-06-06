@@ -1,20 +1,21 @@
 {
   "compilerOptions": {
+    "outDir": "./lib/",
     "alwaysStrict": true,
     "sourceMap": false,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "strictPropertyInitialization": true,
     "strictBindCallApply": true,
-    "module": "es2015",
+    "module": "es6",
     "jsx": "react",
     "target": "es5",
+    "allowJs": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "declaration": true,
     "lib": ["dom", "es2017", "es5", "es6", "es7"],
-    "outDir": ".",
     "strict": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
@@ -22,5 +23,5 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true
   },
-  "exclude": ["docs/*", "webpack.config.*", "*.js", "__tests__", "examples"]
+  "exclude": ["lib/*", "webpack.config.*", "example", "images"]
 }

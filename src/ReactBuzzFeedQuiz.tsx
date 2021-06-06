@@ -1,13 +1,14 @@
 import React, { useState, useEffect, FC } from "react";
 import { scroller, Element } from "react-scroll";
-import Byline from "./components/Byline";
-import Question from "./components/Question";
-import Result from "./components/Result";
+import Byline from "./components/Byline/Byline";
+import Question from "./components/Question/Question";
+import Result from "./components/Result/Result";
 import {
   ISelectedAnswer,
   ReactBuzzFeedQuizProps,
   ResultType,
 } from "./interfaces";
+import "./react-buzzfeed-quiz.css";
 
 const ReactBuzzFeedQuiz: FC<ReactBuzzFeedQuizProps> = (props) => {
   const {
