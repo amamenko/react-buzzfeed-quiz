@@ -5,7 +5,6 @@ import { Element } from "react-scroll";
 import FacebookButton from "./ShareButtons/FacebookButton";
 import TwitterButton from "./ShareButtons/TwitterButton";
 import CopyLinkButton from "./ShareButtons/CopyLinkButton";
-import "./result.css";
 
 const Result: FC<ResultProps> = (props) => {
   const {

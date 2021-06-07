@@ -1,7 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "module": "commonjs"
-  },
-  "exclude": ["lib/*", "webpack.config.*", "*.js", "example", "images"]
-}

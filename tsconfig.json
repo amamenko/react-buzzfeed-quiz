@@ -1,27 +1,35 @@
 {
   "compilerOptions": {
-    "outDir": "./lib/",
+    "outDir": "./lib",
     "alwaysStrict": true,
-    "sourceMap": false,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "strictPropertyInitialization": true,
     "strictBindCallApply": true,
-    "module": "es6",
+    "module": "es2015",
     "jsx": "react",
     "target": "es5",
     "allowJs": true,
     "moduleResolution": "node",
-    "experimentalDecorators": true,
     "esModuleInterop": true,
     "declaration": true,
+    "emitDeclarationOnly": true,
+    "removeComments": true,
+    "isolatedModules": true,
+    "experimentalDecorators": true,
     "lib": ["dom", "es2017", "es5", "es6", "es7"],
     "strict": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "resolveJsonModule": true
   },
-  "exclude": ["lib/*", "webpack.config.*", "example", "images"]
+  // "include": ["src/**/*"],
+  "exclude": ["node_modules", "example", "lib", "*.js"]
 }

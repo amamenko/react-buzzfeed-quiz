@@ -6,7 +6,6 @@ import {
   QuestionProps,
 } from "../../interfaces";
 import Answers from "../Answers/Answers";
-import "./question.css";
 
 const Question: FC<QuestionProps> = (props) => {
   const {

@@ -1,0 +1,50 @@
+// React BuzzFeed Quiz Component
+@use "partials/ReactBuzzFeedQuiz/rbq_inner_quiz_container";
+@use "partials/ReactBuzzFeedQuiz/rbq_outer_quiz_container";
+@use "partials/ReactBuzzFeedQuiz/rbq_question_list_container";
+@use "partials/ReactBuzzFeedQuiz/rbq_quiz_description";
+@use "partials/ReactBuzzFeedQuiz/rbq_quiz_title";
+
+// Answers Component
+@use "components/Answers/partials/rbq_answer_image_attribution";
+@use "components/Answers/partials/rbq_answer_image_bottom_text_container";
+@use "components/Answers/partials/rbq_answer_image_text";
+@use "components/Answers/partials/rbq_answer_image";
+@use "components/Answers/partials/rbq_answers_container";
+@use "components/Answers/partials/rbq_individual_answer_container";
+@use "components/Answers/partials/rbq_individual_answer_outer_container";
+
+// Byline Component
+@use "components/Byline/partials/rbq_avatar_container";
+@use "components/Byline/partials/rbq_avatar";
+@use "components/Byline/partials/rbq_byline_author_descriptor_container";
+@use "components/Byline/partials/rbq_byline_author_descriptor";
+@use "components/Byline/partials/rbq_byline_container";
+
+// Question Component
+@use "components/Question/partials/rbq_list_item_container";
+@use "components/Question/partials/rbq_question_adjacent_text";
+@use "components/Question/partials/rbq_question_image_attribution_text";
+@use "components/Question/partials/rbq_question_image_container";
+@use "components/Question/partials/rbq_question_image";
+@use "components/Question/partials/rbq_question_inner_container";
+@use "components/Question/partials/rbq_question_overlap_text";
+@use "components/Question/partials/rbq_text_fit";
+
+// Result Component
+@use "components/Result/partials/rbq_mobile_retake_quiz_container";
+@use "components/Result/partials/rbq_mobile_share_links_container";
+@use "components/Result/partials/rbq_result_attribution_text";
+@use "components/Result/partials/rbq_result_header";
+@use "components/Result/partials/rbq_result_inner_container";
+@use "components/Result/partials/rbq_result_inner_description_container";
+@use "components/Result/partials/rbq_result_inner_description_header";
+@use "components/Result/partials/rbq_result_inner_description";
+@use "components/Result/partials/rbq_result_inner_image_container";
+@use "components/Result/partials/rbq_result_inner_image";
+@use "components/Result/partials/rbq_result_outer_container";
+@use "components/Result/partials/rbq_retake_quiz_container";
+@use "components/Result/partials/rbq_share_button";
+@use "components/Result/partials/rbq_share_link_button_outer_container";
+@use "components/Result/partials/rbq_share_links_container";
+@use "components/Result/partials/rbq_tooltip_container";

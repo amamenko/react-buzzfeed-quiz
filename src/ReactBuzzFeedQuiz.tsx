@@ -8,7 +8,7 @@ import {
   ReactBuzzFeedQuizProps,
   ResultType,
 } from "./interfaces";
-import "./react-buzzfeed-quiz.css";
+import "./main.scss";
 
 const ReactBuzzFeedQuiz: FC<ReactBuzzFeedQuizProps> = (props) => {
   const {
