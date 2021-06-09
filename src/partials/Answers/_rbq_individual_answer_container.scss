@@ -22,10 +22,10 @@
   text-align: center;
 
   p {
-    font-size: null;
+    font-size: medium;
   }
 
-  .rbq_answer_row_arrangement {
+  &.rbq_answer_row_arrangement {
     border-bottom: none;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
@@ -37,18 +37,18 @@
     }
   }
 
-  .rbq_answer_background_image {
+  &.rbq_answer_background_image {
     border-radius: 0;
   }
 
-  .rbq_question_answered {
+  &.rbq_question_answered {
     opacity: 0.6;
     .rbq_answer_selected {
       opacity: 1;
     }
   }
 
-  .rbq_results_available {
+  &.rbq_results_available {
     pointer-events: none;
   }
 
@@ -61,7 +61,7 @@
     z-index: 1;
     padding-bottom: 75.7%;
 
-    .rbq_answer_background_image {
+    &.rbq_answer_background_image {
       display: none;
     }
   }
@@ -80,11 +80,11 @@
   @media (min-width: 40rem) {
     height: 208.73px;
 
-    .rbq_answer_grid_layout {
+    &.rbq_answer_grid_layout {
       height: 194.66px;
     }
 
-    .rbq_answer_row_arrangement {
+    &.rbq_answer_row_arrangement {
       height: 55px;
     }
 
@@ -95,11 +95,11 @@
   @media (min-width: 52rem) {
     height: 204.83px;
 
-    .rbq_answer_grid_layout {
+    &.rbq_answer_grid_layout {
       height: 194.66px;
     }
 
-    .rbq_answer_row_arrangement {
+    &.rbq_answer_row_arrangement {
       height: 55px;
     }
   }
@@ -116,7 +116,7 @@
     width: 100%;
     text-align: center;
 
-    .rbq_answer_row_arrangement {
+    &.rbq_answer_row_arrangement {
       padding-left: 1rem;
       margin: 0;
       right: auto;
@@ -129,9 +129,9 @@
   &:hover {
     cursor: pointer;
 
-    .rbq_question_answered {
+    &.rbq_question_answered {
       cursor: pointer;
-      .rbq_answer_selected {
+      &.rbq_answer_selected {
         cursor: auto;
       }
     }
@@ -140,18 +140,18 @@
       animation-name: bounceClick;
       animation-duration: 0.2s;
 
-      .rbq_question_answered {
+      &.rbq_question_answered {
         animation-name: bounceClick;
-        .rbq_answer_selected {
+        &.rbq_answer_selected {
           animation-name: none;
         }
       }
 
-      .rbq_answer_row_arrangement {
+      &.rbq_answer_row_arrangement {
         animation-name: none;
       }
 
-      .rbq_results_available {
+      &.rbq_results_available {
         animation-name: none;
       }
     }

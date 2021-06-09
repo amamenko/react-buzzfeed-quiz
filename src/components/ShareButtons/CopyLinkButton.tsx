@@ -56,14 +56,16 @@ const CopyLinkButton: FC<CopyLinkButtonProps> = ({
 
   return (
     <div
-      className={`rbq_share_link_button_outer_container ${
-        isMobile && "rbq_mobile_share_link_button_outer_container"
+      className={`${
+        isMobile
+          ? "rbq_mobile_share_link_button_outer_container"
+          : "rbq_share_link_button_outer_container"
       }`}
     >
       {shareLinkClicked && (
         <div
           className={`rbq_tooltip_container rbq_link_share_copied_tooltip ${
-            shareLinkAnimatingOut && "rbq_tooltip_animating_out"
+            shareLinkAnimatingOut ? "rbq_tooltip_animating_out" : ""
           }`}
         >
           <IoIosCheckmarkCircle />
@@ -72,18 +74,22 @@ const CopyLinkButton: FC<CopyLinkButtonProps> = ({
       )}
       <span
         className={`rbq_share_button rbq_link_share_button ${
-          isMobile && "rbq_mobile_link_share_button"
+          isMobile ? "rbq_mobile_link_share_button" : ""
         }`}
         onClick={() => handleShareLinkClicked(copyShareLink)}
       >
         <IoIosLink
-          className={`rbq_link_share_button_icon ${
-            isMobile && "rbq_mobile_link_share_button_icon"
+          className={`${
+            isMobile
+              ? "rbq_mobile_link_share_button_icon"
+              : "rbq_link_share_button_icon"
           }`}
         />
         <p
-          className={`rbq_link_share_button_text ${
-            isMobile && "rbq_mobile_link_share_button_text"
+          className={`${
+            isMobile
+              ? "rbq_mobile_link_share_button_text"
+              : "rbq_link_share_button_text"
           }`}
         >
           Copy Link

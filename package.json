@@ -25,7 +25,6 @@
     "@types/react-scroll": "^1.8.2",
     "babel-loader": "^8.2.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "copy-webpack-plugin": "^9.0.0",
     "css-loader": "^5.2.6",
     "fork-ts-checker-webpack-plugin": "^6.2.10",
     "mini-css-extract-plugin": "^1.6.0",

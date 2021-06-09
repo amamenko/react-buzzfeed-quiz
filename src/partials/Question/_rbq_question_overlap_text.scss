@@ -16,7 +16,7 @@
   font-size: calc(62px / 2);
   -webkit-text-stroke: 0;
 
-  .rbq_question_with_bg_image {
+  &.rbq_question_with_bg_image {
     -webkit-text-stroke: calc(2px / 1.5) #000000;
   }
 

@@ -5,27 +5,27 @@
   grid-template-rows: 1fr 1fr;
   grid-gap: 0.5rem 0.5rem;
 
-  .rbq_more_than_9_answers {
+  &.rbq_more_than_9_answers {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
   }
 
-  .rbq_3_answers {
+  &.rbq_3_answers {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr;
   }
 
-  .rbq_answer_grid_layout {
+  &.rbq_answer_grid_layout {
     grid-gap: 0.75rem 0.75rem;
   }
 
-  .rbq_answers_contain_images {
+  &.rbq_answers_contain_images {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: none;
     grid-gap: 0.5rem 0.5rem;
   }
 
-  .rbq_answer_row_arrangement {
+  &.rbq_answer_row_arrangement {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
   }

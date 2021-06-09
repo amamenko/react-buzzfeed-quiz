@@ -1,22 +1,22 @@
 .rbq_answer_image_text {
-    font-weight: 700; 
-    font-size: 1.125rem;
-    margin: 0;
-    padding: 0.5rem;
-    overflow: hidden;
-    max-width: 100%;
-    opacity: 1;
+  font-weight: 700;
+  font-size: 1.125rem;
+  margin: 0;
+  padding: 0.5rem;
+  overflow: hidden;
+  max-width: 100%;
+  opacity: 1;
 
-    .rbq_question_answered {
-        opacity: 0.6;
+  &.rbq_question_answered {
+    opacity: 0.6;
 
-        .rbq_answer_selected {
-            opacity: 1;
-        }
+    &.rbq_answer_selected {
+      opacity: 1;
     }
+  }
 
-    @media (min-width: 52rem) {
-        padding: 1rem;
-        padding-bottom: 0.5rem;
-    }
+  @media (min-width: 52rem) {
+    padding: 1rem;
+    padding-bottom: 0.5rem;
+  }
 }

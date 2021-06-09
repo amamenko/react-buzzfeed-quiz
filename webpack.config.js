@@ -2,7 +2,6 @@ const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   optimization: {
@@ -47,23 +46,11 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "[name].css",
+      filename: "styles.css",
       chunkFilename: "[id].css",
     }),
     new ForkTsCheckerWebpackPlugin({
       typescript: true,
-    }),
-    new CopyPlugin({
-      patterns: [
-        {
-          from: "*.json",
-          globOptions: {
-            ignore: ["**/package-lock.*"],
-          },
-        },
-        { from: "*.txt" },
-        { from: "*.md" },
-      ],
     }),
   ],
   resolve: {

@@ -6,12 +6,10 @@ import CalmSkyPhoto from "./images/CalmSkyPhoto.jpg";
 import FirstResultCatImage from "./images/FirstResultCatImage.jpg";
 import SecondResultCatImage from "./images/SecondResultCatImage.jpg";
 import ThirdResultCatImage from "./images/ThirdResultCatImage.jpg";
-import ReactBuzzFeedQuiz from "react-buzzfeed-quiz";
 import styled from "styled-components";
 import { FaYarn, FaNpm, FaGithub } from "react-icons/fa";
-import "react-buzzfeed-quiz/ProximaNovaFont.css";
-
-const Quiz = styled(ReactBuzzFeedQuiz)([]);
+import ReactBuzzFeedQuiz from "react-buzzfeed-quiz";
+import "react-buzzfeed-quiz/lib/styles.css";
 
 const StyledNav = styled.div`
   position: fixed;
@@ -193,7 +191,7 @@ const App = () => {
         </code>
       </StyledInstallationInstructions>
 
-      <Quiz
+      <ReactBuzzFeedQuiz
         title={"Wanna See A Demo of React BuzzFeed Quiz?"}
         description={"Here it is, this is the demo."}
         byline={true}

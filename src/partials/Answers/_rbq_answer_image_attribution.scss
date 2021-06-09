@@ -16,14 +16,13 @@
     padding-top: 0;
   }
 
-  .rbq_question_answered {
+  &.rbq_question_answered {
     color: #666;
     opacity: 0.75;
 
-    .rbq_answer_selected {
-        color: #fff;
-        opacity: 1;
+    &.rbq_answer_selected {
+      color: #fff;
+      opacity: 1;
     }
-
   }
 }

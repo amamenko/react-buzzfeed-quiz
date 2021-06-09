@@ -1,73 +1,73 @@
 .rbq_share_button {
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.5rem 0.875rem;
+  margin-right: 0.25rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.5rem;
+  font-size: 0.875rem;
+  min-width: 4rem;
+  max-height: 1.5rem;
+  border-radius: 3px;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: background-color 0.1s ease, border 0.1s ease;
+
+  &.rbq_facebook_share_button {
+    background-color: "#3b5998";
+    border: "1px solid #3b5998";
+
+    &:hover {
+      background-color: "#2d4373";
+      border: "1px solid #2d4373";
+    }
+  }
+
+  &.rbq_twitter_share_button {
+    background-color: "#55acee";
+    border: "1px solid #55acee";
+
+    &:hover {
+      background-color: "#2795e9";
+      border: "1px solid #2795e9";
+    }
+  }
+
+  &.rbq_link_share_button {
+    width: 100%;
+    background-color: "#0f65ef";
+    border: "1px solid #0f65ef";
+
+    &:hover {
+      background-color: "#0c51bf";
+      border: "1px solid #0c51bf";
+    }
+  }
+
+  @media (min-width: 40rem) {
+    padding: 0.2rem 0.625rem;
+    line-height: 1.25rem;
+    margin-bottom: 0;
     width: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-weight: 600;
-    padding: 0.5rem 0.875rem;
-    margin-right: 0.25rem;
-    margin-bottom: 0.5rem;
-    line-height: 1.5rem;
-    font-size: 0.875rem;
-    min-width: 4rem;
-    max-height: 1.5rem;
-    border-radius: 3px;
-    cursor: pointer;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    transition: background-color 0.1s ease, border 0.1s ease;
+  }
 
-    .rbq_facebook_share_button {
-        background-color: "#3b5998";
-        border: "1px solid #3b5998";
-
-        &:hover {
-            background-color: "#2d4373";
-            border: "1px solid #2d4373";
-        }
-    }
-
-    .rbq_twitter_share_button {
-        background-color: "#55acee";
-        border: "1px solid #55acee";
-
-        &:hover {
-            background-color: "#2795e9";
-            border: "1px solid #2795e9";
-        }
-    }
-
-    .rbq_link_share_button {
-        width: 100%;
-        background-color: "#0f65ef";
-        border:  "1px solid #0f65ef";
-
-        &:hover {
-            background-color: "#0c51bf";
-            border: "1px solid #0c51bf";
-        }
-    }
-
+  svg {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.7rem;
+    position: relative;
+    position: relative;
     @media (min-width: 40rem) {
-        padding: 0.2rem 0.625rem;
-        line-height: 1.25rem;
-        margin-bottom: 0;
-        width: auto;
+      top: auto;
+      width: 0.875rem;
+      height: 0.875rem;
+      margin-right: 0.3125rem;
     }
-
-    svg {
-        width: 1rem;
-        height: 1rem;
-        margin-right: 0.7rem;
-        position: relative;
-        position: relative;
-        @media (min-width: 40rem) {
-        top: auto;
-        width: 0.875rem;
-        height: 0.875rem;
-        margin-right: 0.3125rem;
-        }
-    }
+  }
 }

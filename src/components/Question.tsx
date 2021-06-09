@@ -51,15 +51,23 @@ const Question: FC<QuestionProps> = (props) => {
     }
   };
 
-  const listItemContainerRef = useRef(null);
+  let listItemContainerRef = useRef(null);
 
   const ListItemContainerElement: FC<ListItemContainerElementProps> = (
     elProps
-  ) => (
-    <li {...elProps} ref={listItemContainerRef}>
-      {elProps.children}
-    </li>
-  );
+  ) => {
+    const customAttr = { name: elProps.name };
+
+    return (
+      <li
+        {...customAttr}
+        className={elProps.className}
+        ref={listItemContainerRef}
+      >
+        {elProps.children}
+      </li>
+    );
+  };
 
   const ListItemContainerScrollElement = ScrollElement(
     ListItemContainerElement
@@ -67,7 +75,9 @@ const Question: FC<QuestionProps> = (props) => {
 
   return (
     <ListItemContainerScrollElement
-      className={`rbq_question ${questionIndex === 0 && "rbq_first_question"}`}
+      className={`rbq_list_item_container rbq_question ${
+        questionIndex === 0 ? "rbq_first_question" : ""
+      }`}
       name={`Question${questionIndex}`}
     >
       {item.questionRelativeToImage === "adjacent" && (
@@ -87,9 +97,10 @@ const Question: FC<QuestionProps> = (props) => {
       {item.backgroundImageSrc ? (
         <div
           className={`rbq_question_image_container ${
-            item.questionRelativeToImage === "adjacent" &&
-            "rbq_question_adjacent_to_image"
-          } ${item.imageAttribution && "rbq_image_attribution"}`}
+            item.questionRelativeToImage === "adjacent"
+              ? "rbq_question_adjacent_to_image"
+              : ""
+          } ${item.imageAttribution ? "rbq_image_attribution" : ""}`}
         >
           <img
             className="rbq_question_image"
@@ -101,8 +112,9 @@ const Question: FC<QuestionProps> = (props) => {
       ) : (
         <div
           className={`rbq_question_inner_container ${
-            item.questionRelativeToImage === "adjacent" &&
-            "rbq_question_adjacent_to_image"
+            item.questionRelativeToImage === "adjacent"
+              ? "rbq_question_adjacent_to_image"
+              : ""
           }`}
           style={{
             backgroundColor: item.backgroundColor

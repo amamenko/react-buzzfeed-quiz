@@ -16,7 +16,7 @@
     transition: transform 0.1s cubic-bezier(0.64, 0.57, 0.67, 1.53);
   }
 
-  .rbq_answer_row_arrangement {
+  &.rbq_answer_row_arrangement {
     border-bottom: none;
     border-left: none;
     border-right: none;
@@ -33,7 +33,7 @@
     box-shadow: "0px 0px 1px 3px rgb(173 168 168 / 10%)";
     -webkit-box-shadow: "0px 0px 1px 3px rgb(173 168 168 / 10%)";
 
-    .rbq_results_available {
+    &.rbq_results_available {
       pointer-events: none;
       box-shadow: "0 1px 1px rgb(173 168 168 / 10%)";
       -webkit-box-shadow: "0 1px 1px rgb(173 168 168 / 10%)";
@@ -41,10 +41,10 @@
 
     cursor: pointer;
 
-    .rbq_question_answered {
+    &.rbq_question_answered {
       cursor: pointer;
 
-      .rbq_answer_selected {
+      &.rbq_answer_selected {
         cursor: auto;
       }
     }
@@ -52,15 +52,15 @@
     img {
       transform: scale(1.1);
 
-      .rbq_question_answered {
+      &.rbq_question_answered {
         transform: scale(1.1);
 
-        .rbq_answer_selected {
+        &.rbq_answer_selected {
           transform: scale(1);
         }
       }
 
-      .rbq_results_available {
+      &.rbq_results_available {
         transform: scale(1);
       }
 
@@ -71,27 +71,27 @@
       @media (min-width: 900px) {
         transform: scale(1.05);
 
-        .rbq_question_answered {
+        &.rbq_question_answered {
           transform: scale(1.05);
         }
 
-        .rbq_answer_row_arrangement {
+        &.rbq_answer_row_arrangement {
           transform: scale(1.01);
-          .rbq_question_answered {
+          &.rbq_question_answered {
             transform: scale(1.01);
           }
         }
 
-        .rbq_answer_background_image,
-        .rbq_answer_selected,
-        .rbq_results_available {
+        &.rbq_answer_background_image,
+        &.rbq_answer_selected,
+        &.rbq_results_available {
           transform: scale(1);
         }
       }
 
       transition: transform 0.1s cubic-bezier(0.64, 0.57, 0.67, 1.53);
 
-      .rbq_answer_row_arrangement {
+      &.rbq_answer_row_arrangement {
         transition: transform 0.2s cubic-bezier(0, 0.73, 0.31, 1.67);
       }
     }
@@ -100,8 +100,8 @@
       opacity: 1;
       transition: opacity 0.5s ease;
 
-      .rbq_results_available {
-        opacity: null;
+      &.rbq_results_available {
+        opacity: 1;
       }
     }
   }

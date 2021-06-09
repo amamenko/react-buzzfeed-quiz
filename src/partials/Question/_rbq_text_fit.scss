@@ -22,11 +22,11 @@
 
   cursor: pointer;
 
-  .rbq_text_hovered {
+  &.rbq_text_hovered {
     cursor: pointer;
-    .rbq_question_answered {
+    &.rbq_question_answered {
       cursor: pointer;
-      .rbq_answer_selected {
+      &.rbq_answer_selected {
         cursor: auto;
       }
     }
@@ -34,16 +34,16 @@
 
   transform: scale(1);
 
-  .rbq_text_hovered {
+  &.rbq_text_hovered {
     transform: scale(1.05);
 
-    .rbq_question_answered {
+    &.rbq_question_answered {
       transform: scale(1.05);
     }
 
-    .rbq_answer_selected,
-    .rbq_answer_row_arrangement,
-    .rbq_results_available {
+    &.rbq_answer_selected,
+    &.rbq_answer_row_arrangement,
+    &.rbq_results_available {
       transform: scale(1);
     }
   }
@@ -65,16 +65,16 @@
 
     animation-name: none;
 
-    .rbq_text_hovered {
+    &.rbq_text_hovered {
       animation-name: bounceClick;
 
-      .rbq_question_answered {
+      &.rbq_question_answered {
         animation-name: bounceClick;
       }
 
-      .rbq_answer_selected,
-      .rbq_answer_row_arrangement,
-      .rbq_results_available {
+      &.rbq_answer_selected,
+      &.rbq_answer_row_arrangement,
+      &.rbq_results_available {
         animation-name: none;
       }
     }

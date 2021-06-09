@@ -62,17 +62,18 @@ const Answers: FC<AnswersProps> = ({
   return (
     <div
       className={`rbq_answers_container ${
-        item.answerArrangement === "row" && "rbq_answer_row_arrangement"
+        item.answerArrangement === "row" ? "rbq_answer_row_arrangement" : ""
       } ${
-        item.answers.some((answer) => answer.backgroundImageSrc) &&
-        "rbq_answers_contain_images"
-      } ${item.answers.length >= 9 && "rbq_more_than_9_answers"} ${
-        item.answers.length === 3 && "rbq_3_answers"
+        item.answers.some((answer) => answer.backgroundImageSrc)
+          ? "rbq_answers_contain_images"
+          : ""
+      } ${item.answers.length >= 9 ? "rbq_more_than_9_answers" : ""} ${
+        item.answers.length === 3 ? "rbq_3_answers" : ""
       } ${
         item.answers.length >= 9 ||
         (item.answers.length % 3 === 0 && item.answers.length % 2 !== 0)
           ? "rbq_answer_grid_layout"
-          : null
+          : ""
       }`}
     >
       {item.answers.map((x, answerIndex) => {
@@ -94,12 +95,14 @@ const Answers: FC<AnswersProps> = ({
         return (
           <div
             className={`rbq_individual_answer_outer_container ${
-              resultsAvailable && "rbq_results_available"
+              resultsAvailable ? "rbq_results_available" : ""
             } ${
-              item.answerArrangement === "row" && "rbq_answer_row_arrangement"
-            } ${questionAnswered && "rbq_question_answered"} ${
-              answerSelected && "rbq_answer_selected"
-            } ${x.backgroundImageSrc && "rbq_answer_background_image"}`}
+              item.answerArrangement === "row"
+                ? "rbq_answer_row_arrangement"
+                : ""
+            } ${questionAnswered ? "rbq_question_answered" : ""} ${
+              answerSelected ? "rbq_answer_selected" : ""
+            } ${x.backgroundImageSrc ? "rbq_answer_background_image" : ""}`}
             key={answerIndex}
             onMouseEnter={() => changeAnswerHovered(answerIndex)}
             onMouseLeave={() => changeAnswerHovered(null)}
@@ -114,19 +117,18 @@ const Answers: FC<AnswersProps> = ({
           >
             <div
               className={`rbq_individual_answer_container ${
-                item.answerArrangement === "row" && "rbq_answer_row_arrangement"
-              } ${x.backgroundImageSrc && "rbq_answer_background_image"}
-                      ${questionAnswered && "rbq_question_answered"} ${
-                answerSelected && "rbq_answer_selected"
-              } ${resultsAvailable && "rbq_results_available"}
-                      ${
-                        item.answers.length >= 9 ||
-                        (item.answers.length % 3 === 0 &&
-                          item.answers.length % 2 !== 0)
-                          ? "rbq_answer_grid_layout"
-                          : null
-                      }
-                    `}
+                item.answerArrangement === "row"
+                  ? "rbq_answer_row_arrangement"
+                  : ""
+              } ${x.backgroundImageSrc ? "rbq_answer_background_image" : ""}
+                      ${questionAnswered ? "rbq_question_answered" : ""} ${
+                answerSelected ? "rbq_answer_selected" : ""
+              } ${resultsAvailable ? "rbq_results_available" : ""} ${
+                item.answers.length >= 9 ||
+                (item.answers.length % 3 === 0 && item.answers.length % 2 !== 0)
+                  ? "rbq_answer_grid_layout"
+                  : ""
+              }`}
               style={{
                 background:
                   item.answerArrangement === "row"
@@ -157,12 +159,13 @@ const Answers: FC<AnswersProps> = ({
               ) : (
                 <div
                   className={`rbq_text_fit ${
-                    answerHovered === answerIndex && "rbq_text_hovered"
-                  } ${resultsAvailable && "rbq_results_available"} ${
-                    item.answerArrangement === "row" &&
-                    "rbq_answer_row_arrangement"
-                  } ${questionAnswered && "rbq_question_answered"} ${
-                    answerSelected && "rbq_answer_selected"
+                    answerHovered === answerIndex ? "rbq_text_hovered" : ""
+                  } ${resultsAvailable ? "rbq_results_available" : ""} ${
+                    item.answerArrangement === "row"
+                      ? "rbq_answer_row_arrangement"
+                      : ""
+                  } ${questionAnswered ? "rbq_question_answered" : ""} ${
+                    answerSelected ? "rbq_answer_selected" : ""
                   }`}
                   style={{
                     color: x.fontColor
@@ -174,6 +177,7 @@ const Answers: FC<AnswersProps> = ({
                 >
                   {/* <ScaleText> */}
                   <p
+                    className="rbq_answer_text"
                     style={{
                       color:
                         item.answerArrangement === "row"
@@ -196,7 +200,7 @@ const Answers: FC<AnswersProps> = ({
             {x.backgroundImageSrc && item.answerArrangement === "tile" ? (
               <div
                 className={`rbq_answer_image_bottom_text_container ${
-                  answerSelected && "rbq_selected_answer"
+                  answerSelected ? "rbq_selected_answer" : ""
                 }`}
               >
                 {x.answer && (
@@ -205,8 +209,8 @@ const Answers: FC<AnswersProps> = ({
                 {x.imageAttribution && (
                   <p
                     className={`rbq_answer_image_attribution ${
-                      questionAnswered && "rbq_question_answered"
-                    } ${answerSelected && "rbq_answer_selected"}`}
+                      questionAnswered ? "rbq_question_answered" : ""
+                    } ${answerSelected ? "rbq_answer_selected" : ""}`}
                   >
                     {x.imageAttribution}
                   </p>

@@ -38,7 +38,7 @@
 
   animation: fadein 0.2s ease;
 
-  .rbq_tooltip_animating_out {
+  &.rbq_tooltip_animating_out {
     animation: fadeout 0.5s ease;
   }
 

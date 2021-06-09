@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { GrFacebook } from "react-icons/gr"; 
+import { GrFacebook } from "react-icons/gr";
 import FacebookButtonProps from "../../interfaces/Result/ShareButtons/facebook_button.interface";
 
 const FacebookButton: FC<FacebookButtonProps> = ({
@@ -20,7 +20,7 @@ const FacebookButton: FC<FacebookButtonProps> = ({
     >
       <span
         className={`rbq_share_button rbq_facebook_share_button ${
-          isMobile && "rbq_mobile_facebook_share_button"
+          isMobile ? "rbq_mobile_facebook_share_button" : ""
         }`}
       >
         <GrFacebook
