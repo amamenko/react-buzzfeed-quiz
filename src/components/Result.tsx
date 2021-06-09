@@ -1,6 +1,6 @@
 import React, { FC, useMemo } from "react";
 import { GrRefresh } from "react-icons/gr";
-import { ResultProps } from "../../interfaces";
+import ResultProps from "../interfaces/Result/result_props.interface";
 import { Element } from "react-scroll";
 import FacebookButton from "./ShareButtons/FacebookButton";
 import TwitterButton from "./ShareButtons/TwitterButton";

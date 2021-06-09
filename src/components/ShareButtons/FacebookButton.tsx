@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { GrFacebook } from "react-icons/gr";
-import { FacebookButtonProps } from "../../../interfaces";
+import { GrFacebook } from "react-icons/gr"; 
+import FacebookButtonProps from "../../interfaces/Result/ShareButtons/facebook_button.interface";
 
 const FacebookButton: FC<FacebookButtonProps> = ({
   facebookShareLink,

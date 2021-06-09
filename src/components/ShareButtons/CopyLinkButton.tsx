@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { IoIosCheckmarkCircle, IoIosLink } from "react-icons/io";
-import { CopyLinkButtonProps } from "../../../interfaces";
+import CopyLinkButtonProps from "../../interfaces/Result/ShareButtons/copy_link_button.interface";
 
 const CopyLinkButton: FC<CopyLinkButtonProps> = ({
   shareLinkClicked,

@@ -15,7 +15,6 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "removeComments": true,
-    "isolatedModules": true,
     "experimentalDecorators": true,
     "lib": ["dom", "es2017", "es5", "es6", "es7"],
     "strict": true,
@@ -30,6 +29,5 @@
     "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true
   },
-  // "include": ["src/**/*"],
   "exclude": ["node_modules", "example", "lib", "*.js"]
 }

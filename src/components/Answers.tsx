@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { AnswersProps } from "../../interfaces";
+import AnswersProps from "../interfaces/Answers/answers_props.interface";
 // import ScaleText from "react-scale-text";
 
 const Answers: FC<AnswersProps> = ({

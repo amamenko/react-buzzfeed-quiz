@@ -1,11 +1,9 @@
 import React, { useEffect, useState, FC, useRef } from "react";
 import { ScrollElement } from "react-scroll";
-import {
-  QuestionType,
-  ListItemContainerElementProps,
-  QuestionProps,
-} from "../../interfaces";
-import Answers from "../Answers/Answers";
+import QuestionType from "../interfaces/Question/question.interface";
+import QuestionProps from "../interfaces/Question/question_props.interface";
+import ListItemContainerElementProps from "../interfaces/Question/list_item.interface";
+import Answers from "./Answers";
 
 const Question: FC<QuestionProps> = (props) => {
   const {

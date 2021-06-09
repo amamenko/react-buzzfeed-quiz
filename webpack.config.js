@@ -2,6 +2,7 @@ const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   optimization: {
@@ -10,17 +11,16 @@ module.exports = {
   mode: "production",
   entry: {
     ReactBuzzFeedQuiz: "./src/ReactBuzzFeedQuiz.tsx",
-    interfaces: "./src/interfaces.ts",
-    "./components/Answers/Answers": "./src/components/Answers/Answers.tsx",
-    "./components/Byline/Byline": "./src/components/Byline/Byline.tsx",
-    "./components/Question/Question": "./src/components/Question/Question.tsx",
-    "./components/Result/Result": "./src/components/Result/Result.tsx",
-    "./components/Result/ShareButtons/CopyLinkButton":
-      "./src/components/Result/ShareButtons/CopyLinkButton.tsx",
-    "./components/Result/ShareButtons/FacebookButton":
-      "./src/components/Result/ShareButtons/FacebookButton.tsx",
-    "./components/Result/ShareButtons/TwitterButton":
-      "./src/components/Result/ShareButtons/TwitterButton.tsx",
+    "./components/Answers": "./src/components/Answers.tsx",
+    "./components/Byline": "./src/components/Byline.tsx",
+    "./components/Question": "./src/components/Question.tsx",
+    "./components/Result": "./src/components/Result.tsx",
+    "./components/ShareButtons/CopyLinkButton":
+      "./src/components/ShareButtons/CopyLinkButton.tsx",
+    "./components/ShareButtons/FacebookButton":
+      "./src/components/ShareButtons/FacebookButton.tsx",
+    "./components/ShareButtons/TwitterButton":
+      "./src/components/ShareButtons/TwitterButton.tsx",
   },
   output: {
     path: path.resolve(__dirname, "lib"),
@@ -52,6 +52,18 @@ module.exports = {
     }),
     new ForkTsCheckerWebpackPlugin({
       typescript: true,
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: "*.json",
+          globOptions: {
+            ignore: ["**/package-lock.*"],
+          },
+        },
+        { from: "*.txt" },
+        { from: "*.md" },
+      ],
     }),
   ],
   resolve: {
