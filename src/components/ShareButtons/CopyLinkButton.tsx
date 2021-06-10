@@ -76,7 +76,11 @@ const CopyLinkButton: FC<CopyLinkButtonProps> = ({
         className={`rbq_share_button rbq_link_share_button ${
           isMobile ? "rbq_mobile_link_share_button" : ""
         }`}
-        onClick={() => handleShareLinkClicked(copyShareLink)}
+        onClick={() => {
+          if (copyShareLink) {
+            handleShareLinkClicked(copyShareLink);
+          }
+        }}
       >
         <IoIosLink
           className={`${

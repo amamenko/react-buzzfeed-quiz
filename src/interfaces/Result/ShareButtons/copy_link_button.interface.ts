@@ -4,7 +4,7 @@ interface CopyLinkButtonProps {
   shareLinkClicked: boolean;
   changeShareLinkClicked: Dispatch<SetStateAction<boolean>>;
   shareLinkAnimatingOut: boolean;
-  copyShareLink: string;
+  copyShareLink?: string;
   isMobile?: boolean;
 }
 

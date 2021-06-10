@@ -2,25 +2,25 @@ import BylineProps from "../Byline/byline_props.interface";
 import QuestionType from "../Question/question.interface";
 import ResultType from "../Result/result.interface";
 
-type ReactBuzzFeedQuizProps = BylineProps & {
+type BuzzFeedQuizProps = BylineProps & {
   title: string;
   description: string;
   generalBackgroundColor?: string;
   generalFontColor?: string;
   autoScroll: boolean;
   facebookShareButton: boolean;
-  facebookShareLink: string;
+  facebookShareLink?: string;
   twitterShareButton: boolean;
-  twitterShareLink: string;
-  twitterShareText: string;
-  twitterShareHashtags: string[];
+  twitterShareLink?: string;
+  twitterShareText?: string;
+  twitterShareHashtags?: string[];
   copyShareButton: boolean;
-  copyShareLink: string;
-  onResult(): void;
-  onAnswerSelection(): void;
-  onRestart(): void;
+  copyShareLink?: string;
+  onResult?(): void;
+  onAnswerSelection?(): void;
+  onRestart?(): void;
   questions: QuestionType[];
   results: ResultType[];
 };
 
-export default ReactBuzzFeedQuizProps;
+export default BuzzFeedQuizProps;

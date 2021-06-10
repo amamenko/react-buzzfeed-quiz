@@ -1,13 +1,13 @@
-import Falsy from "../ReactBuzzFeedQuiz/falsy.interface";
+import Falsy from "../BuzzFeedQuiz/falsy.interface";
 
 type ResultImageType =
-    | {
-        resultImageSrc?: Falsy;
-        imageAttribution?: never;
+  | {
+      resultImageSrc?: Falsy;
+      imageAttribution?: never;
     }
-    | {
-        resultImageSrc?: string;
-        imageAttribution?: string;
+  | {
+      resultImageSrc?: string;
+      imageAttribution?: string;
     };
 
 export default ResultImageType;

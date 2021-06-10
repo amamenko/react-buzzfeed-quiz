@@ -1,5 +1,5 @@
 interface FacebookButtonProps {
-  facebookShareLink: string;
+  facebookShareLink?: string;
   isMobile?: boolean;
 }
 

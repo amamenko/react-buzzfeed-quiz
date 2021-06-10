@@ -1,4 +1,4 @@
-import ImageType from "../ReactBuzzFeedQuiz/image.interface";
+import ImageType from "../BuzzFeedQuiz/image.interface";
 import AnswerType from "../Answers/answer.interface";
 
 type QuestionType = ImageType & {

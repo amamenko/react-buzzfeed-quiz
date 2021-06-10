@@ -1,7 +1,7 @@
 interface TwitterButtonProps {
-  twitterShareLink: string;
-  twitterShareText: string;
-  twitterShareHashtags: string[];
+  twitterShareLink?: string;
+  twitterShareText?: string;
+  twitterShareHashtags?: string[];
   isMobile?: boolean;
 }
 

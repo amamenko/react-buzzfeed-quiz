@@ -2,7 +2,7 @@
   "name": "react-buzzfeed-quiz",
   "version": "1.0.11",
   "description": "React-friendly BuzzFeed Quiz Module",
-  "main": "./lib/ReactBuzzFeedQuiz.js",
+  "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "private": false,
   "dependencies": {

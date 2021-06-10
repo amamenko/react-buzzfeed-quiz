@@ -3,12 +3,12 @@ import { scroller, Element } from "react-scroll";
 import Byline from "./components/Byline";
 import Question from "./components/Question";
 import Result from "./components/Result";
-import ReactBuzzFeedQuizProps from "./interfaces/ReactBuzzFeedQuiz/react_buzzfeed_quiz.interface";
+import BuzzFeedQuizProps from "./interfaces/BuzzFeedQuiz/buzzfeed_quiz.interface";
 import ISelectedAnswer from "./interfaces/Answers/selected_answer.interface";
 import ResultType from "./interfaces/Result/result.interface";
 import "./main.scss";
 
-const ReactBuzzFeedQuiz: FC<ReactBuzzFeedQuizProps> = (props) => {
+const BuzzFeedQuiz: FC<BuzzFeedQuizProps> = (props) => {
   const {
     title,
     description,
@@ -185,7 +185,7 @@ const ReactBuzzFeedQuiz: FC<ReactBuzzFeedQuizProps> = (props) => {
   );
 };
 
-ReactBuzzFeedQuiz.defaultProps = {
+BuzzFeedQuiz.defaultProps = {
   title: "",
   description: "",
   byline: true,
@@ -212,4 +212,4 @@ ReactBuzzFeedQuiz.defaultProps = {
   results: [],
 };
 
-export default ReactBuzzFeedQuiz;
+export default BuzzFeedQuiz;

@@ -8,7 +8,7 @@ import SecondResultCatImage from "./images/SecondResultCatImage.jpg";
 import ThirdResultCatImage from "./images/ThirdResultCatImage.jpg";
 import styled from "styled-components";
 import { FaYarn, FaNpm, FaGithub } from "react-icons/fa";
-import ReactBuzzFeedQuiz from "react-buzzfeed-quiz";
+import { BuzzFeedQuiz } from "react-buzzfeed-quiz";
 import "react-buzzfeed-quiz/lib/styles.css";
 
 const StyledNav = styled.div`
@@ -191,7 +191,7 @@ const App = () => {
         </code>
       </StyledInstallationInstructions>
 
-      <ReactBuzzFeedQuiz
+      <BuzzFeedQuiz
         title={"Wanna See A Demo of React BuzzFeed Quiz?"}
         description={"Here it is, this is the demo."}
         byline={true}
