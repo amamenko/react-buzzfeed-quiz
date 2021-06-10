@@ -259,7 +259,7 @@ The name BuzzFeed as well as related names, marks, emblems/logos, and images are
 
 ## Upcoming Features
 
-Versions 2+ of react-buzzfeed-quiz will include [Typescript](https://www.npmjs.com/package/typescript) and will not use styled-components. Instead, users will be able to include a CSS stylesheet in their app with all of the necessary quiz styles. The library will also not be bundled with fonts.
+Versions 2+ of react-buzzfeed-quiz will include [Typescript](https://www.npmjs.com/package/typescript) support and will not use styled-components. Instead, users will be able to include a CSS stylesheet in their app with all of the necessary quiz styles. The package will also not be bundled with fonts. The main BuzzFeed component will also exported as a named export and not a default export.
 
 ## User Guide
 
