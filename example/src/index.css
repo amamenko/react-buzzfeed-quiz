@@ -1,9 +1,130 @@
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("./assets/fonts/ProximaNovaT-Thin.woff") format("woff"),
+    url("./assets/fonts/ProximaNovaT-Thin.ttf") format("truetype"),
+    url("./assets/fonts/ProximaNovaT-Thin.eot") format("embedded-opentype");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("./assets/fonts/ProximaNova-ThinIt.woff") format("woff"),
+    url("./assets/fonts/ProximaNova-ThinIt.ttf") format("truetype"),
+    url("./assets/fonts/ProximaNova-ThinIt.eot") format("embedded-opentype");
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("./assets/fonts/ProximaNova-Light.woff") format("woff"),
+    url("./assets/fonts/ProximaNova-Light.ttf") format("truetype"),
+    url("./assets/fonts/ProximaNova-Light.eot") format("embedded-opentype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("./assets/fonts/ProximaNova-Semibold.woff") format("woff"),
+    url("./assets/fonts/ProximaNova-Semibold.ttf") format("truetype"),
+    url("./assets/fonts/ProximaNova-Semibold.eot") format("embedded-opentype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("./assets/fonts/ProximaNova-SemiboldIt.woff") format("woff"),
+    url("./assets/fonts/ProximaNova-SemiboldIt.ttf") format("truetype"),
+    url("./assets/fonts/ProximaNova-SemiboldIt.eot") format("embedded-opentype");
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("./assets/fonts/ProximaNova-Extrabld.woff") format("woff"),
+    url("./assets/fonts/ProximaNova-Extrabld.ttf") format("truetype"),
+    url("./assets/fonts/ProximaNova-Extrabld.eot") format("embedded-opentype");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("./assets/fonts/ProximaNova-Regular.woff") format("woff"),
+    url("./assets/fonts/ProximaNova-Regular.ttf") format("truetype"),
+    url("./assets/fonts/ProximaNova-Regular.eot") format("embedded-opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("./assets/fonts/ProximaNova-RegularIt.woff") format("woff"),
+    url("./assets/fonts/ProximaNova-RegularIt.ttf") format("truetype"),
+    url("./assets/fonts/ProximaNova-RegularIt.eot") format("embedded-opentype");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("./assets/fonts/ProximaNova-Black.woff") format("woff"),
+    url("./assets/fonts/ProximaNova-Black.ttf") format("truetype"),
+    url("./assets/fonts/ProximaNova-Black.eot") format("embedded-opentype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("./assets/fonts/ProximaNova-Bold.woff") format("woff"),
+    url("./assets/fonts/ProximaNova-Bold.ttf") format("truetype"),
+    url("./assets/fonts/ProximaNova-Bold.eot") format("embedded-opentype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("./assets/fonts/ProximaNova-BoldIt.woff") format("woff"),
+    url("./assets/fonts/ProximaNova-BoldIt.ttf") format("truetype"),
+    url("./assets/fonts/ProximaNova-BoldIt.eot") format("embedded-opentype");
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("./assets/fonts/ProximaNova-ExtrabldIt.woff") format("woff"),
+    url("./assets/fonts/ProximaNova-ExtrabldIt.ttf") format("truetype"),
+    url("./assets/fonts/ProximaNova-ExtrabldIt.eot") format("embedded-opentype");
+  font-weight: 800;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("./assets/fonts/ProximaNova-BlackIt.woff") format("woff"),
+    url("./assets/fonts/ProximaNova-BlackIt.ttf") format("truetype"),
+    url("./assets/fonts/ProximaNova-BlackIt.eot") format("embedded-opentype");
+  font-weight: 900;
+  font-style: italic;
+}
+
 body {
   font-family: "Proxima Nova";
   margin: 0;
   padding: 0;
 }
 
-.react_buzzfeed_quiz {
+h1 {
+  font-weight: bold;
+}
+
+.rbq_outer_quiz_container {
   margin-top: 1rem;
 }

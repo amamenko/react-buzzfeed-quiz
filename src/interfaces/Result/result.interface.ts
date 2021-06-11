@@ -3,7 +3,7 @@ import ResultImageType from "./result_image.interface";
 type ResultType = ResultImageType & {
   title: string;
   description: string;
-  onResult?(): void;
+  onResult?: () => void;
   resultID: number;
 };
 

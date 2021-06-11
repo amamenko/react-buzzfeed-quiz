@@ -4,7 +4,7 @@ type AnswerType = ImageType & {
   answer: string;
   backgroundColor?: string;
   fontColor?: string;
-  onAnswerSelection?(): void;
+  onAnswerSelection?: () => void;
   resultID: number;
 };
 

@@ -11,7 +11,7 @@ interface QuestionProps {
   selectedAnswers: ISelectedAnswer[];
   changeSelectedAnswers: Dispatch<SetStateAction<ISelectedAnswer[]>>;
   scrollFunction(element: string, questionIndex: number): void;
-  onAnswerSelection?(): void;
+  onAnswerSelection?: () => void;
 }
 
 export default QuestionProps;

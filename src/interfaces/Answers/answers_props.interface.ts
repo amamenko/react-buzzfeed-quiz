@@ -10,7 +10,7 @@ interface AnswersProps {
   changeAnswerHovered: Dispatch<SetStateAction<number | null>>;
   questionIndex: number;
   resultsAvailable: boolean;
-  onAnswerSelection(): void;
+  onAnswerSelection?: () => void;
   scrollFunction(element: string, questionIndex: number): void;
   generalBackgroundColor?: string;
   generalFontColor?: string;

@@ -16,9 +16,9 @@ type BuzzFeedQuizProps = BylineProps & {
   twitterShareHashtags?: string[];
   copyShareButton: boolean;
   copyShareLink?: string;
-  onResult?(): void;
-  onAnswerSelection?(): void;
-  onRestart?(): void;
+  onResult?: () => void;
+  onAnswerSelection?: () => void;
+  onRestart?: () => void;
   questions: QuestionType[];
   results: ResultType[];
 };

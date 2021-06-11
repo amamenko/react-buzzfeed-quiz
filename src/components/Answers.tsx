@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import AnswersProps from "../interfaces/Answers/answers_props.interface";
-// import ScaleText from "react-scale-text";
+import ScaleText from "react-scale-text";
 
 const Answers: FC<AnswersProps> = ({
   item,
@@ -148,25 +148,19 @@ const Answers: FC<AnswersProps> = ({
                 <img
                   className="rbq_answer_image"
                   src={x.backgroundImageSrc}
-                  alt={`${x.answer} Answer Image`}
+                  alt={`${x.answer} answer image`}
                 />
               ) : null}
 
-              {x.backgroundImageSrc ? (
-                item.answerArrangement === "tile" ? null : (
-                  <p className="rbq_answer_text">{x.answer}</p>
-                )
-              ) : (
+              {item.answerArrangement === "row" ? (
+                <p className="rbq_answer_text">{x.answer}</p>
+              ) : x.backgroundImageSrc ? null : (
                 <div
                   className={`rbq_text_fit ${
                     answerHovered === answerIndex ? "rbq_text_hovered" : ""
-                  } ${resultsAvailable ? "rbq_results_available" : ""} ${
-                    item.answerArrangement === "row"
-                      ? "rbq_answer_row_arrangement"
-                      : ""
-                  } ${questionAnswered ? "rbq_question_answered" : ""} ${
-                    answerSelected ? "rbq_answer_selected" : ""
-                  }`}
+                  } ${resultsAvailable ? "rbq_results_available" : ""}   ${
+                    questionAnswered ? "rbq_question_answered" : ""
+                  } ${answerSelected ? "rbq_answer_selected" : ""}`}
                   style={{
                     color: x.fontColor
                       ? x.fontColor
@@ -175,25 +169,16 @@ const Answers: FC<AnswersProps> = ({
                       : "#fff",
                   }}
                 >
-                  {/* <ScaleText> */}
-                  <p
-                    className="rbq_answer_text"
-                    style={{
-                      color:
-                        item.answerArrangement === "row"
-                          ? questionAnswered
-                            ? answerSelected
-                              ? "#fff"
-                              : "#000"
-                            : "#000"
-                          : x.fontColor
-                          ? x.fontColor
-                          : "#fff",
-                    }}
-                  >
-                    {x.answer}
-                  </p>
-                  {/* </ScaleText> */}
+                  <ScaleText>
+                    <p
+                      className="rbq_answer_text"
+                      style={{
+                        color: x.fontColor ? x.fontColor : "#fff",
+                      }}
+                    >
+                      {x.answer}
+                    </p>
+                  </ScaleText>
                 </div>
               )}
             </div>

@@ -22,8 +22,8 @@ interface ResultProps {
   changeResultsAvailable: Dispatch<SetStateAction<boolean>>;
   changeSelectedAnswers: Dispatch<SetStateAction<ISelectedAnswer[]>>;
   changeFinalResult: Dispatch<SetStateAction<ResultType[]>>;
-  onResult?(): void;
-  onRestart?(): void;
+  onResult?: () => void;
+  onRestart?: () => void;
 }
 
 export default ResultProps;

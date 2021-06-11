@@ -1,0 +1,21 @@
+.logo_spinner_container {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(-10deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.react_buzzfeed_quiz_logo {
+  animation: logo-spin infinite 10s linear;
+  height: 500px;
+}
