@@ -11,6 +11,7 @@ module.exports = {
   entry: {
     BuzzFeedQuiz: "./src/BuzzFeedQuiz.tsx",
     index: "./src/index.ts",
+    TextFit: "./src/TextFit.tsx",
     "./components/Answers": "./src/components/Answers.tsx",
     "./components/Byline": "./src/components/Byline.tsx",
     "./components/Question": "./src/components/Question.tsx",

@@ -20,33 +20,32 @@
   transition: background-color 0.1s ease, border 0.1s ease;
 
   &.rbq_facebook_share_button {
-    background-color: "#3b5998";
-    border: "1px solid #3b5998";
+    background-color: #3b5998;
+    border: 1px solid #3b5998;
 
     &:hover {
-      background-color: "#2d4373";
-      border: "1px solid #2d4373";
+      background-color: #2d4373;
+      border: 1px solid #2d4373;
     }
   }
 
   &.rbq_twitter_share_button {
-    background-color: "#55acee";
-    border: "1px solid #55acee";
+    background-color: #55acee;
+    border: 1px solid #55acee;
 
     &:hover {
-      background-color: "#2795e9";
-      border: "1px solid #2795e9";
+      background-color: #2795e9;
+      border: 1px solid #2795e9;
     }
   }
 
   &.rbq_link_share_button {
-    width: 100%;
-    background-color: "#0f65ef";
-    border: "1px solid #0f65ef";
+    background-color: #0f65ef;
+    border: 1px solid #0f65ef;
 
     &:hover {
-      background-color: "#0c51bf";
-      border: "1px solid #0c51bf";
+      background-color: #0c51bf;
+      border: 1px solid #0c51bf;
     }
   }
 

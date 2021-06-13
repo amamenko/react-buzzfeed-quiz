@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { GrTwitter } from "react-icons/gr";
 import TwitterButtonProps from "../../interfaces/Result/ShareButtons/twitter_button.interface";
 

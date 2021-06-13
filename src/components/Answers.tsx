@@ -1,6 +1,6 @@
-import React, { FC } from "react";
+import { FC, useState } from "react";
 import AnswersProps from "../interfaces/Answers/answers_props.interface";
-import ScaleText from "react-scale-text";
+import TextFit from "../TextFit";
 
 const Answers: FC<AnswersProps> = ({
   item,
@@ -15,6 +15,9 @@ const Answers: FC<AnswersProps> = ({
   generalBackgroundColor,
   generalFontColor,
 }) => {
+  const [outerContainerEl, changeOuterContainerEl] =
+    useState<HTMLDivElement | null>(null);
+
   const handleAnswerSelection = (
     questionIndex: number,
     answerIndex: number,
@@ -114,6 +117,7 @@ const Answers: FC<AnswersProps> = ({
                 x.onAnswerSelection
               )
             }
+            ref={(el) => changeOuterContainerEl(el)}
           >
             <div
               className={`rbq_individual_answer_container ${
@@ -169,16 +173,18 @@ const Answers: FC<AnswersProps> = ({
                       : "#fff",
                   }}
                 >
-                  <ScaleText>
-                    <p
-                      className="rbq_answer_text"
-                      style={{
-                        color: x.fontColor ? x.fontColor : "#fff",
-                      }}
-                    >
-                      {x.answer}
-                    </p>
-                  </ScaleText>
+                  <TextFit
+                    className="rbq_answer_text"
+                    min={0}
+                    max={50}
+                    capAt={100}
+                    style={{
+                      color: x.fontColor ? x.fontColor : "#fff",
+                    }}
+                    outerContainerEl={outerContainerEl}
+                  >
+                    {x.answer}
+                  </TextFit>
                 </div>
               )}
             </div>

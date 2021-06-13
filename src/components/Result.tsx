@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from "react";
+import { FC, useMemo } from "react";
 import { GrRefresh } from "react-icons/gr";
 import ResultProps from "../interfaces/Result/result_props.interface";
 import { Element } from "react-scroll";

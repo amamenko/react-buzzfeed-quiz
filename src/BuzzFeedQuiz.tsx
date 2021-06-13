@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FC } from "react";
+import { useState, useEffect, FC } from "react";
 import { scroller, Element } from "react-scroll";
 import Byline from "./components/Byline";
 import Question from "./components/Question";

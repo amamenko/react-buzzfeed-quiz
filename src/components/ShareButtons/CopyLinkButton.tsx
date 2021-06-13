@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { IoIosCheckmarkCircle, IoIosLink } from "react-icons/io";
 import CopyLinkButtonProps from "../../interfaces/Result/ShareButtons/copy_link_button.interface";
 

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { GrFacebook } from "react-icons/gr";
 import FacebookButtonProps from "../../interfaces/Result/ShareButtons/facebook_button.interface";
 

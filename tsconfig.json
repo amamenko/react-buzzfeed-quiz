@@ -7,7 +7,7 @@
     "strictPropertyInitialization": true,
     "strictBindCallApply": true,
     "module": "es2015",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "target": "es5",
     "allowJs": true,
     "moduleResolution": "node",

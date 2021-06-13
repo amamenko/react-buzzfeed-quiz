@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { FaUser } from "react-icons/fa";
 import BylineProps from "../interfaces/Byline/byline_props.interface";
 

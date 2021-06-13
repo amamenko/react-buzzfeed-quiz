@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FC, useRef } from "react";
+import { useEffect, useState, FC, useRef } from "react";
 import { ScrollElement } from "react-scroll";
 import QuestionType from "../interfaces/Question/question.interface";
 import QuestionProps from "../interfaces/Question/question_props.interface";
