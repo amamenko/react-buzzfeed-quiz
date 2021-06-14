@@ -1,4 +1,4 @@
-import { useEffect, useState, FC, useRef } from "react";
+import { useState, FC, useRef } from "react";
 import { ScrollElement } from "react-scroll";
 import QuestionType from "../interfaces/Question/question.interface";
 import QuestionProps from "../interfaces/Question/question_props.interface";
@@ -19,14 +19,6 @@ const Question: FC<QuestionProps> = (props) => {
   } = props;
 
   const [answerHovered, changeAnswerHovered] = useState<number | null>(null);
-
-  // Necessary for ScaleText to refresh font-size right after component mount
-  useEffect(() => {
-    setTimeout(() => {
-      changeAnswerHovered(0);
-      changeAnswerHovered(null);
-    }, 400);
-  }, []);
 
   const renderOverlapText = (item: QuestionType) => {
     if (item.questionRelativeToImage !== "adjacent") {

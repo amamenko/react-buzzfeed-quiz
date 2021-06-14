@@ -1,5 +1,6 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import AnswersProps from "../interfaces/Answers/answers_props.interface";
+import { useResizeDetector } from "react-resize-detector";
 import TextFit from "../TextFit";
 
 const Answers: FC<AnswersProps> = ({
@@ -15,8 +16,7 @@ const Answers: FC<AnswersProps> = ({
   generalBackgroundColor,
   generalFontColor,
 }) => {
-  const [outerContainerEl, changeOuterContainerEl] =
-    useState<HTMLDivElement | null>(null);
+  const { width, ref } = useResizeDetector();
 
   const handleAnswerSelection = (
     questionIndex: number,
@@ -62,6 +62,10 @@ const Answers: FC<AnswersProps> = ({
     }
   };
 
+  const gridLayout =
+    item.answers.length >= 9 ||
+    (item.answers.length % 3 === 0 && item.answers.length % 2 !== 0);
+
   return (
     <div
       className={`rbq_answers_container ${
@@ -72,12 +76,7 @@ const Answers: FC<AnswersProps> = ({
           : ""
       } ${item.answers.length >= 9 ? "rbq_more_than_9_answers" : ""} ${
         item.answers.length === 3 ? "rbq_3_answers" : ""
-      } ${
-        item.answers.length >= 9 ||
-        (item.answers.length % 3 === 0 && item.answers.length % 2 !== 0)
-          ? "rbq_answer_grid_layout"
-          : ""
-      }`}
+      } ${gridLayout ? "rbq_answer_grid_layout" : ""}`}
     >
       {item.answers.map((x, answerIndex) => {
         const questionAnswered = selectedAnswers.some(
@@ -117,7 +116,7 @@ const Answers: FC<AnswersProps> = ({
                 x.onAnswerSelection
               )
             }
-            ref={(el) => changeOuterContainerEl(el)}
+            ref={ref}
           >
             <div
               className={`rbq_individual_answer_container ${
@@ -128,10 +127,7 @@ const Answers: FC<AnswersProps> = ({
                       ${questionAnswered ? "rbq_question_answered" : ""} ${
                 answerSelected ? "rbq_answer_selected" : ""
               } ${resultsAvailable ? "rbq_results_available" : ""} ${
-                item.answers.length >= 9 ||
-                (item.answers.length % 3 === 0 && item.answers.length % 2 !== 0)
-                  ? "rbq_answer_grid_layout"
-                  : ""
+                gridLayout ? "rbq_answer_grid_layout" : ""
               }`}
               style={{
                 background:
@@ -157,7 +153,18 @@ const Answers: FC<AnswersProps> = ({
               ) : null}
 
               {item.answerArrangement === "row" ? (
-                <p className="rbq_answer_text">{x.answer}</p>
+                <p
+                  className="rbq_answer_text"
+                  style={{
+                    color: questionAnswered
+                      ? answerSelected
+                        ? "#fff"
+                        : "#000"
+                      : "#000",
+                  }}
+                >
+                  {x.answer}
+                </p>
               ) : x.backgroundImageSrc ? null : (
                 <div
                   className={`rbq_text_fit ${
@@ -175,13 +182,14 @@ const Answers: FC<AnswersProps> = ({
                 >
                   <TextFit
                     className="rbq_answer_text"
-                    min={0}
-                    max={50}
-                    capAt={100}
+                    min={10}
+                    max={gridLayout ? 58 : 65}
+                    capAt={gridLayout ? 35 : 50}
                     style={{
                       color: x.fontColor ? x.fontColor : "#fff",
                     }}
-                    outerContainerEl={outerContainerEl}
+                    outerContainerWidth={width}
+                    gridLayout={gridLayout}
                   >
                     {x.answer}
                   </TextFit>

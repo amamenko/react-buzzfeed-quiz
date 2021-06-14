@@ -151,7 +151,6 @@ const App = () => {
   useEffect(() => {
     document.fonts.ready.then(() => {
       changeFontsLoaded(true);
-      console.log("Loaded");
     });
   }, []);
 
@@ -232,7 +231,8 @@ const App = () => {
               question: "Here's a default question",
               answers: [
                 {
-                  answer: "Backgrounds are black",
+                  answer:
+                    "Backgrounds are black so many words so many words so many words so many words so many words so many word",
                   resultID: 0,
                 },
                 {

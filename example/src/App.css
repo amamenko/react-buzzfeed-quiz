@@ -19,3 +19,10 @@
   animation: logo-spin infinite 10s linear;
   height: 500px;
 }
+
+@media (max-width: 767px) {
+  .react_buzzfeed_quiz_logo {
+    animation: logo-spin infinite 10s linear;
+    height: 300px;
+  }
+}

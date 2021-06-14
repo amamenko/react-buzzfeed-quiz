@@ -7,22 +7,39 @@ import {
 } from "react";
 import { FC } from "react";
 
+// Modified from react-text-resize script
+
 const mapRange = (
   n: number,
   in_min: number,
   in_max: number,
   out_min: number,
   out_max: number,
-  outerWidth: number
+  gridLayout: boolean,
+  outerWidth?: number
 ): number => {
-  const value =
+  let value =
     ((n - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
 
-  const sizeDif = outerWidth <= 294 ? 7 - outerWidth / 50 : 0;
+  let sizeDif = 0;
 
-  if (value < out_min) return out_min - sizeDif;
-  if (value > out_max) return out_max - sizeDif;
-  return value - sizeDif;
+  if (outerWidth) {
+    if (gridLayout) {
+      if (outerWidth < 190) {
+        sizeDif = 35 - outerWidth / 20;
+      }
+    } else {
+      if (outerWidth < 294) {
+        sizeDif = 40 - outerWidth / 20;
+      }
+    }
+  }
+
+  value = value - sizeDif;
+
+  if (value < out_min) return out_min;
+  if (value > out_max) return out_max;
+  return value;
 };
 
 interface TextFitProps {
@@ -32,7 +49,8 @@ interface TextFitProps {
   className?: string;
   children: ReactNode;
   style: CSSProperties;
-  outerContainerEl: HTMLDivElement | null;
+  outerContainerWidth?: number;
+  gridLayout: boolean;
 }
 
 const TextFit: FC<TextFitProps> = ({
@@ -42,12 +60,12 @@ const TextFit: FC<TextFitProps> = ({
   className,
   children,
   style,
-  outerContainerEl,
+  outerContainerWidth,
+  gridLayout,
 }) => {
   const [fontSize, changeFontSize] = useState(16);
   const [totalChars, changeTotalChars] = useState(0);
   const [areaEl, changeAreaEl] = useState<HTMLDivElement | null>(null);
-  const [outerContainerWidth, changeOuterContainerWidth] = useState(0);
 
   let limits = {
     cap: parseInt(capAt.toString(), 10),
@@ -55,41 +73,48 @@ const TextFit: FC<TextFitProps> = ({
     max: parseInt(max.toString(), 10),
   };
 
-  const getSize = useCallback(() => {
-    if (areaEl && outerContainerEl) {
-      const chars = areaEl.innerHTML.split("").length;
-      const outerWidth = outerContainerEl.clientWidth;
+  const getSize = useCallback(
+    (gridLayout: boolean, outerContainerWidth?: number) => {
+      if (areaEl) {
+        const chars = areaEl.innerHTML.split("").length;
 
-      const size = mapRange(
-        chars,
-        limits.cap,
-        0,
-        limits.min,
-        limits.max,
-        outerWidth
-      );
-      changeFontSize(Math.abs(size));
-      changeTotalChars(chars);
-      changeOuterContainerWidth(outerWidth);
-    }
-  }, [areaEl, limits.cap, limits.max, limits.min, outerContainerEl]);
+        const size = mapRange(
+          chars,
+          limits.cap,
+          0,
+          limits.min,
+          limits.max,
+          gridLayout,
+          outerContainerWidth
+        );
+        changeFontSize(Math.abs(size));
+        changeTotalChars(chars);
+      }
+    },
+    [areaEl, limits.cap, limits.max, limits.min]
+  );
 
   useEffect(() => {
-    getSize();
-  }, [getSize]);
+    getSize(gridLayout, outerContainerWidth);
+  }, [getSize, outerContainerWidth, gridLayout]);
 
   useEffect(() => {
     if (areaEl) {
-      if (outerContainerEl) {
-        if (
-          areaEl.innerHTML.split("").length !== totalChars ||
-          outerContainerEl.clientWidth !== outerContainerWidth
-        ) {
-          getSize();
-        }
+      if (
+        areaEl.innerHTML.split("").length !== totalChars ||
+        outerContainerWidth
+      ) {
+        getSize(gridLayout, outerContainerWidth);
       }
     }
-  }, [areaEl, totalChars, outerContainerWidth, outerContainerEl, getSize]);
+  }, [
+    areaEl,
+    totalChars,
+    outerContainerWidth,
+    gridLayout,
+    getSize,
+    outerContainerWidth,
+  ]);
 
   return (
     <div className={className} style={style}>

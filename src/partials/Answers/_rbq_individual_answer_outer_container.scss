@@ -18,6 +18,12 @@
       opacity 0.5s ease;
   }
 
+  &.rbq_question_answered {
+    &.rbq_answer_selected {
+      background: linear-gradient(#fff 50%, #0f65ef 0%);
+    }
+  }
+
   &.rbq_answer_row_arrangement {
     border-bottom: none;
     border-left: none;
@@ -73,14 +79,6 @@
     }
 
     @media (min-width: 900px) {
-      p {
-        transform: scale(1.05);
-      }
-
-      &.rbq_question_answered p {
-        transform: scale(1.05);
-      }
-
       &.rbq_answer_row_arrangement p {
         transform: scale(1.01);
       }
