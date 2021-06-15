@@ -5,7 +5,7 @@
   "dependencies": {
     "async-module-loader": "^2.1.0",
     "react": "^17.0.1",
-    "react-buzzfeed-quiz": "file:react-buzzfeed-quiz-1.0.11.tgz",
+    "react-buzzfeed-quiz": "file:react-buzzfeed-quiz-2.0.0.tgz",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.2",
     "styled-components": "^5.2.1",
