@@ -25,30 +25,24 @@
   }
 
   cursor: pointer;
-
-  &.rbq_text_hovered {
-    cursor: pointer;
-    &.rbq_question_answered {
-      cursor: pointer;
-      &.rbq_answer_selected {
-        cursor: auto;
-      }
-    }
-  }
-
   transform: scale(1);
 
-  &.rbq_text_hovered {
+  &:hover {
+    cursor: pointer;
     transform: scale(1.05);
-
-    &.rbq_question_answered {
-      transform: scale(1.05);
-    }
 
     &.rbq_answer_selected,
     &.rbq_answer_row_arrangement,
     &.rbq_results_available {
       transform: scale(1);
+    }
+
+    &.rbq_question_answered {
+      cursor: pointer;
+      transform: scale(1.05);
+      &.rbq_answer_selected {
+        cursor: auto;
+      }
     }
   }
 
@@ -69,7 +63,7 @@
 
     animation-name: none;
 
-    &.rbq_text_hovered {
+    &:hover {
       animation-name: bounceClick;
 
       &.rbq_question_answered {

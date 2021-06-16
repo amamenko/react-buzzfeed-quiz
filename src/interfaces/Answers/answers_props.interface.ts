@@ -6,8 +6,6 @@ interface AnswersProps {
   item: QuestionType;
   selectedAnswers: ISelectedAnswer[];
   changeSelectedAnswers: Dispatch<SetStateAction<ISelectedAnswer[]>>;
-  answerHovered: number | null;
-  changeAnswerHovered: Dispatch<SetStateAction<number | null>>;
   questionIndex: number;
   resultsAvailable: boolean;
   onAnswerSelection?: () => void;

@@ -231,8 +231,7 @@ const App = () => {
               question: "Here's a default question",
               answers: [
                 {
-                  answer:
-                    "Backgrounds are black so many words so many words so many words so many words so many words so many word",
+                  answer: "Backgrounds are black",
                   resultID: 0,
                 },
                 {

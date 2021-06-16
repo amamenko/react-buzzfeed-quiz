@@ -7,8 +7,6 @@ const Answers: FC<AnswersProps> = ({
   item,
   selectedAnswers,
   changeSelectedAnswers,
-  answerHovered,
-  changeAnswerHovered,
   questionIndex,
   resultsAvailable,
   onAnswerSelection,
@@ -106,8 +104,6 @@ const Answers: FC<AnswersProps> = ({
               answerSelected ? "rbq_answer_selected" : ""
             } ${x.backgroundImageSrc ? "rbq_answer_background_image" : ""}`}
             key={answerIndex}
-            onMouseEnter={() => changeAnswerHovered(answerIndex)}
-            onMouseLeave={() => changeAnswerHovered(null)}
             onClick={() =>
               handleAnswerSelection(
                 questionIndex,
@@ -168,10 +164,10 @@ const Answers: FC<AnswersProps> = ({
               ) : x.backgroundImageSrc ? null : (
                 <div
                   className={`rbq_text_fit ${
-                    answerHovered === answerIndex ? "rbq_text_hovered" : ""
-                  } ${resultsAvailable ? "rbq_results_available" : ""}   ${
-                    questionAnswered ? "rbq_question_answered" : ""
-                  } ${answerSelected ? "rbq_answer_selected" : ""}`}
+                    resultsAvailable ? "rbq_results_available" : ""
+                  } ${questionAnswered ? "rbq_question_answered" : ""} ${
+                    answerSelected ? "rbq_answer_selected" : ""
+                  }`}
                   style={{
                     color: x.fontColor
                       ? x.fontColor

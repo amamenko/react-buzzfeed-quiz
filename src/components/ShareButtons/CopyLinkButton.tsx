@@ -55,13 +55,7 @@ const CopyLinkButton: FC<CopyLinkButtonProps> = ({
   };
 
   return (
-    <div
-      className={`${
-        isMobile
-          ? "rbq_mobile_share_link_button_outer_container"
-          : "rbq_share_link_button_outer_container"
-      }`}
-    >
+    <div className="rbq_share_link_button_outer_container">
       {shareLinkClicked && (
         <div
           className={`rbq_tooltip_container rbq_link_share_copied_tooltip ${

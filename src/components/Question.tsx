@@ -1,4 +1,4 @@
-import { useState, FC, useRef } from "react";
+import { FC, useRef } from "react";
 import { ScrollElement } from "react-scroll";
 import QuestionType from "../interfaces/Question/question.interface";
 import QuestionProps from "../interfaces/Question/question_props.interface";
@@ -17,8 +17,6 @@ const Question: FC<QuestionProps> = (props) => {
     scrollFunction,
     onAnswerSelection,
   } = props;
-
-  const [answerHovered, changeAnswerHovered] = useState<number | null>(null);
 
   const renderOverlapText = (item: QuestionType) => {
     if (item.questionRelativeToImage !== "adjacent") {
@@ -131,8 +129,6 @@ const Question: FC<QuestionProps> = (props) => {
             item={item}
             selectedAnswers={selectedAnswers}
             changeSelectedAnswers={changeSelectedAnswers}
-            answerHovered={answerHovered}
-            changeAnswerHovered={changeAnswerHovered}
             questionIndex={questionIndex}
             resultsAvailable={resultsAvailable}
             onAnswerSelection={onAnswerSelection}
