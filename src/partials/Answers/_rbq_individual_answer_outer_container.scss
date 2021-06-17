@@ -9,12 +9,12 @@
   border-radius: 3px;
   -webkit-box-shadow: 0 1px 1px rgb(173 168 168 / 10%);
   box-shadow: 0 1px 1px rgb(173 168 168 / 10%);
-  transition: box-shadow 0.25s, -webkit-box-shadow 0.25s, opacity 0.5s ease;
+  transition: box-shadow 0.15s, -webkit-box-shadow 0.15s, opacity 0.15s,
+    background-color 0.15s, color 0.15s;
 
   p {
     transform: scale(1);
-    transition: transform 0.2s cubic-bezier(0, 0.73, 0.31, 1.67),
-      opacity 0.5s ease;
+    transition: transform 0.2s ease, opacity 0.15s ease;
   }
 
   &.rbq_question_answered {
@@ -33,6 +33,10 @@
 
   img {
     transition: all 0.2s cubic-bezier(0.64, 0.57, 0.67, 1.53);
+  }
+
+  &.rbq_results_available {
+    pointer-events: none;
   }
 
   &:hover {
@@ -58,8 +62,7 @@
 
     img {
       transform: scale(1.1);
-      transition: transform 0.2s cubic-bezier(0.64, 0.57, 0.67, 1.53),
-        opacity 0.5s ease;
+      transition: transform 0.2s ease, opacity 0.5s ease;
     }
 
     &.rbq_question_answered img {
@@ -88,14 +91,7 @@
 
     p,
     &.rbq_answer_row_arrangement p {
-      transition: transform 0.2s cubic-bezier(0, 0.73, 0.31, 1.67),
-        opacity 0.5s ease;
-    }
-
-    &.rbq_results_available {
-      * {
-        opacity: 1;
-      }
+      transition: transform 0.2s ease, opacity 0.5s ease;
     }
   }
 }

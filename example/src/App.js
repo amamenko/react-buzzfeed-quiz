@@ -6,140 +6,17 @@ import CalmSkyPhoto from "./assets/images/CalmSkyPhoto.jpg";
 import FirstResultCatImage from "./assets/images/FirstResultCatImage.jpg";
 import SecondResultCatImage from "./assets/images/SecondResultCatImage.jpg";
 import ThirdResultCatImage from "./assets/images/ThirdResultCatImage.jpg";
-import styled from "styled-components";
+import LogoSpinner from "./LogoSpinner";
+import StyledInstallationInstructions from "./styled/StyledInstallationInstructions";
+import StyledInstallationSeparator from "./styled/StyledInstallationSeparator";
+import StyledNav from "./styled/StyledNav";
+import StyledLinksContainer from "./styled/StyledLinksContainer";
+import StyledLogoLetter from "./styled/StyledLogoLetter";
+import StyledLogoContainer from "./styled/StyledLogoContainer";
 import { FaYarn, FaNpm, FaGithub } from "react-icons/fa";
 import { BuzzFeedQuiz } from "react-buzzfeed-quiz";
 import "react-buzzfeed-quiz/lib/styles.css";
 import "./App.css";
-import LogoSpinner from "./LogoSpinner";
-
-const StyledNav = styled.div`
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  top: 0;
-  z-index: 999;
-  background: #fff;
-  border-bottom: 1px solid rgb(235, 235, 235);
-
-  a {
-    text-decoration: none;
-    color: rgb(80, 80, 80);
-  }
-`;
-
-const StyledLogoContainer = styled.div`
-  display: flex;
-  margin-left: 1rem;
-`;
-
-const StyledLogoLetter = styled.h1`
-  color: ${(props) => (props.buzzfeed ? "rgb(238, 50, 34)" : "#000")};
-
-  font-size: 1.5rem;
-  padding-right: 0.4rem;
-
-  @media (max-width: 375px) {
-    font-size: 1rem;
-    padding-right: 0.3rem;
-  }
-
-  @media (min-width: 1200px) {
-    font-size: 2rem;
-    padding-right: 0.5rem;
-  }
-`;
-
-const StyledLinksContainer = styled.div`
-  display: flex;
-  font-size: 1.5rem;
-  margin-right: 1rem;
-
-  @media (max-width: 330px) {
-    font-size: 1.2rem;
-    margin-right: 0.5rem;
-  }
-
-  a {
-    &:first-child {
-      padding-right: 1rem;
-    }
-
-    &:nth-child(2) {
-      padding-right: 1rem;
-    }
-
-    &:active:first-child {
-      color: #000;
-    }
-
-    &:active:nth-child(2) {
-      color: #cb0000;
-    }
-
-    &:active:nth-child(3) {
-      color: #117cad;
-    }
-  }
-
-  @media (min-width: 1200px) {
-    font-size: 2rem;
-
-    a {
-      transition: color 0.3s ease;
-
-      &:hover:first-child {
-        color: #000;
-      }
-
-      &:hover:nth-child(2) {
-        color: #cb0000;
-      }
-
-      &:hover:nth-child(3) {
-        color: #117cad;
-      }
-    }
-  }
-`;
-
-const StyledInstallationInstructions = styled.div`
-  padding: 16px;
-  margin: 0px auto;
-  background: rgb(30, 30, 30);
-  max-width: 600px;
-  margin-bottom: 0px;
-  text-align: center;
-
-  @media (max-width: 767px) {
-    margin: 0px 16px;
-    margin-bottom: 0px;
-  }
-
-  code {
-    margin: 0 auto;
-    font-family: Courier New, Courier, monospace;
-    opacity: 0.9;
-    color: #fff;
-  }
-`;
-
-const StyledInstallationSeparator = styled.div`
-  position: relative;
-  background: #fff;
-  color: #000;
-  max-width: 630px;
-  text-align: left;
-  margin: 0px 16px;
-  margin-top: ${(props) => (props.first ? "70px" : "0px")};
-
-  @media (min-width: 768px) {
-    margin: auto;
-    margin-top: ${(props) => (props.first ? "100px" : "0px")};
-  }
-`;
 
 const App = () => {
   const [fontsLoaded, changeFontsLoaded] = useState(false);
@@ -311,9 +188,9 @@ const App = () => {
             {
               question: "Here is some overlapping image text",
               questionRelativeToImage: "overlap",
-              imageAttribution: "Photo by Maria Orlova from Pexels",
               answerArrangement: "tile",
               backgroundImageSrc: CalmSkyPhoto,
+              imageAttribution: "Photo by Maria Orlova from Pexels",
               answers: [
                 {
                   answer: "This answer has a cat photo",

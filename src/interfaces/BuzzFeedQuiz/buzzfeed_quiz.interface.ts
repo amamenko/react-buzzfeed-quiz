@@ -73,6 +73,7 @@ type BuzzFeedQuizProps = BylineProps & {
    * @returns void
    */
   onRestart?: () => void;
+
   /**
    * An array of question objects.
    */

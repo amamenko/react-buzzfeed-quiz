@@ -14,7 +14,7 @@
     "esModuleInterop": true,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "removeComments": true,
+    "removeComments": false,
     "experimentalDecorators": true,
     "lib": ["dom", "es2017", "es5", "es6", "es7"],
     "strict": true,

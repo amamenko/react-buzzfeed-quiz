@@ -4,7 +4,7 @@
 <br />
 <p align="center">
    <a href="https://github.com/amamenko/react-buzzfeed-quiz">
-    <img src="example/src/images/RBQLogo.jpg" alt="Logo" width="150" />
+    <img src="example/src/assets/images/RBQLogo.jpg" alt="Logo" width="150" />
   </a>
 </p>
 <p align="center">
