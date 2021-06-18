@@ -128,11 +128,7 @@ const Answers: FC<AnswersProps> = ({
               style={{
                 background:
                   item.answerArrangement === "row"
-                    ? questionAnswered
-                      ? answerSelected
-                        ? "#0f65ef"
-                        : "#fff"
-                      : "#fff"
+                    ? "#fff"
                     : actualBackgroundColor
                     ? actualBackgroundColor
                     : x.backgroundImageSrc
@@ -149,18 +145,7 @@ const Answers: FC<AnswersProps> = ({
               ) : null}
 
               {item.answerArrangement === "row" ? (
-                <p
-                  className="rbq_answer_text"
-                  style={{
-                    color: questionAnswered
-                      ? answerSelected
-                        ? "#fff"
-                        : "#000"
-                      : "#000",
-                  }}
-                >
-                  {x.answer}
-                </p>
+                <p className="rbq_answer_text">{x.answer}</p>
               ) : x.backgroundImageSrc ? null : (
                 <div
                   className={`rbq_text_fit ${
@@ -178,9 +163,9 @@ const Answers: FC<AnswersProps> = ({
                 >
                   <TextFit
                     className="rbq_answer_text"
-                    min={10}
-                    max={gridLayout ? 58 : 65}
-                    capAt={gridLayout ? 35 : 50}
+                    min={12}
+                    max={gridLayout ? 57 : 62}
+                    capAt={gridLayout ? 35 : 46}
                     style={{
                       color: x.fontColor ? x.fontColor : "#fff",
                     }}
@@ -193,11 +178,7 @@ const Answers: FC<AnswersProps> = ({
               )}
             </div>
             {x.backgroundImageSrc && item.answerArrangement === "tile" ? (
-              <div
-                className={`rbq_answer_image_bottom_text_container ${
-                  answerSelected ? "rbq_selected_answer" : ""
-                }`}
-              >
+              <div className="rbq_answer_image_bottom_text_container">
                 {x.answer && (
                   <p className="rbq_answer_image_text">{x.answer}</p>
                 )}

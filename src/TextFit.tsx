@@ -25,11 +25,11 @@ const mapRange = (
 
   if (outerWidth) {
     if (gridLayout) {
-      if (outerWidth < 190) {
+      if (outerWidth < 182) {
         sizeDif = 35 - outerWidth / 20;
       }
     } else {
-      if (outerWidth < 294) {
+      if (outerWidth < 286) {
         sizeDif = 40 - outerWidth / 20;
       }
     }

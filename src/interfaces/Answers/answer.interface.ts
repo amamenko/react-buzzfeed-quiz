@@ -4,7 +4,7 @@ type AnswerType = ImageType & {
   /**
    * The text value of the answer choice.
    */
-  answer: string;
+  answer?: string;
   /**
    * Applies a given color to only the specific answer container's background.
    * This value supersedes the generalBackgroundColor prop if supplied to ReactBuzzFeedQuiz.

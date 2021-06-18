@@ -5,7 +5,7 @@
   align-items: center;
   height: 70%;
   width: 70%;
-  transition: transform 0.15s cubic-bezier(0.64, 0.57, 0.67, 1.53);
+  transition: transform 0.2s cubic-bezier(0, 0.73, 0.31, 1.67);
 
   p {
     position: absolute;
@@ -44,39 +44,5 @@
         cursor: auto;
       }
     }
-  }
-
-  @media (max-width: 900px) {
-    transform: none;
-
-    @keyframes bounceClick {
-      0% {
-        transform: none;
-      }
-      50% {
-        transform: scale(1.1);
-      }
-      100% {
-        transform: none;
-      }
-    }
-
-    animation-name: none;
-
-    &:hover {
-      animation-name: bounceClick;
-
-      &.rbq_question_answered {
-        animation-name: bounceClick;
-      }
-
-      &.rbq_answer_selected,
-      &.rbq_answer_row_arrangement,
-      &.rbq_results_available {
-        animation-name: none;
-      }
-    }
-
-    animation-duration: 0.2s;
   }
 }

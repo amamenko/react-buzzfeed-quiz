@@ -1,18 +1,5 @@
+import { __makeTemplateObject } from "tslib";
 import styled from "styled-components";
-
-const StyledInstallationSeparator = styled.div`
-  position: relative;
-  background: #fff;
-  color: #000;
-  max-width: 630px;
-  text-align: left;
-  margin: 0px 16px;
-  margin-top: ${(props) => (props.first ? "70px" : "0px")};
-
-  @media (min-width: 768px) {
-    margin: auto;
-    margin-top: ${(props) => (props.first ? "100px" : "0px")};
-  }
-`;
-
+var StyledInstallationSeparator = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  position: relative;\n  background: #fff;\n  color: #000;\n  max-width: 630px;\n  text-align: left;\n  margin: 0px 16px;\n  margin-top: ", ";\n\n  @media (min-width: 768px) {\n    margin: auto;\n    margin-top: ", ";\n  }\n"], ["\n  position: relative;\n  background: #fff;\n  color: #000;\n  max-width: 630px;\n  text-align: left;\n  margin: 0px 16px;\n  margin-top: ", ";\n\n  @media (min-width: 768px) {\n    margin: auto;\n    margin-top: ", ";\n  }\n"])), function (props) { return (props.first ? "70px" : "0px"); }, function (props) { return (props.first ? "100px" : "0px"); });
 export default StyledInstallationSeparator;
+var templateObject_1;
