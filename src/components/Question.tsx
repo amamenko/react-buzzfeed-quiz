@@ -107,7 +107,7 @@ const Question: FC<QuestionProps> = (props) => {
               : ""
           }`}
           style={{
-            backgroundColor: item.backgroundColor
+            background: item.backgroundColor
               ? item.backgroundColor
               : generalBackgroundColor
               ? generalBackgroundColor

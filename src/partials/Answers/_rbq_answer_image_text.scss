@@ -8,6 +8,14 @@
   opacity: 1;
   text-align: center;
 
+  &.rbq_question_answered {
+    opacity: 0.6;
+
+    &.rbq_answer_selected {
+      opacity: 1;
+    }
+  }
+
   @media (min-width: 40rem) {
     font-size: 1.125rem;
     line-height: 1.2;

@@ -17,6 +17,13 @@
     transition: transform 0.2s ease, opacity 0.15s ease;
   }
 
+  &.rbq_question_answered {
+    opacity: 0.6;
+    &.rbq_answer_selected {
+      opacity: 1;
+    }
+  }
+
   &.rbq_answer_row_arrangement {
     border-bottom: none;
     border-left: none;
@@ -54,8 +61,11 @@
 
   &:hover {
     pointer-events: all;
-    box-shadow: 0 0 3px 3px rgb(173 168 168 / 10%);
-    -webkit-box-shadow: 0 0 3px 3px rgb(173 168 168 / 10%);
+
+    &:not(.rbq_answer_selected) {
+      box-shadow: 0 0 3px 3px rgb(173 168 168 / 10%);
+      -webkit-box-shadow: 0 0 3px 3px rgb(173 168 168 / 10%);
+    }
 
     .rbq_individual_answer_container {
       opacity: 1;
@@ -66,14 +76,23 @@
       transition-duration: 0.2s;
       transition-timing-function: cubic-bezier(0, 0.73, 0.31, 1.67);
 
-      &.rbq_question_answered.rbq_question_selected {
+      &.rbq_question_answered.rbq_answer_selected {
         transform: scale(1);
       }
+    }
+
+    &.rbq_question_answered.rbq_answer_selected {
+      cursor: auto;
+      transform: scale(1);
+      opacity: 1;
+      box-shadow: 0 1px 1px rgb(173 168 168 / 10%);
+      -webkit-box-shadow: 0 1px 1px rgb(173 168 168 / 10%);
     }
 
     .rbq_text_fit {
       cursor: pointer;
       transform: scale(1.05);
+      opacity: 1;
 
       @media (max-width: 900px) {
         animation-name: bounceClick;
@@ -106,6 +125,7 @@
 
       &.rbq_answer_selected {
         .rbq_text_fit {
+          transform: scale(1);
           cursor: auto;
         }
       }
@@ -119,6 +139,7 @@
 
     &.rbq_question_answered {
       cursor: pointer;
+      opacity: 1;
 
       &.rbq_answer_selected {
         cursor: auto;
