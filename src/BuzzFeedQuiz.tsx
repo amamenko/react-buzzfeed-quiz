@@ -1,4 +1,4 @@
-import { useState, useEffect, FC } from "react";
+import { useState, useEffect, FC, createContext, Dispatch } from "react";
 import { scroller, Element } from "react-scroll";
 import Byline from "./components/Byline";
 import Question from "./components/Question";
@@ -7,6 +7,18 @@ import BuzzFeedQuizProps from "./interfaces/BuzzFeedQuiz/buzzfeed_quiz.interface
 import ISelectedAnswer from "./interfaces/Answers/selected_answer.interface";
 import ResultType from "./interfaces/Result/result.interface";
 import "./main.scss";
+
+interface ContextProps {
+  selectedAnswers: ISelectedAnswer[];
+  changeSelectedAnswers: Dispatch<React.SetStateAction<ISelectedAnswer[]>>;
+  scrollFunction: (element: string, questionIndex: number) => void;
+}
+
+export const QuizContext = createContext<ContextProps>({
+  selectedAnswers: [{ questionIndex: 0, resultID: 0, answerIndex: 0 }],
+  changeSelectedAnswers: () => [],
+  scrollFunction: () => {},
+});
 
 const BuzzFeedQuiz: FC<BuzzFeedQuizProps> = (props) => {
   const {
@@ -113,7 +125,13 @@ const BuzzFeedQuiz: FC<BuzzFeedQuizProps> = (props) => {
   }, [shareLinkClicked]);
 
   return (
-    <>
+    <QuizContext.Provider
+      value={{
+        selectedAnswers: selectedAnswers,
+        changeSelectedAnswers: changeSelectedAnswers,
+        scrollFunction: scrollFunction,
+      }}
+    >
       <Element name="Top" className="rbq_outer_quiz_container">
         <div className="rbq_inner_quiz_container">
           {title ? <h1 className="rbq_quiz_title">{title}</h1> : null}
@@ -145,9 +163,6 @@ const BuzzFeedQuiz: FC<BuzzFeedQuizProps> = (props) => {
                         generalBackgroundColor={generalBackgroundColor}
                         generalFontColor={generalFontColor}
                         resultsAvailable={resultsAvailable}
-                        selectedAnswers={selectedAnswers}
-                        changeSelectedAnswers={changeSelectedAnswers}
-                        scrollFunction={scrollFunction}
                         onAnswerSelection={onAnswerSelection}
                       />
                     );
@@ -181,7 +196,7 @@ const BuzzFeedQuiz: FC<BuzzFeedQuizProps> = (props) => {
           ) : null}
         </div>
       </Element>
-    </>
+    </QuizContext.Provider>
   );
 };
 

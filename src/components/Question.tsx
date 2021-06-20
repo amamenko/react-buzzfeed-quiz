@@ -1,4 +1,4 @@
-import { FC, useRef } from "react";
+import { FC, useRef, memo } from "react";
 import { ScrollElement } from "react-scroll";
 import { useResizeDetector } from "react-resize-detector";
 import TextFit from "../TextFit";
@@ -7,16 +7,13 @@ import QuestionProps from "../interfaces/Question/question_props.interface";
 import ListItemContainerElementProps from "../interfaces/Question/list_item.interface";
 import Answers from "./Answers";
 
-const Question: FC<QuestionProps> = (props) => {
+const Question: FC<QuestionProps> = memo((props) => {
   const {
     item,
     questionIndex,
     generalBackgroundColor,
     generalFontColor,
     resultsAvailable,
-    selectedAnswers,
-    changeSelectedAnswers,
-    scrollFunction,
     onAnswerSelection,
   } = props;
 
@@ -138,18 +135,15 @@ const Question: FC<QuestionProps> = (props) => {
         (Array.isArray(item.answers) && item.answers.length > 0 ? (
           <Answers
             item={item}
-            selectedAnswers={selectedAnswers}
-            changeSelectedAnswers={changeSelectedAnswers}
             questionIndex={questionIndex}
             resultsAvailable={resultsAvailable}
             onAnswerSelection={onAnswerSelection}
-            scrollFunction={scrollFunction}
             generalBackgroundColor={generalBackgroundColor}
             generalFontColor={generalFontColor}
           />
         ) : null)}
     </ListItemContainerScrollElement>
   );
-};
+});
 
 export default Question;

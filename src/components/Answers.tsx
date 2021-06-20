@@ -1,19 +1,20 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 import AnswersProps from "../interfaces/Answers/answers_props.interface";
 import { useResizeDetector } from "react-resize-detector";
 import TextFit from "../TextFit";
+import { QuizContext } from "../BuzzFeedQuiz";
 
 const Answers: FC<AnswersProps> = ({
   item,
-  selectedAnswers,
-  changeSelectedAnswers,
   questionIndex,
   resultsAvailable,
   generalBackgroundColor,
   generalFontColor,
   onAnswerSelection,
-  scrollFunction,
 }) => {
+  const { selectedAnswers, changeSelectedAnswers, scrollFunction } =
+    useContext(QuizContext);
+
   const { width: answerWidth, ref } = useResizeDetector();
 
   const handleAnswerSelection = (
