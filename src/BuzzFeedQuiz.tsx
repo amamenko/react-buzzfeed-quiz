@@ -139,7 +139,7 @@ const BuzzFeedQuiz: FC<BuzzFeedQuizProps> = (props) => {
                   {questions.map((item, questionIndex) => {
                     return (
                       <Question
-                        key={questionIndex}
+                        key={item.question.replace(/ /g, "_")}
                         item={item}
                         questionIndex={questionIndex}
                         generalBackgroundColor={generalBackgroundColor}

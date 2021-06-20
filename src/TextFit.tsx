@@ -15,8 +15,9 @@ const mapRange = (
   in_max: number,
   out_min: number,
   out_max: number,
-  gridLayout: boolean,
-  outerWidth?: number
+  gridLayout?: boolean,
+  outerWidth?: number,
+  question?: boolean
 ): number => {
   let value =
     ((n - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
@@ -29,8 +30,14 @@ const mapRange = (
         sizeDif = 35 - outerWidth / 20;
       }
     } else {
-      if (outerWidth < 286) {
-        sizeDif = 40 - outerWidth / 20;
+      if (question) {
+        if (outerWidth < 600) {
+          sizeDif = 60 - outerWidth / 20;
+        }
+      } else {
+        if (outerWidth < 286) {
+          sizeDif = 40 - outerWidth / 20;
+        }
       }
     }
   }
@@ -50,7 +57,8 @@ interface TextFitProps {
   children: ReactNode;
   style: CSSProperties;
   outerContainerWidth?: number;
-  gridLayout: boolean;
+  gridLayout?: boolean;
+  question?: boolean;
 }
 
 const TextFit: FC<TextFitProps> = ({
@@ -62,6 +70,7 @@ const TextFit: FC<TextFitProps> = ({
   style,
   outerContainerWidth,
   gridLayout,
+  question,
 }) => {
   const [fontSize, changeFontSize] = useState(16);
   const [totalChars, changeTotalChars] = useState(0);
@@ -74,7 +83,11 @@ const TextFit: FC<TextFitProps> = ({
   };
 
   const getSize = useCallback(
-    (gridLayout: boolean, outerContainerWidth?: number) => {
+    (
+      gridLayout?: boolean,
+      outerContainerWidth?: number,
+      question?: boolean
+    ) => {
       if (areaEl) {
         const chars = areaEl.innerHTML.split("").length;
 
@@ -85,7 +98,8 @@ const TextFit: FC<TextFitProps> = ({
           limits.min,
           limits.max,
           gridLayout,
-          outerContainerWidth
+          outerContainerWidth,
+          question
         );
         changeFontSize(Math.abs(size));
         changeTotalChars(chars);
@@ -95,8 +109,8 @@ const TextFit: FC<TextFitProps> = ({
   );
 
   useEffect(() => {
-    getSize(gridLayout, outerContainerWidth);
-  }, [getSize, outerContainerWidth, gridLayout]);
+    getSize(gridLayout, outerContainerWidth, question);
+  }, [getSize, outerContainerWidth, gridLayout, question]);
 
   useEffect(() => {
     if (areaEl) {
@@ -104,7 +118,7 @@ const TextFit: FC<TextFitProps> = ({
         areaEl.innerHTML.split("").length !== totalChars ||
         outerContainerWidth
       ) {
-        getSize(gridLayout, outerContainerWidth);
+        getSize(gridLayout, outerContainerWidth, question);
       }
     }
   }, [
@@ -114,6 +128,7 @@ const TextFit: FC<TextFitProps> = ({
     gridLayout,
     getSize,
     outerContainerWidth,
+    question,
   ]);
 
   return (

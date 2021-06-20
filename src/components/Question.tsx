@@ -1,5 +1,7 @@
 import { FC, useRef } from "react";
 import { ScrollElement } from "react-scroll";
+import { useResizeDetector } from "react-resize-detector";
+import TextFit from "../TextFit";
 import QuestionType from "../interfaces/Question/question.interface";
 import QuestionProps from "../interfaces/Question/question_props.interface";
 import ListItemContainerElementProps from "../interfaces/Question/list_item.interface";
@@ -18,13 +20,18 @@ const Question: FC<QuestionProps> = (props) => {
     onAnswerSelection,
   } = props;
 
+  const { height, width, ref: resizeRef } = useResizeDetector();
+
   const renderOverlapText = (item: QuestionType) => {
     if (item.questionRelativeToImage !== "adjacent") {
       return (
-        <p
+        <TextFit
           className={`rbq_question_overlap_text ${
             item.backgroundImageSrc && "rbq_question_with_bg_image"
           }`}
+          min={height ? (height < 345 ? 30 : 50) : 50}
+          max={height ? (height < 345 ? 80 : 118) : 118}
+          capAt={80}
           style={{
             color: item.fontColor
               ? item.fontColor
@@ -32,9 +39,11 @@ const Question: FC<QuestionProps> = (props) => {
               ? generalFontColor
               : "#fff",
           }}
+          outerContainerWidth={width}
+          question={true}
         >
           {item.question ? item.question : null}
-        </p>
+        </TextFit>
       );
     } else {
       return null;
@@ -91,6 +100,7 @@ const Question: FC<QuestionProps> = (props) => {
               ? "rbq_question_adjacent_to_image"
               : ""
           } ${item.imageAttribution ? "rbq_image_attribution" : ""}`}
+          ref={resizeRef}
         >
           <img
             className="rbq_question_image"
@@ -113,6 +123,7 @@ const Question: FC<QuestionProps> = (props) => {
               ? generalBackgroundColor
               : "#000",
           }}
+          ref={resizeRef}
         >
           {renderOverlapText(item)}
         </div>

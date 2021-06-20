@@ -9,12 +9,12 @@ const Answers: FC<AnswersProps> = ({
   changeSelectedAnswers,
   questionIndex,
   resultsAvailable,
-  onAnswerSelection,
-  scrollFunction,
   generalBackgroundColor,
   generalFontColor,
+  onAnswerSelection,
+  scrollFunction,
 }) => {
-  const { width, ref } = useResizeDetector();
+  const { width: answerWidth, ref } = useResizeDetector();
 
   const handleAnswerSelection = (
     questionIndex: number,
@@ -163,13 +163,13 @@ const Answers: FC<AnswersProps> = ({
                 >
                   <TextFit
                     className="rbq_answer_text"
-                    min={12}
-                    max={gridLayout ? 54 : 62}
+                    min={20}
+                    max={gridLayout ? 54 : 60}
                     capAt={gridLayout ? 35 : 46}
                     style={{
                       color: x.fontColor ? x.fontColor : "#fff",
                     }}
-                    outerContainerWidth={width}
+                    outerContainerWidth={answerWidth}
                     gridLayout={gridLayout}
                   >
                     {x.answer}

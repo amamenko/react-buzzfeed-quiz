@@ -211,7 +211,7 @@ const App = () => {
                   imageAttribution: "Photo by Pixabay from Pexels",
                 },
                 {
-                  answer: "Not this one, though",
+                  answer: "No cat photo here, though",
                   resultID: 0,
                   backgroundColor: "rgb(238,243,247)",
                   fontColor: "rgb(53,51,48)",
