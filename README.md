@@ -259,6 +259,7 @@ The `ReactBuzzFeedQuiz` component accepts the following props:
 | questions                    | Array[Object] | `[]`    | An array of question objects (see Question Object below).                                                                                                                                                    |
 | results                      | Array[Object] | `[]`    | An array of result objects (see Result Object below).                                                                                                                                                        |
 
+
 ### Question Object
 
 `ReactBuzzFeedQuiz`'s `questions` prop accepts an array of question objects with key-value pairs formatted in the following manner:
