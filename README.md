@@ -222,7 +222,7 @@ const App = () => {
 
 ## Disclaimer
 
-react-buzzfeed-quiz is not affiliated, associated, authorized, endorsed by, or in any way officially connected with BuzzFeed, Inc., or any of its subsidiaries or its affiliates. The official BuzzFeed, Inc. website can be found at [https://www.buzzfeed.com](https://www.buzzfeed.com).
+`react-buzzfeed-quiz` is not affiliated, associated, authorized, endorsed by, or in any way officially connected with BuzzFeed, Inc., or any of its subsidiaries or its affiliates. The official BuzzFeed, Inc. website can be found at [https://www.buzzfeed.com](https://www.buzzfeed.com).
 
 The name BuzzFeed as well as related names, marks, emblems/logos, and images are registered trademarks of BuzzFeed, Inc.
 
@@ -230,7 +230,7 @@ The name BuzzFeed as well as related names, marks, emblems/logos, and images are
 
 ### API
 
-The `ReactBuzzFeedQuiz` component accepts the following props:
+The `BuzzFeedQuiz` component accepts the following props:
 
 | Name                         | Type          | Default | Description                                                                                                                                                                                                  |
 | ---------------------------- | ------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -262,7 +262,7 @@ The `ReactBuzzFeedQuiz` component accepts the following props:
 
 ### Question Object
 
-`ReactBuzzFeedQuiz`'s `questions` prop accepts an array of question objects with key-value pairs formatted in the following manner:
+`BuzzFeedQuiz`'s `questions` prop accepts an array of question objects with key-value pairs formatted in the following manner:
 
 | Key Name                | Value Type    | Value Description                                                                                                                                                                                                                                                                                                                                                                                         |
 | ----------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -291,7 +291,7 @@ The value of the `answers` key of the Question Object accepts an array of answer
 
 ### Result Object
 
-`ReactBuzzFeedQuiz`'s `results` prop accepts an array of result objects with key-value pairs formatted in the following manner:
+`BuzzFeedQuiz`'s `results` prop accepts an array of result objects with key-value pairs formatted in the following manner:
 
 | Key Name         | Value Type | Value Description                                                                                                                                                                                        |
 | ---------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
