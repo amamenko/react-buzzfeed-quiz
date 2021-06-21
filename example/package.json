@@ -3,12 +3,16 @@
   "version": "0.1.0",
   "private": false,
   "dependencies": {
+    "@types/css-font-loading-module": "^0.0.4",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.12.4",
+    "@types/react": "^17.0.11",
+    "@types/react-dom": "^17.0.8",
     "async-module-loader": "^2.1.0",
     "react": "^17.0.1",
     "react-buzzfeed-quiz": "^2.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.2",
-    "styled-components": "^5.2.1",
     "tslib": "^2.3.0",
     "typescript": "^4.3.4",
     "web-vitals": "^1.0.1"
@@ -36,13 +40,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@types/css-font-loading-module": "^0.0.4",
-    "@types/jest": "^26.0.23",
-    "@types/node": "^15.12.2",
-    "@types/react": "^17.0.11",
-    "@types/react-dom": "^17.0.7",
-    "@types/styled-components": "^5.1.10"
   }
 }
