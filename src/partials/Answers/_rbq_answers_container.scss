@@ -1,0 +1,39 @@
+.rbq_answers_container {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 0.5rem 0.5rem;
+
+  &.rbq_more_than_9_answers {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+
+  &.rbq_3_answers {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  &.rbq_answers_contain_images {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: none;
+  }
+
+  &.rbq_answer_row_arrangement {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  @media (min-width: 40rem) {
+    grid-row-gap: 1rem;
+
+    &.rbq_answer_row_arrangement {
+      grid-row-gap: 0.5rem;
+    }
+  }
+
+  @media (min-width: 52rem) {
+    grid-column-gap: 1.5rem;
+  }
+}

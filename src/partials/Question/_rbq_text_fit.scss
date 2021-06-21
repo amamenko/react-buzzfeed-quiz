@@ -1,0 +1,48 @@
+.rbq_text_fit {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+  width: 70%;
+  transition: transform 0.2s cubic-bezier(0, 0.73, 0.31, 1.67);
+
+  p {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &.rbq_answer_row_arrangement {
+    height: 100%;
+    width: 100%;
+  }
+
+  cursor: pointer;
+  transform: scale(1);
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+
+    &.rbq_answer_selected,
+    &.rbq_answer_row_arrangement,
+    &.rbq_results_available {
+      transform: scale(1);
+    }
+
+    &.rbq_question_answered {
+      cursor: pointer;
+      transform: scale(1.05);
+      &.rbq_answer_selected {
+        cursor: auto;
+      }
+    }
+  }
+}

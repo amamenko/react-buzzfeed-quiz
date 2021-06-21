@@ -1,0 +1,50 @@
+// React BuzzFeed Quiz Component
+@use "partials/ReactBuzzFeedQuiz/rbq_inner_quiz_container";
+@use "partials/ReactBuzzFeedQuiz/rbq_outer_quiz_container";
+@use "partials/ReactBuzzFeedQuiz/rbq_question_list_container";
+@use "partials/ReactBuzzFeedQuiz/rbq_quiz_description";
+@use "partials/ReactBuzzFeedQuiz/rbq_quiz_title";
+
+// Answers Component
+@use "partials/Answers/rbq_answer_image_attribution";
+@use "partials/Answers/rbq_answer_image_bottom_text_container";
+@use "partials/Answers/rbq_answer_image_text";
+@use "partials/Answers/rbq_answer_image";
+@use "partials/Answers/rbq_answers_container";
+@use "partials/Answers/rbq_individual_answer_container";
+@use "partials/Answers/rbq_individual_answer_outer_container";
+
+// Byline Component
+@use "partials/Byline/rbq_avatar_container";
+@use "partials/Byline/rbq_avatar";
+@use "partials/Byline/rbq_byline_author_descriptor_container";
+@use "partials/Byline/rbq_byline_author_descriptor";
+@use "partials/Byline/rbq_byline_container";
+
+// Question Component
+@use "partials/Question/rbq_list_item_container";
+@use "partials/Question/rbq_question_adjacent_text";
+@use "partials/Question/rbq_question_image_attribution_text";
+@use "partials/Question/rbq_question_image_container";
+@use "partials/Question/rbq_question_image";
+@use "partials/Question/rbq_question_inner_container";
+@use "partials/Question/rbq_question_overlap_text";
+@use "partials/Question/rbq_text_fit";
+
+// Result Component
+@use "partials/Result/rbq_mobile_retake_quiz_container";
+@use "partials/Result/rbq_mobile_share_links_container";
+@use "partials/Result/rbq_result_attribution_text";
+@use "partials/Result/rbq_result_header";
+@use "partials/Result/rbq_result_inner_container";
+@use "partials/Result/rbq_result_inner_description_container";
+@use "partials/Result/rbq_result_inner_description_header";
+@use "partials/Result/rbq_result_inner_description";
+@use "partials/Result/rbq_result_inner_image_container";
+@use "partials/Result/rbq_result_inner_image";
+@use "partials/Result/rbq_result_outer_container";
+@use "partials/Result/rbq_retake_quiz_container";
+@use "partials/Result/rbq_share_button";
+@use "partials/Result/rbq_share_link_button_outer_container";
+@use "partials/Result/rbq_share_links_container";
+@use "partials/Result/rbq_tooltip_container";
