@@ -14,6 +14,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 100%;
   height: 14.5vh;
   line-height: 1.1;
   word-wrap: normal;
@@ -38,6 +39,7 @@
 
   &.rbq_answer_background_image {
     border-radius: 0;
+    min-height: auto;
   }
 
   &.rbq_question_answered {

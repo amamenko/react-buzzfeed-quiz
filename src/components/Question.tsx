@@ -7,6 +7,7 @@ import QuestionProps from "../interfaces/Question/question_props.interface";
 import ListItemContainerElementProps from "../interfaces/Question/list_item.interface";
 import Answers from "./Answers";
 
+// Memoization important to keep entire quiz from re-rendering upon every answer selection
 const Question: FC<QuestionProps> = memo((props) => {
   const {
     item,
@@ -15,6 +16,7 @@ const Question: FC<QuestionProps> = memo((props) => {
     generalFontColor,
     resultsAvailable,
     onAnswerSelection,
+    imageOverlapExists,
   } = props;
 
   const { height, width, ref: resizeRef } = useResizeDetector();
@@ -24,7 +26,7 @@ const Question: FC<QuestionProps> = memo((props) => {
       return (
         <TextFit
           className={`rbq_question_overlap_text ${
-            item.backgroundImageSrc && "rbq_question_with_bg_image"
+            item.backgroundImageSrc ? "rbq_question_with_bg_image" : ""
           }`}
           min={height ? (height < 345 ? 30 : 50) : 50}
           max={height ? (height < 345 ? 80 : 118) : 118}
@@ -112,7 +114,7 @@ const Question: FC<QuestionProps> = memo((props) => {
             item.questionRelativeToImage === "adjacent"
               ? "rbq_question_adjacent_to_image"
               : ""
-          }`}
+          } ${!imageOverlapExists ? "rbq_no_image_overlap" : ""}`}
           style={{
             background: item.backgroundColor
               ? item.backgroundColor
