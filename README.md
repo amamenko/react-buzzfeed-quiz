@@ -23,8 +23,6 @@ Check out the demo page [here](https://react-buzzfeed-quiz.netlify.app)!
 
 ## Installation
 
-### Step One: Install the package itself
-
 `react-buzzfeed-quiz` is available through [Yarn](https://yarnpkg.com/package/react-buzzfeed-quiz):
 
 ```bash
@@ -37,49 +35,29 @@ or through [npm](https://www.npmjs.com/package/react-buzzfeed-quiz):
 npm install react-buzzfeed-quiz
 ```
 
-Once it's installed, you can import the `ReactBuzzFeedQuiz` component as follows:
+Once it's installed, you can import the `BuzzFeedQuiz` component as follows:
 
 ```js
-import ReactBuzzFeedQuiz from "react-buzzfeed-quiz";
+import { BuzzFeedQuiz } from "react-buzzfeed-quiz";
 ```
 
-### Step Two: Install `styled-components`
+## Custom Styles
 
-`ReactBuzzFeedQuiz` uses `styled-components` for styling, which is not bundled with the package as a direct dependency (as recommended [here](https://styled-components.com/docs/faqs#i-am-a-library-author-should-i-bundle-styledcomponents-with-my-library)), but rather as a peer dependency.
-
-This is to prevent multiple instances of `styled-components` being initialized, which can cause issues with class name collisions and dynamic styles not working properly.
-
-Thus, you will have to install `styled-components` yourself using [Yarn](https://yarnpkg.com/package/styled-components):
-
-```bash
-yarn add styled-components
-```
-
-or [npm](https://www.npmjs.com/package/styled-components):
-
-```bash
-npm install styled-components
-```
-
-and import it like so:
+If you'd like to import the default `react-buzzfeed-quiz` CSS styles, you can import them like so:
 
 ```js
-import styled from "styled-components";
-
-const Quiz = styled(ReactBuzzFeedQuiz)([]);
+import "react-buzzfeed-quiz/lib/styles.css";
 ```
 
-### BuzzFeed Font
+## Fonts
 
-The module also includes some `.woff` and `.woff2` font assets for [Proxima Nova](https://www.marksimonson.com/fonts/view/proxima-nova), the official BuzzFeed font.
+`react-buzzfeed-quiz` does not provide any fonts, but some recommended fonts that are often found on BuzzFeed quizzes are:
 
-If you'd like to use the font, import the CSS file defining the font-faces into your project:
+* [Proxima Nova](https://github.com/roshinthomas/Proximanova-fonts)
+* [Pathway Gothic One](https://fonts.google.com/specimen/Pathway+Gothic+One)
+* [PT Serif](https://fonts.google.com/specimen/PT+Serif)
 
-```js
-import "react-buzzfeed-quiz/ProximaNova.css";
-```
-
-### Example
+## Example
 
 Additional example can be found in the `example` directory. The package can be used as follows:
 
@@ -88,15 +66,12 @@ import ProfilePhoto from "./path/to/ProfilePhoto.jpg";
 import BackgroundImage from "./path/to/BackgroundImage.jpg";
 import FirstResultImage from "./path/to/FirstResultImage.jpg";
 import SecondResultImage from "./path/to/SecondResultImage.jpg";
-import ReactBuzzFeedQuiz from "react-buzzfeed-quiz";
-import styled from "styled-components";
-import "react-buzzfeed-quiz/ProximaNovaFont.css";
-
-const Quiz = styled(ReactBuzzFeedQuiz)([]);
+import { BuzzFeedQuiz } from "react-buzzfeed-quiz";
+import "react-buzzfeed-quiz/lib/styles.css";
 
 const App = () => {
   return (
-    <Quiz
+    <BuzzFeedQuiz
       title={"Your title goes here."}
       description={"Your description goes here."}
       byline={true}
@@ -250,10 +225,6 @@ const App = () => {
 react-buzzfeed-quiz is not affiliated, associated, authorized, endorsed by, or in any way officially connected with BuzzFeed, Inc., or any of its subsidiaries or its affiliates. The official BuzzFeed, Inc. website can be found at [https://www.buzzfeed.com](https://www.buzzfeed.com).
 
 The name BuzzFeed as well as related names, marks, emblems/logos, and images are registered trademarks of BuzzFeed, Inc.
-
-## Upcoming Features
-
-Versions 2+ of react-buzzfeed-quiz will include Typescript and SCSS instead of styled-components. The library will also not be bundled with fonts.
 
 ## User Guide
 
