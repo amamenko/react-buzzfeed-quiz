@@ -332,7 +332,7 @@ const App = () => {
             {
               title: "This is one result title",
               description:
-                "You can customize the link URL that will be shared to Facebook and Twitter. The text copied when the 'Copy Link' button is pressed can also be customized. Click the 'Retake Quiz' button to trigger the onRestart function.",
+                "You can customize the link URL that will be shared to Facebook and Twitter. The text copied when the 'Copy Link' (or 🔗) button is pressed can also be customized. Click the 'Retake' button to trigger the onRestart function.",
               resultImageSrc: FirstResultCatImage,
               imageAttribution: "Photo by Pixabay from Pexels",
               resultID: 0,
@@ -340,7 +340,7 @@ const App = () => {
             {
               title: "This is another result title",
               description:
-                "You can customize the link URL that will be shared to Facebook and Twitter. The text copied when the 'Copy Link' button is pressed can also be customized. Click the 'Retake Quiz' button to trigger the onRestart function.",
+                "You can customize the link URL that will be shared to Facebook and Twitter. The text copied when the 'Copy Link' (or 🔗) button is pressed can also be customized. Click the 'Retake' button to trigger the onRestart function.",
               resultImageSrc: SecondResultCatImage,
               imageAttribution: "Photo by Tranmautritam from Pexels",
               resultID: 1,
@@ -348,7 +348,7 @@ const App = () => {
             {
               title: "Here's yet another result title",
               description:
-                "You can customize the link URL that will be shared to Facebook and Twitter. The text copied when the 'Copy Link' button is pressed can also be customized. Click the 'Retake Quiz' button to trigger the onRestart function.",
+                "You can customize the link URL that will be shared to Facebook and Twitter. The text copied when the 'Copy Link' (or 🔗) button is pressed can also be customized. Click the 'Retake' button to trigger the onRestart function.",
               resultImageSrc: ThirdResultCatImage,
               imageAttribution: "Photo by Pixabay from Pexels",
               resultID: 2,

@@ -1,5 +1,14 @@
- .rbq_result_outer_container {
-  background-image: linear-gradient(43deg, #e40c78 0%, #e32 100%);
+.rbq_result_outer_container {
+  background-image: linear-gradient(
+    180deg,
+    #e40c78 0%,
+    #e32 51.44%,
+    #e40c78 100%
+  );
   border-radius: 3px;
-  padding: 0 1rem 1rem 1rem;
+  padding: 1rem;
+
+  @media (min-width: 40rem) {
+    padding: 1.5rem 1rem;
+  }
 }

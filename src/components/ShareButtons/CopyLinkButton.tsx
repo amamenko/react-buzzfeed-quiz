@@ -1,5 +1,6 @@
 import { FC } from "react";
-import { IoIosCheckmarkCircle, IoIosLink } from "react-icons/io";
+import { IoIosCheckmarkCircle } from "react-icons/io";
+import { HiLink } from "react-icons/hi";
 import CopyLinkButtonProps from "../../interfaces/Result/ShareButtons/copy_link_button.interface";
 
 const CopyLinkButton: FC<CopyLinkButtonProps> = ({
@@ -7,7 +8,6 @@ const CopyLinkButton: FC<CopyLinkButtonProps> = ({
   changeShareLinkClicked,
   shareLinkAnimatingOut,
   copyShareLink,
-  isMobile,
 }) => {
   const handleShareLinkClicked = (shareLink: string) => {
     // Handle copy to clipboard
@@ -55,45 +55,32 @@ const CopyLinkButton: FC<CopyLinkButtonProps> = ({
   };
 
   return (
-    <div className="rbq_share_link_button_outer_container">
-      {shareLinkClicked && (
-        <div
-          className={`rbq_tooltip_container rbq_link_share_copied_tooltip ${
-            shareLinkAnimatingOut ? "rbq_tooltip_animating_out" : ""
-          }`}
-        >
-          <IoIosCheckmarkCircle />
-          <p>Link copied!</p>
-        </div>
-      )}
-      <span
-        className={`rbq_share_button rbq_link_share_button ${
-          isMobile ? "rbq_mobile_link_share_button" : ""
-        }`}
+    <li className="rbq_share_button_outer_container">
+      <button
+        className="rbq_share_button rbq_link_share_button"
         onClick={() => {
           if (copyShareLink) {
             handleShareLinkClicked(copyShareLink);
           }
         }}
       >
-        <IoIosLink
-          className={`${
-            isMobile
-              ? "rbq_mobile_link_share_button_icon"
-              : "rbq_link_share_button_icon"
-          }`}
-        />
-        <p
-          className={`${
-            isMobile
-              ? "rbq_mobile_link_share_button_text"
-              : "rbq_link_share_button_text"
-          }`}
-        >
-          Copy Link
-        </p>
-      </span>
-    </div>
+        <HiLink className="rbq_link_share_button_icon" />
+        {shareLinkClicked && (
+          <div
+            className={`rbq_tooltip_container ${
+              shareLinkAnimatingOut ? "rbq_tooltip_animating_out" : ""
+            }`}
+          >
+            <div className="rbq_tooltip_outer_wrapper">
+              <div className="rbq_tooltip_inner_wrapper">
+                <IoIosCheckmarkCircle />
+                <span>Link copied!</span>
+              </div>
+            </div>
+          </div>
+        )}
+      </button>
+    </li>
   );
 };
 

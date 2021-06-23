@@ -1,0 +1,18 @@
+.rbq_tooltip_outer_wrapper {
+  left: 15px;
+  bottom: 30px;
+  transform: translate(-50%, 0);
+  margin-bottom: 15px;
+  background-color: #222;
+  color: #fff;
+  border: 1px solid #222;
+  box-sizing: inherit;
+  font-family: inherit;
+  position: absolute;
+  white-space: nowrap;
+  width: auto;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  box-shadow: 0 1px 1px rgb(173 168 168 / 10%);
+  border-radius: 3px;
+}
