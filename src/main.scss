@@ -32,9 +32,8 @@
 @use "partials/Question/rbq_text_fit";
 
 // Result Component
-@use "partials/Result/rbq_mobile_retake_quiz_container";
-@use "partials/Result/rbq_mobile_share_links_container";
 @use "partials/Result/rbq_result_attribution_text";
+@use "partials/Result/rbq_result_footer";
 @use "partials/Result/rbq_result_header";
 @use "partials/Result/rbq_result_inner_container";
 @use "partials/Result/rbq_result_inner_description_container";
@@ -43,8 +42,10 @@
 @use "partials/Result/rbq_result_inner_image_container";
 @use "partials/Result/rbq_result_inner_image";
 @use "partials/Result/rbq_result_outer_container";
-@use "partials/Result/rbq_retake_quiz_container";
+@use "partials/Result/rbq_retake_quiz_button";
+@use "partials/Result/rbq_share_button_outer_container";
 @use "partials/Result/rbq_share_button";
-@use "partials/Result/rbq_share_link_button_outer_container";
-@use "partials/Result/rbq_share_links_container";
+@use "partials/Result/rbq_share_links_list";
 @use "partials/Result/rbq_tooltip_container";
+@use "partials/Result/rbq_tooltip_inner_wrapper";
+@use "partials/Result/rbq_tooltip_outer_wrapper";

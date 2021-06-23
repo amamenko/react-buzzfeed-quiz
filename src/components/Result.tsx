@@ -1,5 +1,4 @@
 import { FC, useMemo } from "react";
-import { GrRefresh } from "react-icons/gr";
 import ResultProps from "../interfaces/Result/result_props.interface";
 import { Element } from "react-scroll";
 import FacebookButton from "./ShareButtons/FacebookButton";
@@ -79,45 +78,15 @@ const Result: FC<ResultProps> = (props) => {
       <Element className="rbq_result_outer_container" name="Result">
         <div className="rbq_result_header">
           <h2>{title}</h2>
-          <div className="rbq_retake_quiz_container" onClick={handleRetakeQuiz}>
-            <GrRefresh className="rbq_retake_icon" />
-            <p>Retake Quiz</p>
-          </div>
         </div>
         <div className="rbq_result_inner_container">
           <div className="rbq_result_inner_description_container">
             <h3 className="rbq_result_inner_description_header">
-              You got: {finalResult[0].title}
+              {finalResult[0].title}
             </h3>
             <p className="rbq_result_inner_description">
               {finalResult[0].description}
             </p>
-            {finalResult[0].resultImageSrc &&
-            finalResult[0].imageAttribution ? (
-              <p className="rbq_result_attribution_text">
-                <i>{finalResult[0].imageAttribution}</i>
-              </p>
-            ) : null}
-            <div className="rbq_share_links_container">
-              {facebookShareButton && (
-                <FacebookButton facebookShareLink={facebookShareLink} />
-              )}
-              {twitterShareButton && (
-                <TwitterButton
-                  twitterShareLink={twitterShareLink}
-                  twitterShareText={twitterShareText}
-                  twitterShareHashtags={twitterShareHashtags}
-                />
-              )}
-              {copyShareButton && (
-                <CopyLinkButton
-                  shareLinkClicked={shareLinkClicked}
-                  changeShareLinkClicked={changeShareLinkClicked}
-                  shareLinkAnimatingOut={shareLinkAnimatingOut}
-                  copyShareLink={copyShareLink}
-                />
-              )}
-            </div>
           </div>
           {finalResult[0].resultImageSrc && (
             <div className="rbq_result_inner_image_container">
@@ -126,37 +95,38 @@ const Result: FC<ResultProps> = (props) => {
                 alt="Buzzfeed Quiz Result Image"
                 src={finalResult[0].resultImageSrc}
               />
+              {finalResult[0].imageAttribution ? (
+                <span className="rbq_result_attribution_text">
+                  {finalResult[0].imageAttribution}
+                </span>
+              ) : null}
             </div>
           )}
-          <div className="rbq_mobile_share_links_container">
-            {facebookShareButton && (
-              <FacebookButton facebookShareLink={facebookShareLink} isMobile />
-            )}
-            {twitterShareButton && (
-              <TwitterButton
-                twitterShareLink={twitterShareLink}
-                twitterShareText={twitterShareText}
-                twitterShareHashtags={twitterShareHashtags}
-                isMobile
-              />
-            )}
+        </div>
+        <div className="rbq_result_footer">
+          <button className="rbq_retake_quiz_button" onClick={handleRetakeQuiz}>
+            Retake
+          </button>
+          <ul className="rbq_share_links_list" aria-label="share">
             {copyShareButton && (
               <CopyLinkButton
                 shareLinkClicked={shareLinkClicked}
                 changeShareLinkClicked={changeShareLinkClicked}
                 shareLinkAnimatingOut={shareLinkAnimatingOut}
                 copyShareLink={copyShareLink}
-                isMobile
               />
             )}
-          </div>
-        </div>
-        <div
-          className="rbq_mobile_retake_quiz_container"
-          onClick={handleRetakeQuiz}
-        >
-          <GrRefresh className="rbq_mobile_retake_icon" />
-          <p className="rbq_mobile_retake_text">Retake Quiz</p>
+            {twitterShareButton && (
+              <TwitterButton
+                twitterShareLink={twitterShareLink}
+                twitterShareText={twitterShareText}
+                twitterShareHashtags={twitterShareHashtags}
+              />
+            )}
+            {facebookShareButton && (
+              <FacebookButton facebookShareLink={facebookShareLink} />
+            )}
+          </ul>
         </div>
       </Element>
     );

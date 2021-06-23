@@ -1,0 +1,22 @@
+.rbq_retake_quiz_button {
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  background-image: none;
+  border: none;
+  white-space: nowrap;
+  appearance: none;
+  user-select: none;
+  outline: 0;
+  display: inline-block;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.2;
+  font-weight: 600;
+  text-decoration: underline;
+
+  &:hover {
+    color: #d7d7d7;
+  }
+}

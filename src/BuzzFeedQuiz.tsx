@@ -68,13 +68,31 @@ const BuzzFeedQuiz: FC<BuzzFeedQuizProps> = (props) => {
             container: "main_questions_container",
           });
         }, 200);
+
+        setTimeout(() => {
+          scroller.scrollTo("Result", {
+            duration: 250,
+            offset: -110,
+            smooth: true,
+            container: "main_questions_container",
+          });
+        }, 700);
       } else {
         scroller.scrollTo(element, {
           duration: 500,
-          offset: -150,
+          offset: -120,
           smooth: true,
           container: "main_questions_container",
         });
+
+        setTimeout(() => {
+          scroller.scrollTo(element, {
+            duration: 250,
+            offset: -150,
+            smooth: true,
+            container: "main_questions_container",
+          });
+        }, 500);
       }
     }
   };

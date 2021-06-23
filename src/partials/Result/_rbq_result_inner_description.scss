@@ -1,6 +1,10 @@
- .rbq_result_inner_description {
+.rbq_result_inner_description {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  margin-top: 0;
+  line-height: 1.2;
+
+  @media (min-width: 40rem) {
     font-size: 1.125rem;
-    margin-bottom: 0;
-    margin-top: 0;
-    line-height: 1.5;
+  }
 }

@@ -1,7 +1,11 @@
 .rbq_result_inner_description_container {
-    padding: 1rem;
-    flex-basis: 0;
-    flex-grow: 1;
-    max-width: 100%;
-    border-radius: 0;
+  padding: 1rem 1rem 0;
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+  border-radius: 0;
+
+  @media (min-width: 40rem) {
+    padding: 1.5rem 1.5rem 0;
+  }
 }

@@ -1,0 +1,16 @@
+.rbq_share_links_list {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+
+  li:not(:first-child) {
+    margin-left: 0.5rem;
+  }
+
+  li {
+    @media (min-width: 40rem) {
+      display: unset;
+    }
+  }
+}

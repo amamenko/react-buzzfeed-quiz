@@ -1,9 +1,11 @@
- .rbq_result_inner_image_container {
-    max-width: 100%;
-    border-radius: 0;
-    @media (min-width: 40rem) {
-        min-height: 20rem;
-        flex: 1 1 auto;
-        max-width: 50%;
-    }
+.rbq_result_inner_image_container {
+  position: relative;
+  display: block;
+  font-style: italic;
+  border-radius: 0;
+  @media (min-width: 40rem) {
+    margin: 0 1.5rem 1.5rem;
+    border-radius: 3px;
+    overflow: hidden;
+  }
 }

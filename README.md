@@ -53,9 +53,9 @@ import "react-buzzfeed-quiz/lib/styles.css";
 
 `react-buzzfeed-quiz` does not provide any fonts, but some recommended fonts that are often found on BuzzFeed quizzes are:
 
-* [Proxima Nova](https://github.com/roshinthomas/Proximanova-fonts)
-* [Pathway Gothic One](https://fonts.google.com/specimen/Pathway+Gothic+One)
-* [PT Serif](https://fonts.google.com/specimen/PT+Serif)
+- [Proxima Nova](https://github.com/roshinthomas/Proximanova-fonts)
+- [Pathway Gothic One](https://fonts.google.com/specimen/Pathway+Gothic+One)
+- [PT Serif](https://fonts.google.com/specimen/PT+Serif)
 
 ## Example
 
@@ -251,14 +251,13 @@ The `BuzzFeedQuiz` component accepts the following props:
 | twitterShareLink             | string        | `""`    | URL to share to Twitter upon clicking the Twitter share button.                                                                                                                                              |
 | twitterShareText             | string        | `""`    | Text to pre-fill shared tweet (keep in mind Twitter's current 280 character limit).                                                                                                                          |
 | twitterShareHashtags         | Array[string] | `[]`    | Array of strings that should be marked as hashtags of the shared tweet.                                                                                                                                      |
-| copyShareButton              | boolean       | `true`  | Whether or not to include the "Copy Link" button in the result container.                                                                                                                                    |
-| copyShareLink                | string        | `""`    | The text that should be copied to the clipboard upon clicking the "Copy Link" button.                                                                                                                        |
+| copyShareButton              | boolean       | `true`  | Whether or not to include the "Copy Link" (or 🔗) button in the result container.                                                                                                                            |
+| copyShareLink                | string        | `""`    | The text that should be copied to the clipboard upon clicking the "Copy Link" (or 🔗) button.                                                                                                                |
 | onResult                     | Function      | `NOOP`  | Function called when the quiz is completed and a result is available.                                                                                                                                        |
 | onAnswerSelection            | Function      | `NOOP`  | Function called when any answer option is selected.                                                                                                                                                          |
 | onRestart                    | Function      | `NOOP`  | Function called when the "Retake Quiz" button is clicked in the result container.                                                                                                                            |
 | questions                    | Array[Object] | `[]`    | An array of question objects (see Question Object below).                                                                                                                                                    |
 | results                      | Array[Object] | `[]`    | An array of result objects (see Result Object below).                                                                                                                                                        |
-
 
 ### Question Object
 
@@ -295,7 +294,7 @@ The value of the `answers` key of the Question Object accepts an array of answer
 
 | Key Name         | Value Type | Value Description                                                                                                                                                                                        |
 | ---------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| title            | string     | The heading text value of the associated result. Preceded by the string "You got: ".                                                                                                                     |
+| title            | string     | The heading text value of the associated result.                                                                                                                                                         |
 | description      | string     | The text value of the sub-heading result description.                                                                                                                                                    |
 | resultImageSrc   | string     | URL or local filename to be included in the result container image's `src` attribute.                                                                                                                    |
 | imageAttribution | string     | This will add attribution text below the result description giving credit to the result container image's original source.                                                                               |

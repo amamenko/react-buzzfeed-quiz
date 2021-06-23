@@ -1,7 +1,13 @@
 .rbq_result_attribution_text {
-    margin-top: 0.5rem;
-    font-size: 1.125rem;
-    margin-bottom: 0;
-    color: #757575;
-    display: inline-block;
+  position: absolute;
+  font-size: 12px;
+  line-height: 1.2;
+  word-break: break-word;
+  margin: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  opacity: 0.9;
+  color: #222;
+  padding: 0.25rem 0.5rem;
 }
