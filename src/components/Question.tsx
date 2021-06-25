@@ -16,7 +16,6 @@ const Question: FC<QuestionProps> = memo((props) => {
     generalFontColor,
     resultsAvailable,
     onAnswerSelection,
-    imageOverlapExists,
   } = props;
 
   const { height, width, ref: resizeRef } = useResizeDetector();
@@ -28,7 +27,7 @@ const Question: FC<QuestionProps> = memo((props) => {
           className={`rbq_question_overlap_text ${
             item.backgroundImageSrc ? "rbq_question_with_bg_image" : ""
           }`}
-          min={height ? (height < 345 ? 30 : 50) : 50}
+          min={height ? (height < 345 ? 25 : 50) : 50}
           max={height ? (height < 345 ? 80 : 118) : 118}
           capAt={80}
           style={{
@@ -114,7 +113,7 @@ const Question: FC<QuestionProps> = memo((props) => {
             item.questionRelativeToImage === "adjacent"
               ? "rbq_question_adjacent_to_image"
               : ""
-          } ${!imageOverlapExists ? "rbq_no_image_overlap" : ""}`}
+          } `}
           style={{
             background: item.backgroundColor
               ? item.backgroundColor

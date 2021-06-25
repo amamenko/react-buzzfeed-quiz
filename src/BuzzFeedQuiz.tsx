@@ -55,7 +55,6 @@ const BuzzFeedQuiz: FC<BuzzFeedQuizProps> = (props) => {
   const [finalResult, changeFinalResult] = useState<ResultType[]>([]);
   const [shareLinkClicked, changeShareLinkClicked] = useState(false);
   const [shareLinkAnimatingOut, changeShareLinkAnimatingOut] = useState(false);
-  const [imageOverlapExists, changeImageOverlapExists] = useState(false);
 
   const scrollFunction = (element: string, questionIndex: number) => {
     if (autoScroll) {
@@ -143,23 +142,6 @@ const BuzzFeedQuiz: FC<BuzzFeedQuizProps> = (props) => {
     }
   }, [shareLinkClicked]);
 
-  useEffect(() => {
-    if (questions) {
-      if (
-        questions.some(
-          (item) =>
-            (item.backgroundImageSrc &&
-              item.questionRelativeToImage === "overlap") ||
-            (item.backgroundImageSrc && !item.questionRelativeToImage)
-        )
-      ) {
-        if (!imageOverlapExists) {
-          changeImageOverlapExists(true);
-        }
-      }
-    }
-  }, [questions, imageOverlapExists]);
-
   return (
     <QuizContext.Provider
       value={{
@@ -200,7 +182,6 @@ const BuzzFeedQuiz: FC<BuzzFeedQuizProps> = (props) => {
                         generalFontColor={generalFontColor}
                         resultsAvailable={resultsAvailable}
                         onAnswerSelection={onAnswerSelection}
-                        imageOverlapExists={imageOverlapExists}
                       />
                     );
                   })}

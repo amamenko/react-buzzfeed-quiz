@@ -116,7 +116,7 @@
 }
 
 body {
-  font-family: "Proxima Nova";
+  font-family: "Proxima Nova", Helvetica, Arial, sans-serif;
   margin: 0;
   padding: 0;
 }

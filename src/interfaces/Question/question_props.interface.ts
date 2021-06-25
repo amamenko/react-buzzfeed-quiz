@@ -7,7 +7,6 @@ interface QuestionProps {
   generalFontColor?: string;
   resultsAvailable: boolean;
   onAnswerSelection?: () => void;
-  imageOverlapExists: boolean;
 }
 
 export default QuestionProps;

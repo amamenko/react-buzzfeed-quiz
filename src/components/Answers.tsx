@@ -164,7 +164,7 @@ const Answers: FC<AnswersProps> = ({
                 >
                   <TextFit
                     className="rbq_answer_text"
-                    min={20}
+                    min={15}
                     max={gridLayout ? 54 : 60}
                     capAt={gridLayout ? 35 : 46}
                     style={{
