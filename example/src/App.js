@@ -23,26 +23,22 @@ var App = function () {
     var _a = useState(false), fontsLoaded = _a[0], changeFontsLoaded = _a[1];
     useEffect(function () {
         changeFontsLoaded(false);
-    }, []);
+    }, [changeFontsLoaded]);
     useEffect(function () {
         document.fonts.ready.then(function () {
             changeFontsLoaded(true);
         });
-    }, []);
+    }, [changeFontsLoaded]);
     if (fontsLoaded) {
-        return (_jsxs(_Fragment, { children: [_jsxs(StyledNav, { children: [_jsx("a", __assign({ href: "/" }, { children: _jsxs(StyledLogoContainer, { children: [_jsx(StyledLogoLetter, { children: "React" }, void 0),
-                                    _jsx(StyledLogoLetter, __assign({ buzzfeed: true }, { children: "BuzzFeed" }), void 0),
-                                    _jsx(StyledLogoLetter, { children: "Quiz" }, void 0)] }, void 0) }), void 0),
-                        _jsxs(StyledLinksContainer, { children: [_jsx("a", __assign({ href: "https://github.com/amamenko/react-buzzfeed-quiz", target: "_blank", rel: "noopener noreferrer" }, { children: _jsx(FaGithub, {}, void 0) }), void 0),
-                                _jsx("a", __assign({ href: "https://www.npmjs.com/package/react-buzzfeed-quiz", target: "_blank", rel: "noopener noreferrer" }, { children: _jsx(FaNpm, {}, void 0) }), void 0),
-                                _jsx("a", __assign({ href: "https://yarnpkg.com/package/react-buzzfeed-quiz", target: "_blank", rel: "noopener noreferrer" }, { children: _jsx(FaYarn, {}, void 0) }), void 0)] }, void 0)] }, void 0),
-                _jsx(StyledInstallationSeparator, __assign({ first: true }, { children: _jsx("p", { children: "Install with NPM:" }, void 0) }), void 0),
-                _jsx(StyledInstallationInstructions, { children: _jsx("code", { children: _jsx("span", { children: "npm i react-buzzfeed-quiz" }, void 0) }, void 0) }, void 0),
-                _jsx(StyledInstallationSeparator, { children: _jsx("p", { children: "Install with Yarn:" }, void 0) }, void 0),
-                _jsx(StyledInstallationInstructions, { children: _jsx("code", { children: _jsx("span", { children: "yarn add react-buzzfeed-quiz" }, void 0) }, void 0) }, void 0),
-                _jsx(BuzzFeedQuiz, { title: "Wanna See A Demo of React BuzzFeed Quiz?", description: "Here it is, this is the demo.", byline: true, bylineAuthor: "Avi Mamenko", bylineAuthorLink: "https://amamenko.github.io", bylineAuthorLinkOpenInNewTab: true, bylineAuthorTagline: "Web Developer", bylineAvatarImageSrc: ProfilePhoto, autoScroll: true, onRestart: function () {
+        return (_jsxs(_Fragment, { children: [_jsxs(StyledNav, { children: [_jsx("a", __assign({ href: "/" }, { children: _jsxs(StyledLogoContainer, { children: [_jsx(StyledLogoLetter, { children: "React" }, void 0), _jsx(StyledLogoLetter, __assign({ buzzfeed: true }, { children: "BuzzFeed" }), void 0), _jsx(StyledLogoLetter, { children: "Quiz" }, void 0)] }, void 0) }), void 0), _jsxs(StyledLinksContainer, { children: [_jsx("a", __assign({ href: "https://github.com/amamenko/react-buzzfeed-quiz", target: "_blank", rel: "noopener noreferrer" }, { children: _jsx(FaGithub, {}, void 0) }), void 0), _jsx("a", __assign({ href: "https://www.npmjs.com/package/react-buzzfeed-quiz", target: "_blank", rel: "noopener noreferrer" }, { children: _jsx(FaNpm, {}, void 0) }), void 0), _jsx("a", __assign({ href: "https://yarnpkg.com/package/react-buzzfeed-quiz", target: "_blank", rel: "noopener noreferrer" }, { children: _jsx(FaYarn, {}, void 0) }), void 0)] }, void 0)] }, void 0), _jsx(StyledInstallationSeparator, __assign({ first: true }, { children: _jsx("p", { children: "Install with NPM:" }, void 0) }), void 0), _jsx(StyledInstallationInstructions, { children: _jsx("code", { children: _jsx("span", { children: "npm i react-buzzfeed-quiz" }, void 0) }, void 0) }, void 0), _jsx(StyledInstallationSeparator, { children: _jsx("p", { children: "Install with Yarn:" }, void 0) }, void 0), _jsx(StyledInstallationInstructions, { children: _jsx("code", { children: _jsx("span", { children: "yarn add react-buzzfeed-quiz" }, void 0) }, void 0) }, void 0), _jsx(BuzzFeedQuiz, { title: "Wanna See A Demo of React BuzzFeed Quiz?", description: "Here it is, this is the demo.", byline: true, bylineAuthor: "Avi Mamenko", bylineAuthorLink: "https://amamenko.github.io", bylineAuthorLinkOpenInNewTab: true, bylineAuthorTagline: "Web Developer", bylineAvatarImageSrc: ProfilePhoto, autoScroll: true, onRestart: function () {
                         return alert("This alert was triggered by the onRestart prop!");
-                    }, onResult: function () { return alert("The onResult prop triggered this alert!"); }, facebookShareButton: true, facebookShareLink: "google.com", twitterShareButton: true, twitterShareLink: "google.com", copyShareButton: true, copyShareLink: "This text was copied using the copyShareLink prop.", questions: [
+                    }, onResult: function () { return alert("The onResult prop triggered this alert!"); }, onAnswerSelection: function (questionIndex, answerIndex, resultID) {
+                        return console.log({
+                            questionIndex: questionIndex,
+                            answerIndex: answerIndex,
+                            resultID: resultID,
+                        });
+                    }, facebookShareButton: true, facebookShareLink: "google.com", twitterShareButton: true, twitterShareLink: "google.com", copyShareButton: true, copyShareLink: "This text was copied using the copyShareLink prop.", questions: [
                         {
                             question: "Here's a default question",
                             answers: [
@@ -214,8 +210,8 @@ var App = function () {
                                 },
                                 {
                                     answer: "Click for answer function",
-                                    onAnswerSelection: function () {
-                                        return alert("This alert is caused by an answer selection!");
+                                    onAnswerSelection: function (questionIndex, answerIndex, resultID) {
+                                        return alert("This alert is caused by an answer selection!\n\nThe onAnswerSelection prop takes an optional callback function with the question's index, selected answer index, and associated result ID as parameters.\n\nCheck out the console to see these parameters in action!\n\n*** Keep in mind that the onAnswerSelection prop on specific answers supersedes ReactBuzzFeedQuiz's general onAnswerSelection prop, so the parameters for this particular question selection won't show up in the console but here instead:\n\n{questionIndex: " + questionIndex + ", answerIndex: " + answerIndex + ", resultID: " + resultID + "}");
                                     },
                                     resultID: 1,
                                 },

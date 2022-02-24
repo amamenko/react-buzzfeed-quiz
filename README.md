@@ -83,6 +83,13 @@ const App = () => {
       autoScroll={true}
       onRestart={() => alert("This alert was triggered by the onRestart prop!")}
       onResult={() => alert("The onResult prop triggered this alert!")}
+      onAnswerSelection={(questionIndex, answerIndex, resultID) =>
+        console.log({
+          questionIndex,
+          answerIndex,
+          resultID,
+        })
+      }
       facebookShareButton={true}
       facebookShareLink={"www.yourlink.com"}
       twitterShareButton={true}
@@ -188,7 +195,7 @@ const App = () => {
             },
             {
               answer: "Click for answer function",
-              onAnswerSelection: () =>
+              onAnswerSelection: (questionIndex, answerIndex, resultID) =>
                 alert("This alert is caused by an answer selection!"),
               resultID: 1,
             },
@@ -254,7 +261,7 @@ The `BuzzFeedQuiz` component accepts the following props:
 | copyShareButton              | boolean       | `true`  | Whether or not to include the "Copy Link" (or 🔗) button in the result container.                                                                                                                            |
 | copyShareLink                | string        | `""`    | The text that should be copied to the clipboard upon clicking the "Copy Link" (or 🔗) button.                                                                                                                |
 | onResult                     | Function      | `NOOP`  | Function called when the quiz is completed and a result is available.                                                                                                                                        |
-| onAnswerSelection            | Function      | `NOOP`  | Function called when any answer option is selected.                                                                                                                                                          |
+| onAnswerSelection            | Function      | `NOOP`  | Function called when any answer option is selected. The question's index, the answer's index, and the answer's associated result ID are available as parameters.                                             |
 | onRestart                    | Function      | `NOOP`  | Function called when the "Retake Quiz" button is clicked in the result container.                                                                                                                            |
 | questions                    | Array[Object] | `[]`    | An array of question objects (see Question Object below).                                                                                                                                                    |
 | results                      | Array[Object] | `[]`    | An array of result objects (see Result Object below).                                                                                                                                                        |
@@ -285,7 +292,7 @@ The value of the `answers` key of the Question Object accepts an array of answer
 | fontColor          | string     | Applies a given color to only the specific answer container's font. This value supersedes the `generalFontColor` prop if supplied to `ReactBuzzFeedQuiz`. If the `generalFontColor` prop is supplied and this value is empty, then the color in `generalFontColor` will be applied. Otherwise, if no color or invalid color is supplied, the default font color is white.                               |
 | backgroundImageSrc | string     | URL or local filename to be included as the background image of the answer container. Automatically sets the font color to white and adds a text stroke. Takes precedence over any theme, if supplied.                                                                                                                                                                                                  |
 | imageAttribution   | string     | If background image is supplied, this will add attribution text below the image giving credit to its original source.                                                                                                                                                                                                                                                                                   |
-| onAnswerSelection  | Function   | Function called when this specific answer option is selected. This function value supersedes `ReactBuzzFeedQuiz`'s `onAnswerSelection` prop, if supplied, for this specific answer choice.                                                                                                                                                                                                              |
+| onAnswerSelection  | Function   | Function called when this specific answer option is selected. The question's index, the answer's index, and the answer's associated result ID are available as parameters. This function value supersedes `ReactBuzzFeedQuiz`'s `onAnswerSelection` prop, if supplied, for this specific answer choice.                                                                                                 |
 | resultID           | number     | The numerical ID of the answer's associated Result Object (see below) found in `ReactBuzzFeedQuiz`'s `results` prop.                                                                                                                                                                                                                                                                                    |
 
 ### Result Object

@@ -21,19 +21,23 @@ const Answers: FC<AnswersProps> = ({
     questionIndex: number,
     answerIndex: number,
     resultID: number,
-    specificHandleAnswerSelection?: () => void
+    specificHandleAnswerSelection?: (
+      questionIndex: number,
+      answerIndex: number,
+      resultID: number
+    ) => void
   ) => {
     const handleGeneralAnswerSelection = () => {
       if (onAnswerSelection) {
         if (typeof onAnswerSelection === "function") {
-          onAnswerSelection();
+          onAnswerSelection(questionIndex, answerIndex, resultID);
         }
       }
     };
 
     if (specificHandleAnswerSelection) {
       if (typeof specificHandleAnswerSelection === "function") {
-        specificHandleAnswerSelection();
+        specificHandleAnswerSelection(questionIndex, answerIndex, resultID);
       } else {
         handleGeneralAnswerSelection();
       }

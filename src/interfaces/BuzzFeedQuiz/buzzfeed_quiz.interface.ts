@@ -63,10 +63,15 @@ type BuzzFeedQuizProps = BylineProps & {
   onResult?: () => void;
   /**
    * Function called when any answer option is selected.
+   * The question's index, the answer's index, and the answer's associated result ID are available as parameters.
    *
    * @returns void
    */
-  onAnswerSelection?: () => void;
+  onAnswerSelection?: (
+    questionIndex?: number,
+    answerIndex?: number,
+    resultID?: number
+  ) => void;
   /**
    * Function called when the "Retake Quiz" button is clicked in the result container.
    *
