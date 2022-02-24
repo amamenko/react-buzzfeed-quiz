@@ -23,13 +23,13 @@ const App = () => {
 
   useEffect(() => {
     changeFontsLoaded(false);
-  }, []);
+  }, [changeFontsLoaded]);
 
   useEffect(() => {
     document.fonts.ready.then(() => {
       changeFontsLoaded(true);
     });
-  }, []);
+  }, [changeFontsLoaded]);
 
   if (fontsLoaded) {
     return (
@@ -97,6 +97,13 @@ const App = () => {
             alert("This alert was triggered by the onRestart prop!")
           }
           onResult={() => alert("The onResult prop triggered this alert!")}
+          onAnswerSelection={(questionIndex, answerIndex, resultID) =>
+            console.log({
+              questionIndex,
+              answerIndex,
+              resultID,
+            })
+          }
           facebookShareButton={true}
           facebookShareLink={"google.com"}
           twitterShareButton={true}
@@ -287,8 +294,10 @@ const App = () => {
                 },
                 {
                   answer: "Click for answer function",
-                  onAnswerSelection: () =>
-                    alert("This alert is caused by an answer selection!"),
+                  onAnswerSelection: (questionIndex, answerIndex, resultID) =>
+                    alert(
+                      `This alert is caused by an answer selection!\n\nThe onAnswerSelection prop takes an optional callback function with the question's index, selected answer index, and associated result ID as parameters.\n\nCheck out the console to see these parameters in action!\n\n*** Keep in mind that the onAnswerSelection prop on specific answers supersedes ReactBuzzFeedQuiz's general onAnswerSelection prop, so the parameters for this particular question selection won't show up in the console but here instead:\n\n{questionIndex: ${questionIndex}, answerIndex: ${answerIndex}, resultID: ${resultID}}`
+                    ),
                   resultID: 1,
                 },
                 {

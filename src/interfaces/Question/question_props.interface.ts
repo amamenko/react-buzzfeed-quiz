@@ -6,7 +6,11 @@ interface QuestionProps {
   generalBackgroundColor?: string;
   generalFontColor?: string;
   resultsAvailable: boolean;
-  onAnswerSelection?: () => void;
+  onAnswerSelection?: (
+    questionIndex?: number,
+    answerIndex?: number,
+    resultID?: number
+  ) => void;
 }
 
 export default QuestionProps;

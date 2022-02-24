@@ -22,10 +22,15 @@ type AnswerType = ImageType & {
   /**
    * Function called when this specific answer option is selected.
    * This function value supersedes ReactBuzzFeedQuiz's onAnswerSelection prop, if supplied, for this specific answer choice.
+   * The question's index, the answer's index, and the answer's associated result ID are available as parameters.
    *
    * @returns void
    */
-  onAnswerSelection?: () => void;
+  onAnswerSelection?: (
+    questionIndex?: number,
+    answerIndex?: number,
+    resultID?: number
+  ) => void;
   /**
    * The numerical ID of the answer's associated result object found in ReactBuzzFeedQuiz's results prop.
    */

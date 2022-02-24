@@ -4,7 +4,11 @@ interface AnswersProps {
   item: QuestionType;
   questionIndex: number;
   resultsAvailable: boolean;
-  onAnswerSelection?: () => void;
+  onAnswerSelection?: (
+    questionIndex?: number,
+    answerIndex?: number,
+    resultID?: number
+  ) => void;
   generalBackgroundColor?: string;
   generalFontColor?: string;
 }

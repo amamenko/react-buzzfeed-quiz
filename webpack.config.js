@@ -51,9 +51,7 @@ module.exports = {
       filename: "styles.css",
       chunkFilename: "[id].css",
     }),
-    new ForkTsCheckerWebpackPlugin({
-      typescript: true,
-    }),
+    new ForkTsCheckerWebpackPlugin(),
   ],
   resolve: {
     alias: {
