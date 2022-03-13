@@ -66,6 +66,7 @@ import ProfilePhoto from "./path/to/ProfilePhoto.jpg";
 import BackgroundImage from "./path/to/BackgroundImage.jpg";
 import FirstResultImage from "./path/to/FirstResultImage.jpg";
 import SecondResultImage from "./path/to/SecondResultImage.jpg";
+import ResponseImage from "./path/to/ResponseImage.jpg";
 import { BuzzFeedQuiz } from "react-buzzfeed-quiz";
 import "react-buzzfeed-quiz/lib/styles.css";
 
@@ -136,6 +137,12 @@ const App = () => {
               backgroundColor: "yellow",
               fontColor: "#000",
               resultID: 2,
+              revealResponse: {
+                 title: "Here's an answer response!",
+                 description: "Here's a description for the answer response!",
+                 image: ResponseImage,
+                 imageAttribution: "Answer response image attribution text goes here",
+              },
             },
           ],
         },
@@ -294,6 +301,18 @@ The value of the `answers` key of the Question Object accepts an array of answer
 | imageAttribution   | string     | If background image is supplied, this will add attribution text below the image giving credit to its original source.                                                                                                                                                                                                                                                                                   |
 | onAnswerSelection  | Function   | Function called when this specific answer option is selected. The question's index, the answer's index, and the answer's associated result ID are available as parameters. This function value supersedes `ReactBuzzFeedQuiz`'s `onAnswerSelection` prop, if supplied, for this specific answer choice.                                                                                                 |
 | resultID           | number     | The numerical ID of the answer's associated Result Object (see below) found in `ReactBuzzFeedQuiz`'s `results` prop.                                                                                                                                                                                                                                                                                    |
+| revealResponse     | Object     | Triggers a response message for this specific answer below the associated question and its answer options (see Response Object below). |
+
+### Response Object
+              
+`BuzzFeedQuiz`'s Answer Objects accept an optional `revealResponse` key object with key-value pairs formatted in the following manner:
+
+| Key Name         | Value Type | Value Description                                                                                                                                                                                        |
+| ---------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| title            | string or JSX element     | The heading value of the associated answer response.                                                                                                                                                         |
+| description      | string or JSX element     | The lower sub-heading value of the associated answer response.                                                                                                                                                    |
+| image   | string     | URL or local filename to be included in the answer response image's `src` attribute.                                                                                                                    |
+| imageAttribution | string     | This will add attribution text below the answer response image giving credit to the image's original source.                                                                               |
 
 ### Result Object
 

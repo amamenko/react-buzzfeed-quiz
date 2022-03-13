@@ -15,6 +15,7 @@ module.exports = {
     "./components/Answers": "./src/components/Answers.tsx",
     "./components/Byline": "./src/components/Byline.tsx",
     "./components/Question": "./src/components/Question.tsx",
+    "./components/QuestionResponse": "./src/components/QuestionResponse.tsx",
     "./components/Result": "./src/components/Result.tsx",
     "./components/ShareButtons/CopyLinkButton":
       "./src/components/ShareButtons/CopyLinkButton.tsx",

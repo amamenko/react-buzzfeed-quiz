@@ -128,3 +128,7 @@ h1 {
 .rbq_outer_quiz_container {
   margin-top: 1rem;
 }
+
+.rbq_question_response_title svg {
+  margin-right: 0.5rem;
+}
