@@ -5,6 +5,7 @@ import ProfilePhoto from "./assets/images/ProfilePhoto.jpg";
 import StockCatPhoto from "./assets/images/StockCatPhoto.jpg";
 import AdditionalCatPhoto from "./assets/images/AdditionalCatPhoto.jpg";
 import CalmSkyPhoto from "./assets/images/CalmSkyPhoto.jpg";
+import GreenEyedCat from "./assets/images/GreenEyedCat.jpg";
 import FirstResultCatImage from "./assets/images/FirstResultCatImage.jpg";
 import SecondResultCatImage from "./assets/images/SecondResultCatImage.jpg";
 import ThirdResultCatImage from "./assets/images/ThirdResultCatImage.jpg";
@@ -16,6 +17,7 @@ import StyledLinksContainer from "./styled/StyledLinksContainer";
 import StyledLogoLetter from "./styled/StyledLogoLetter";
 import StyledLogoContainer from "./styled/StyledLogoContainer";
 import { FaYarn, FaNpm, FaGithub } from "react-icons/fa";
+import { IoRocketSharp } from "react-icons/io5";
 import { BuzzFeedQuiz } from "react-buzzfeed-quiz";
 import "react-buzzfeed-quiz/lib/styles.css";
 import "./App.css";
@@ -29,6 +31,11 @@ var App = function () {
             changeFontsLoaded(true);
         });
     }, [changeFontsLoaded]);
+    var renderCustomRocketGradient = function () {
+        return (_jsxs(_Fragment, { children: [_jsx("svg", __assign({ width: "0", height: "0" }, { children: _jsxs("linearGradient", __assign({ id: "rocket-gradient", x1: "100%", y1: "100%", x2: "0%", y2: "0%" }, { children: [_jsx("stop", { stopColor: "rgb(0,80,58)", offset: "0%" }, void 0), _jsx("stop", { stopColor: "rgb(2,207,158)", offset: "100%" }, void 0)] }), void 0) }), void 0), _jsx(IoRocketSharp, { style: {
+                        fill: "url(#rocket-gradient)",
+                    }, size: 28 }, void 0)] }, void 0));
+    };
     if (fontsLoaded) {
         return (_jsxs(_Fragment, { children: [_jsxs(StyledNav, { children: [_jsx("a", __assign({ href: "/" }, { children: _jsxs(StyledLogoContainer, { children: [_jsx(StyledLogoLetter, { children: "React" }, void 0), _jsx(StyledLogoLetter, __assign({ buzzfeed: true }, { children: "BuzzFeed" }), void 0), _jsx(StyledLogoLetter, { children: "Quiz" }, void 0)] }, void 0) }), void 0), _jsxs(StyledLinksContainer, { children: [_jsx("a", __assign({ href: "https://github.com/amamenko/react-buzzfeed-quiz", target: "_blank", rel: "noopener noreferrer" }, { children: _jsx(FaGithub, {}, void 0) }), void 0), _jsx("a", __assign({ href: "https://www.npmjs.com/package/react-buzzfeed-quiz", target: "_blank", rel: "noopener noreferrer" }, { children: _jsx(FaNpm, {}, void 0) }), void 0), _jsx("a", __assign({ href: "https://yarnpkg.com/package/react-buzzfeed-quiz", target: "_blank", rel: "noopener noreferrer" }, { children: _jsx(FaYarn, {}, void 0) }), void 0)] }, void 0)] }, void 0), _jsx(StyledInstallationSeparator, __assign({ first: true }, { children: _jsx("p", { children: "Install with NPM:" }, void 0) }), void 0), _jsx(StyledInstallationInstructions, { children: _jsx("code", { children: _jsx("span", { children: "npm i react-buzzfeed-quiz" }, void 0) }, void 0) }, void 0), _jsx(StyledInstallationSeparator, { children: _jsx("p", { children: "Install with Yarn:" }, void 0) }, void 0), _jsx(StyledInstallationInstructions, { children: _jsx("code", { children: _jsx("span", { children: "yarn add react-buzzfeed-quiz" }, void 0) }, void 0) }, void 0), _jsx(BuzzFeedQuiz, { title: "Wanna See A Demo of React BuzzFeed Quiz?", description: "Here it is, this is the demo.", byline: true, bylineAuthor: "Avi Mamenko", bylineAuthorLink: "https://amamenko.github.io", bylineAuthorLinkOpenInNewTab: true, bylineAuthorTagline: "Web Developer", bylineAvatarImageSrc: ProfilePhoto, autoScroll: true, onRestart: function () {
                         return alert("This alert was triggered by the onRestart prop!");
@@ -169,6 +176,18 @@ var App = function () {
                                     resultID: 2,
                                     backgroundColor: "rgb(238,243,247)",
                                     fontColor: "rgb(53,51,48)",
+                                },
+                                {
+                                    answer: "Click here to trigger an answer response!",
+                                    resultID: 1,
+                                    backgroundColor: "rgb(238,243,247)",
+                                    fontColor: "rgb(53,51,48)",
+                                    revealResponse: {
+                                        title: (_jsx(_Fragment, { children: _jsxs("h3", __assign({ className: "rbq_question_response_title" }, { children: [renderCustomRocketGradient(), "Here's an answer response!"] }), void 0) }, void 0)),
+                                        description: "Trigger your own answer response by setting an answer's revealResponse key. You can set a title and description value (either of which can be a string or a JSX element). You can also set an image and an image attribution statement.",
+                                        image: GreenEyedCat,
+                                        imageAttribution: "Via Pexels",
+                                    },
                                 },
                             ],
                         },

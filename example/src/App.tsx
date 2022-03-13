@@ -3,6 +3,7 @@ import ProfilePhoto from "./assets/images/ProfilePhoto.jpg";
 import StockCatPhoto from "./assets/images/StockCatPhoto.jpg";
 import AdditionalCatPhoto from "./assets/images/AdditionalCatPhoto.jpg";
 import CalmSkyPhoto from "./assets/images/CalmSkyPhoto.jpg";
+import GreenEyedCat from "./assets/images/GreenEyedCat.jpg";
 import FirstResultCatImage from "./assets/images/FirstResultCatImage.jpg";
 import SecondResultCatImage from "./assets/images/SecondResultCatImage.jpg";
 import ThirdResultCatImage from "./assets/images/ThirdResultCatImage.jpg";
@@ -14,6 +15,7 @@ import StyledLinksContainer from "./styled/StyledLinksContainer";
 import StyledLogoLetter from "./styled/StyledLogoLetter";
 import StyledLogoContainer from "./styled/StyledLogoContainer";
 import { FaYarn, FaNpm, FaGithub } from "react-icons/fa";
+import { IoRocketSharp } from "react-icons/io5";
 import { BuzzFeedQuiz } from "react-buzzfeed-quiz";
 import "react-buzzfeed-quiz/lib/styles.css";
 import "./App.css";
@@ -30,6 +32,31 @@ const App = () => {
       changeFontsLoaded(true);
     });
   }, [changeFontsLoaded]);
+
+  const renderCustomRocketGradient = () => {
+    return (
+      <>
+        <svg width="0" height="0">
+          <linearGradient
+            id="rocket-gradient"
+            x1="100%"
+            y1="100%"
+            x2="0%"
+            y2="0%"
+          >
+            <stop stopColor="rgb(0,80,58)" offset="0%" />
+            <stop stopColor="rgb(2,207,158)" offset="100%" />
+          </linearGradient>
+        </svg>
+        <IoRocketSharp
+          style={{
+            fill: "url(#rocket-gradient)",
+          }}
+          size={28}
+        />
+      </>
+    );
+  };
 
   if (fontsLoaded) {
     return (
@@ -252,6 +279,26 @@ const App = () => {
                   resultID: 2,
                   backgroundColor: "rgb(238,243,247)",
                   fontColor: "rgb(53,51,48)",
+                },
+                {
+                  answer: "Click here to trigger an answer response!",
+                  resultID: 1,
+                  backgroundColor: "rgb(238,243,247)",
+                  fontColor: "rgb(53,51,48)",
+                  revealResponse: {
+                    title: (
+                      <>
+                        <h3 className="rbq_question_response_title">
+                          {renderCustomRocketGradient()}
+                          Here's an answer response!
+                        </h3>
+                      </>
+                    ),
+                    description:
+                      "Trigger your own answer response by setting an answer's revealResponse key. You can set a title and description value (either of which can be a string or a JSX element). You can also set an image and an image attribution statement.",
+                    image: GreenEyedCat,
+                    imageAttribution: "Via Pexels",
+                  },
                 },
               ],
             },

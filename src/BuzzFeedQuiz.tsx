@@ -1,4 +1,4 @@
-import { useState, useEffect, FC, createContext, Dispatch } from "react";
+import React, { useState, useEffect, FC, createContext, Dispatch } from "react";
 import { scroller, Element } from "react-scroll";
 import Byline from "./components/Byline";
 import Question from "./components/Question";
@@ -57,41 +57,58 @@ const BuzzFeedQuiz: FC<BuzzFeedQuizProps> = (props) => {
   const [shareLinkAnimatingOut, changeShareLinkAnimatingOut] = useState(false);
 
   const scrollFunction = (element: string, questionIndex: number) => {
-    if (autoScroll) {
-      if (questionIndex + 1 === questions.length) {
-        setTimeout(() => {
-          scroller.scrollTo("Result", {
-            duration: 500,
-            offset: -80,
-            smooth: true,
-            container: "main_questions_container",
-          });
-        }, 200);
-
-        setTimeout(() => {
-          scroller.scrollTo("Result", {
-            duration: 250,
-            offset: -110,
-            smooth: true,
-            container: "main_questions_container",
-          });
-        }, 700);
-      } else {
-        scroller.scrollTo(element, {
+    const scrollToRes = () => {
+      setTimeout(() => {
+        scroller.scrollTo("Result", {
           duration: 500,
-          offset: -120,
+          offset: -80,
           smooth: true,
           container: "main_questions_container",
         });
+      }, 200);
 
-        setTimeout(() => {
-          scroller.scrollTo(element, {
-            duration: 250,
-            offset: -150,
-            smooth: true,
-            container: "main_questions_container",
-          });
-        }, 500);
+      setTimeout(() => {
+        scroller.scrollTo("Result", {
+          duration: 250,
+          offset: -110,
+          smooth: true,
+          container: "main_questions_container",
+        });
+      }, 700);
+    };
+
+    const scrollToEl = () => {
+      scroller.scrollTo(element, {
+        duration: 500,
+        offset: -120,
+        smooth: true,
+        container: "main_questions_container",
+      });
+
+      setTimeout(() => {
+        scroller.scrollTo(element, {
+          duration: 250,
+          offset: -150,
+          smooth: true,
+          container: "main_questions_container",
+        });
+      }, 500);
+    };
+
+    if (autoScroll) {
+      if (
+        questionIndex + 1 === questions.length &&
+        !element.includes("RBQQuestionResponse")
+      ) {
+        scrollToRes();
+      } else {
+        if (element.includes("RBQQuestionResponse")) {
+          setTimeout(() => {
+            scrollToEl();
+          }, 200);
+        } else {
+          scrollToEl();
+        }
       }
     }
   };
@@ -172,19 +189,17 @@ const BuzzFeedQuiz: FC<BuzzFeedQuizProps> = (props) => {
                   id="main_questions_container"
                   className="rbq_question_list_container"
                 >
-                  {questions.map((item, questionIndex) => {
-                    return (
-                      <Question
-                        key={questionIndex}
-                        item={item}
-                        questionIndex={questionIndex}
-                        generalBackgroundColor={generalBackgroundColor}
-                        generalFontColor={generalFontColor}
-                        resultsAvailable={resultsAvailable}
-                        onAnswerSelection={onAnswerSelection}
-                      />
-                    );
-                  })}
+                  {questions.map((item, index) => (
+                    <Question
+                      key={index}
+                      item={item}
+                      questionIndex={index}
+                      generalBackgroundColor={generalBackgroundColor}
+                      generalFontColor={generalFontColor}
+                      resultsAvailable={resultsAvailable}
+                      onAnswerSelection={onAnswerSelection}
+                    />
+                  ))}
                 </ol>
                 <Result
                   title={title}

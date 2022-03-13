@@ -4,6 +4,14 @@ interface AnswersProps {
   item: QuestionType;
   questionIndex: number;
   resultsAvailable: boolean;
+  changeSelectedAnswerResponse: React.Dispatch<
+    React.SetStateAction<{
+      title?: string | JSX.Element;
+      description?: string | JSX.Element;
+      image?: string;
+      imageAttribution?: string;
+    }>
+  >;
   onAnswerSelection?: (
     questionIndex?: number,
     answerIndex?: number,

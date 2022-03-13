@@ -11,6 +11,7 @@ const Answers: FC<AnswersProps> = ({
   generalBackgroundColor,
   generalFontColor,
   onAnswerSelection,
+  changeSelectedAnswerResponse,
 }) => {
   const { selectedAnswers, changeSelectedAnswers, scrollFunction } =
     useContext(QuizContext);
@@ -21,6 +22,7 @@ const Answers: FC<AnswersProps> = ({
     questionIndex: number,
     answerIndex: number,
     resultID: number,
+    showResponse: boolean,
     specificHandleAnswerSelection?: (
       questionIndex: number,
       answerIndex: number,
@@ -45,6 +47,14 @@ const Answers: FC<AnswersProps> = ({
       handleGeneralAnswerSelection();
     }
 
+    const handleScrollLogic = () => {
+      if (showResponse) {
+        scrollFunction(`RBQQuestionResponse${questionIndex}`, questionIndex);
+      } else {
+        scrollFunction(`Question${questionIndex + 1}`, questionIndex);
+      }
+    };
+
     if (selectedAnswers.some((item) => item.questionIndex === questionIndex)) {
       const arrCopy = selectedAnswers.slice();
 
@@ -55,13 +65,14 @@ const Answers: FC<AnswersProps> = ({
       );
 
       changeSelectedAnswers(arrCopy);
-      scrollFunction(`Question${questionIndex + 1}`, questionIndex);
+
+      handleScrollLogic();
     } else {
       changeSelectedAnswers([
         ...selectedAnswers,
         { questionIndex, answerIndex, resultID },
       ]);
-      scrollFunction(`Question${questionIndex + 1}`, questionIndex);
+      handleScrollLogic();
     }
   };
 
@@ -81,7 +92,7 @@ const Answers: FC<AnswersProps> = ({
         item.answers.length === 3 ? "rbq_3_answers" : ""
       } ${gridLayout ? "rbq_answer_grid_layout" : ""}`}
     >
-      {item.answers.map((x, answerIndex) => {
+      {item.answers.map((answerEl, answerIndex) => {
         const questionAnswered = selectedAnswers.some(
           (el) => el.questionIndex === questionIndex
         );
@@ -91,8 +102,8 @@ const Answers: FC<AnswersProps> = ({
             el.questionIndex === questionIndex && el.answerIndex === answerIndex
         );
 
-        const actualBackgroundColor = x.backgroundColor
-          ? x.backgroundColor
+        const actualBackgroundColor = answerEl.backgroundColor
+          ? answerEl.backgroundColor
           : generalBackgroundColor
           ? generalBackgroundColor
           : null;
@@ -107,16 +118,39 @@ const Answers: FC<AnswersProps> = ({
                 : ""
             } ${questionAnswered ? "rbq_question_answered" : ""} ${
               answerSelected ? "rbq_answer_selected" : ""
-            } ${x.backgroundImageSrc ? "rbq_answer_background_image" : ""}`}
+            } ${
+              answerEl.backgroundImageSrc ? "rbq_answer_background_image" : ""
+            }`}
             key={answerIndex}
-            onClick={() =>
+            onClick={() => {
+              changeSelectedAnswerResponse({
+                title: "",
+                description: "",
+                image: "",
+                imageAttribution: "",
+              });
+              const revealRes = answerEl.revealResponse;
+              let showResponse = false;
+
+              if (
+                revealRes &&
+                (revealRes.title ||
+                  revealRes.description ||
+                  revealRes.image ||
+                  revealRes.imageAttribution)
+              ) {
+                showResponse = true;
+                changeSelectedAnswerResponse(revealRes);
+              }
+
               handleAnswerSelection(
                 questionIndex,
                 answerIndex,
-                x.resultID,
-                x.onAnswerSelection
-              )
-            }
+                answerEl.resultID,
+                showResponse,
+                answerEl.onAnswerSelection
+              );
+            }}
             ref={ref}
           >
             <div
@@ -124,7 +158,9 @@ const Answers: FC<AnswersProps> = ({
                 item.answerArrangement === "row"
                   ? "rbq_answer_row_arrangement"
                   : ""
-              } ${x.backgroundImageSrc ? "rbq_answer_background_image" : ""}
+              } ${
+                answerEl.backgroundImageSrc ? "rbq_answer_background_image" : ""
+              }
                       ${questionAnswered ? "rbq_question_answered" : ""} ${
                 answerSelected ? "rbq_answer_selected" : ""
               } ${resultsAvailable ? "rbq_results_available" : ""} ${
@@ -136,22 +172,23 @@ const Answers: FC<AnswersProps> = ({
                     ? "#fff"
                     : actualBackgroundColor
                     ? actualBackgroundColor
-                    : x.backgroundImageSrc
+                    : answerEl.backgroundImageSrc
                     ? "none"
                     : "#000",
               }}
             >
-              {x.backgroundImageSrc && item.answerArrangement !== "row" ? (
+              {answerEl.backgroundImageSrc &&
+              item.answerArrangement !== "row" ? (
                 <img
                   className="rbq_answer_image"
-                  src={x.backgroundImageSrc}
-                  alt={`${x.answer} answer image`}
+                  src={answerEl.backgroundImageSrc}
+                  alt={`${answerEl.answer} answer image`}
                 />
               ) : null}
 
               {item.answerArrangement === "row" ? (
-                <p className="rbq_answer_text">{x.answer}</p>
-              ) : x.backgroundImageSrc ? null : (
+                <p className="rbq_answer_text">{answerEl.answer}</p>
+              ) : answerEl.backgroundImageSrc ? null : (
                 <div
                   className={`rbq_text_fit ${
                     resultsAvailable ? "rbq_results_available" : ""
@@ -159,8 +196,8 @@ const Answers: FC<AnswersProps> = ({
                     answerSelected ? "rbq_answer_selected" : ""
                   }`}
                   style={{
-                    color: x.fontColor
-                      ? x.fontColor
+                    color: answerEl.fontColor
+                      ? answerEl.fontColor
                       : generalFontColor
                       ? generalFontColor
                       : "#fff",
@@ -172,28 +209,29 @@ const Answers: FC<AnswersProps> = ({
                     max={gridLayout ? 54 : 60}
                     capAt={gridLayout ? 35 : 46}
                     style={{
-                      color: x.fontColor ? x.fontColor : "#fff",
+                      color: answerEl.fontColor ? answerEl.fontColor : "#fff",
                     }}
                     outerContainerWidth={answerWidth}
                     gridLayout={gridLayout}
                   >
-                    {x.answer}
+                    {answerEl.answer}
                   </TextFit>
                 </div>
               )}
             </div>
-            {x.backgroundImageSrc && item.answerArrangement === "tile" ? (
+            {answerEl.backgroundImageSrc &&
+            item.answerArrangement === "tile" ? (
               <div className="rbq_answer_image_bottom_text_container">
-                {x.answer && (
-                  <p className="rbq_answer_image_text">{x.answer}</p>
+                {answerEl.answer && (
+                  <p className="rbq_answer_image_text">{answerEl.answer}</p>
                 )}
-                {x.imageAttribution && (
+                {answerEl.imageAttribution && (
                   <p
                     className={`rbq_answer_image_attribution ${
                       questionAnswered ? "rbq_question_answered" : ""
                     } ${answerSelected ? "rbq_answer_selected" : ""}`}
                   >
-                    {x.imageAttribution}
+                    {answerEl.imageAttribution}
                   </p>
                 )}
               </div>

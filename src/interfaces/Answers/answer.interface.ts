@@ -32,6 +32,15 @@ type AnswerType = ImageType & {
     resultID?: number
   ) => void;
   /**
+   * Reveals a custom response message below the associated question if this specific answer is selected.
+   */
+  revealResponse?: {
+    title?: string | JSX.Element;
+    description?: string | JSX.Element;
+    image?: string;
+    imageAttribution?: string;
+  };
+  /**
    * The numerical ID of the answer's associated result object found in ReactBuzzFeedQuiz's results prop.
    */
   resultID: number;

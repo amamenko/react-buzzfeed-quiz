@@ -31,6 +31,9 @@
 @use "partials/Question/rbq_question_overlap_text";
 @use "partials/Question/rbq_text_fit";
 
+// Question Response Component
+@use "partials/QuestionResponse/rbq_question_response";
+
 // Result Component
 @use "partials/Result/rbq_result_attribution_text";
 @use "partials/Result/rbq_result_footer";
