@@ -1,6 +1,6 @@
 {
   "name": "react-buzzfeed-quiz",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "React-friendly BuzzFeed Quiz Module",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
